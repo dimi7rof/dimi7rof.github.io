@@ -1,5 +1,9 @@
 *{ box-sizing: border-box;}
 
+ul[role='list'], ol[role='list'] {
+  list-style: none;
+}
+
 html { position: relative;}
 
 body {
@@ -36,6 +40,16 @@ header {
     height: 200px;
     margin: 8px 12px;
     overflow: hidden;
+}
+footer {
+    padding: 16px;
+    margin: 16px;
+    border-radius: 50px;
+    height: 120px;
+    background-color: lightgray;
+    display: grid;
+    align-items: center;
+    justify-content: center;
 }
 
 .avatar {
@@ -100,6 +114,7 @@ header:hover h1{
     position: relative;
     overflow: hidden;
     transition: opacity 200ms linear;
+    
 }
 .box::before{
     content: "";
@@ -115,9 +130,22 @@ header:hover h1{
 .box:hover .bg{
     opacity: 0.2;
     transition: opacity 200ms linear;
+    /* background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 8px 32px 0 rgba(255,255,255,0.18);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 32px; */
 }
 .box:hover h2{
     color: black;
+    text-shadow: 1px 2px 2px  white;
+    transition: color 200ms linear;
+}
+
+.box:hover ul, .box:hover dl {
+    color: white;
+    font-weight: bold;
     transition: color 200ms linear;
 }
 
@@ -131,7 +159,12 @@ img {
 .img2 {
     transform: rotateY(180deg);
 }
-
+.courses img {
+    display: none;
+}
+.courses > li:hover img {
+    display: block;
+}
 
 h2 {
     margin: 10px 0px;
@@ -159,4 +192,48 @@ h2 {
   
 .box4 {
     border-bottom-right-radius: 50px;
+}
+.con ul {
+    position: absolute;
+    top: 60px;
+}
+.edu ul {
+    position: absolute;
+    top: 60px;
+}
+.ski dl {
+    position: absolute;
+    left: 60px;
+    top: 60px;
+}
+.exp ul {
+    position: absolute;
+    top: 60px;
+    
+}
+@media (max-width: 800px) {
+    .boxes {
+        height: 80%;
+        position: relative;
+        display: grid;
+        grid-template-columns: 1fr;
+        
+        gap: 16px;
+        margin: 0px 12px;
+    }
+    .box1 {
+        border-top-left-radius: 0px;
+        
+      }
+    .box2 {
+        border-top-right-radius: 0px;
+    }
+      
+    .box3 {
+        border-bottom-left-radius: 0px;
+     }
+      
+    .box4 {
+        border-bottom-right-radius: 0px;
+    }
 }
