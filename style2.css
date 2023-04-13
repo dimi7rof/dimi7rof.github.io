@@ -4,18 +4,10 @@
     margin: 0px;
 }
 
-html {
-    /* display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 0px 32px; */
-}
-
 body {
     display: flex;
     justify-content: center;
 }
-
 
 nav {
     position: fixed;
@@ -79,12 +71,12 @@ header {
 
 #profile>div>div:nth-child(2)>img {
     width: 250px;
-    height: 280px;
-    aspect-ratio: 1.2/1;
+    height: 320px;
+    aspect-ratio: 1/1;
 }
 
 #profile>div>div:nth-child(2) {
-    border-radius: 250px;
+    border-radius: 80px;
     overflow: hidden;
     width: 250px;
 }
@@ -120,10 +112,8 @@ h3 {
 
 .info {
     width: 30%;
-    padding-bottom: 16px;
     line-height: 1.5;
 }
-
 
 .info p,
 b {
@@ -208,20 +198,35 @@ b {
 
 .info3 {
     line-height: 2.2;
+    border: 1px solid #222222;
+    border-radius: 200px;
+    padding: 30px 60px;
+    border-style: inherit;
+}
+.info31 {
+    line-height: 2.2;
+    border: 2px solid;
+    border-radius: 200px;
+    padding: 30px 60px;
+    border-style: outset;
+
 }
 
-.info3>dl>dt>p>i,
-.info3>dl>dt {
+.info3>dl>dt>p,
+.info31>dl>dt {
     color: #00a6a0;
     font-weight: bold;
 }
 
-.info5,
+.info5 {
+    line-height: 2.5;
+}
 .info4 {
     line-height: 2.5;
-    padding-bottom: 40px;
+    border: 1px solid;
+    border-radius: 200px;
+    padding: 20px 60px;
 }
-
 
 #expirience>div>div>ul>li>p:nth-child(1),
 #contacts>div>div>ul>li>p:nth-child(1) {
@@ -234,7 +239,6 @@ b {
     flex-direction: column;
     justify-content: space-evenly;
     gap: 16px;
-    margin-top: 40px;
 }
 
 .certPics {
