@@ -50,6 +50,7 @@ nav a {
 
 main {
     width: 90vw;
+    padding-top: 40px;
 }
 
 main>div {
@@ -79,10 +80,6 @@ header {
     border-radius: 80px;
     overflow: hidden;
     width: 250px;
-}
-
-#profile>header {
-    margin-top: 40px;
 }
 
 h1 {
