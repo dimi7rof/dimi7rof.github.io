@@ -7,6 +7,7 @@
 body {
     display: flex;
     justify-content: center;
+    padding-top: 40px;
 }
 
 nav {
@@ -14,7 +15,7 @@ nav {
     top: 0px;
     left: 0px;
     width: 100vw;
-    height: 70px;
+    height: 44px;
     background-color: #222222;
     color: #00a6a0;
     display: flex;
@@ -40,7 +41,7 @@ nav a {
 }
 
 #certBtn {
-    padding: 12px 8px;
+    padding: 6px 12px;
     border-radius: 24px;
     font-size: 20px;
     background-color: transparent;
@@ -50,7 +51,6 @@ nav a {
 
 main {
     width: 90vw;
-    padding-top: 40px;
 }
 
 main>div {
@@ -64,7 +64,7 @@ header {
     flex-direction: column;
     align-items: center;
     justify-content: end;
-    height: 120px;
+    height: 96px;
     overflow: hidden;
     border-top-right-radius: 50px;
     border-top-left-radius: 50px;
@@ -271,4 +271,98 @@ b {
 #certBtn>p:nth-child(1) {
     display: flex;
     justify-content: center;
+}
+#certBtn2 {
+    display: none;
+}
+
+
+@media (orientation: portrait) {
+    body {
+        padding-top: 0px;
+        justify-content: start;
+    }
+    main {
+        width: 100%;
+    }
+    nav {
+        display: none;
+    }
+    h1 {
+        font-size: 32px;
+    }
+    h2 {
+        font-size: 14px;
+    }
+    h3 {
+        display: inline;
+    }
+    header {
+        height: 52px;
+        width: 100vw;
+    }
+    .information {
+        flex-direction: column;
+        justify-content: center;
+    }
+    .info {
+        width: 100%;
+        line-height: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+        padding-right: 12px;
+    }
+    #profile>div>div:nth-child(2)>img {
+        width: 250px;
+        height: 260px;
+        aspect-ratio: 1/1;
+    }
+    
+    #profile>div>div:nth-child(2) {
+        border-radius: 44px;
+        width: 248px;
+        padding-right: 0px;
+    }
+    .info2 p {
+        font-size: 16px;
+    }
+    .courses > li > a {
+        font-size: 18px;
+
+    }
+    #expirience > div > div > ul > li > p:nth-child(1) {
+        font-size: 18px;
+    }
+    #certBtn2 {
+        padding: 10px 12px 6px 12px;
+        border-radius: 24px;
+        font-size: 22px;
+        background-color: transparent;
+        color: #00a6a0;
+        border: 2px solid #00a6a0;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 6px;
+        text-decoration: none;
+    }
+    #education > div > div > ul > li:nth-child(3) > ol > li:nth-child(2n-1) {
+        position: relative;
+        left: -100px;
+    }
+    #contacts > div {
+        gap:32px;
+    }
+    #profile > div > div:nth-child(3) {
+        align-items: start;
+    }
+    .certPics>div>img {
+        height: 390px;
+        width: 300px;
+        object-fit: cover;
+    }
+    .certPics>div {
+        width: 47%;
+        height: 390px;
+    }
 }
