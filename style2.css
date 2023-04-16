@@ -7,7 +7,6 @@
 body {
     display: flex;
     justify-content: center;
-    /* padding-top: 40px; */
     min-width: 384px;
 }
 
@@ -58,13 +57,13 @@ nav a:not(:hover) {
 }
 
 #certBtn {
-    padding: 4px 8px;
+    padding: 6px 18px;
     border-radius: 24px;
     font-size: 16px;
     background-color: #00a6a0;
-    color: darkgrey;
+    /* color: darkgrey; */
     filter: blur(0.3px);
-    /* border: 2px solid #00a6a0; */
+    border: 2px solid #00a6a0;
     outline-offset: 0px;
 }
 
@@ -72,13 +71,11 @@ nav a:not(:hover) {
 #certBtn:focus {
     outline-offset: 3px;
     color: white;
-
 }
 
 main {
     width: 96vw;
 }
-
 
 main>div {
     margin-top: 70px;
@@ -113,6 +110,7 @@ h1 {
     color: #00a6a0;
     font-size: 48px;
 }
+
 
 h2 {
     font-size: 28px;
@@ -156,8 +154,9 @@ b {
 }
 
 .social a {
-    width: 60px;
-    height: 60px;
+    width: 120px;
+    height: 120px;
+    font-size: 60px;
     text-decoration: none;
     color: black;
     display: flex;
@@ -220,35 +219,34 @@ b {
     display: block;
 }
 
-/* .info3 {
-    line-height: 2.2;
-    border: 1px solid #222222;
-    border-radius: 200px;
-    padding: 30px 60px;
-    border-style: inherit;
-} */
-
 .info31,
 .info3 {
     line-height: 2.2;
     border: 1px solid #222222;
     border-radius: 200px;
-    padding: 30px 60px;
+    padding: 60px 100px;
     border-style: inherit;
-
+    height: 40vw;
+    width: 40vw;
 }
 
-.logos {
-    position: relative;
-    top: 190px;
+.logos,
+.logos2 {
+    position: absolute;
+    top: 1600px;
+    width: 90vw;
     display: flex;
+    left: 4vw;
     flex-direction: row;
-    justify-content: space-between;
+    gap: 6vw;
 }
-.logos > img {
-    width: 108px;
-    object-fit: cover;
-    opacity: 0.75;
+
+.logos>img,
+.logos2>img {
+    width: 10vw;
+    object-fit: contain;
+    padding: 6px;
+    height: 10vw;
 }
 
 .info3>dl>dt>p,
@@ -268,9 +266,12 @@ b {
     padding: 20px 60px;
 }
 
-#expirience>div>div>ul>li>p:nth-child(1),
-#contacts>div>div>ul>li>p:nth-child(1) {
+#expirience>div>div>ul>li>p:nth-child(1) {
     color: #00a6a0;
+    font-size: 22px;
+}
+
+#contacts>div>div>ul>li>p:nth-child(1) {
     font-size: 22px;
 }
 
@@ -308,7 +309,6 @@ b {
 
 .certPics>div>img {
     height: 54vw;
-    /* width: 360px; */
 }
 
 #certBtn>p:nth-child(1) {
@@ -358,7 +358,7 @@ b {
     }
 
     .info {
-        width: 100%;
+        width: 90%;
         line-height: 1;
         display: flex;
         flex-direction: column;
@@ -418,8 +418,6 @@ b {
     }
 
     .certPics>div>img {
-        /* height: 290px;
-        width: 300px; */
         object-fit: cover;
     }
 
@@ -427,30 +425,87 @@ b {
         width: 48%;
         height: 54vw;
     }
+
     .logos {
-        position: relative;
-        top: 420px;
-        display: flex;
+        position: absolute;
+        top: 1166px;
         flex-direction: column;
         gap: 10px;
     }
-    .logos > img {
-        width: 108px;
-        object-fit: cover;
+
+    .info3,
+    .info31 {
+        height: 70vw;
+        width: 90vw;
+        padding: 40px 80px;
+    }
+
+    #contacts>div>div>ul>li>p:nth-child(1) {
+        color: #00a6a0;
+    }
+
+    #skills>div.information {
+        height: 620px;
+    }
+
+    .logos2 {
+        top: 1716px;
     }
 }
+
 @media (orientation: landscape) {
     body {
         min-width: 630px;
     }
+
+    h1 {
+        text-shadow: 2px 1px 6px black;
+        transition: 100ms linear;
+    }
+
+    h1:hover,
+    h1:focus {
+        text-shadow: 2px 1px 20px black;
+        transition: 100ms linear;
+    }
+
+    p:hover,
+    h2:hover,
+    h3:hover,
+    b:hover {
+        text-shadow: 1px 1px black;
+    }
+
+    .info4:hover {
+        background-color: #00a6a0;
+
+    }
+
+    #skills>div.information {
+        align-items: flex-start;
+        padding-top: 18px;
+    }
+
+    #skills>div.logos2>img {
+        border: 1px solid #222222;
+        border-radius: 30px;
+    }
+
+    #skills>div.logos2>img:hover {
+        width: 12vw;
+        height: 12vw;
+    }
+
 }
+
 @media only screen and (max-width: 500px) {
     .certPics>div {
         width: 94%;
         height: 130vw;
     }
+
     .certPics>div>img {
         height: 130vw;
         width: 90vw;
     }
-  }
+}
