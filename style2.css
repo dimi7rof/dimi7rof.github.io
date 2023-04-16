@@ -7,7 +7,8 @@
 body {
     display: flex;
     justify-content: center;
-    padding-top: 40px;
+    /* padding-top: 40px; */
+    min-width: 384px;
 }
 
 nav {
@@ -23,7 +24,8 @@ nav {
     justify-content: space-evenly;
     flex: auto;
     align-items: center;
-    padding-right: 16px;
+    padding-right: 30px;
+    z-index: 1;
 }
 
 nav>div {
@@ -36,22 +38,47 @@ nav>div {
 nav a {
     text-decoration: none;
     color: #00a6a0;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: bold;
+    text-transform: uppercase;
+    transition: 200ms ease;
+    border: 1px solid #00a6a0;
+    border-radius: 24px;
+    padding: 4px 8px;
+    outline-style: solid;
+    outline-color: #00a6a0;
+}
+
+nav a:not(:hover) {
+    color: white;
+    opacity: 0.7;
+    filter: blur(0.8px);
+    border: 0px solid #00a6a0;
+    outline-color: #222222;
 }
 
 #certBtn {
-    padding: 6px 12px;
+    padding: 4px 8px;
     border-radius: 24px;
-    font-size: 20px;
-    background-color: transparent;
-    color: #00a6a0;
-    border: 2px solid #00a6a0;
+    font-size: 16px;
+    background-color: #00a6a0;
+    color: darkgrey;
+    filter: blur(0.3px);
+    /* border: 2px solid #00a6a0; */
+    outline-offset: 0px;
+}
+
+#certBtn:hover,
+#certBtn:focus {
+    outline-offset: 3px;
+    color: white;
+
 }
 
 main {
-    width: 90vw;
+    width: 96vw;
 }
+
 
 main>div {
     margin-top: 70px;
@@ -64,7 +91,7 @@ header {
     flex-direction: column;
     align-items: center;
     justify-content: end;
-    height: 96px;
+    height: 78px;
     overflow: hidden;
     border-top-right-radius: 50px;
     border-top-left-radius: 50px;
@@ -193,20 +220,35 @@ b {
     display: block;
 }
 
+/* .info3 {
+    line-height: 2.2;
+    border: 1px solid #222222;
+    border-radius: 200px;
+    padding: 30px 60px;
+    border-style: inherit;
+} */
+
+.info31,
 .info3 {
     line-height: 2.2;
     border: 1px solid #222222;
     border-radius: 200px;
     padding: 30px 60px;
     border-style: inherit;
-}
-.info31 {
-    line-height: 2.2;
-    border: 2px solid;
-    border-radius: 200px;
-    padding: 30px 60px;
-    border-style: outset;
 
+}
+
+.logos {
+    position: relative;
+    top: 190px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.logos > img {
+    width: 108px;
+    object-fit: cover;
+    opacity: 0.75;
 }
 
 .info3>dl>dt>p,
@@ -218,6 +260,7 @@ b {
 .info5 {
     line-height: 2.5;
 }
+
 .info4 {
     line-height: 2.5;
     border: 1px solid;
@@ -248,8 +291,8 @@ b {
 }
 
 .certPics>div {
-    width: 40%;
-    height: 540px;
+    width: 48%;
+    height: 54vw;
     overflow: hidden;
     display: flex;
     justify-content: center;
@@ -264,14 +307,15 @@ b {
 }
 
 .certPics>div>img {
-    height: 540px;
-    width: 360px;
+    height: 54vw;
+    /* width: 360px; */
 }
 
 #certBtn>p:nth-child(1) {
     display: flex;
     justify-content: center;
 }
+
 #certBtn2 {
     display: none;
 }
@@ -282,29 +326,37 @@ b {
         padding-top: 0px;
         justify-content: start;
     }
+
     main {
         width: 100%;
     }
+
     nav {
         display: none;
     }
+
     h1 {
         font-size: 32px;
     }
+
     h2 {
         font-size: 14px;
     }
+
     h3 {
         display: inline;
     }
+
     header {
         height: 52px;
         width: 100vw;
     }
+
     .information {
         flex-direction: column;
         justify-content: center;
     }
+
     .info {
         width: 100%;
         line-height: 1;
@@ -313,27 +365,32 @@ b {
         align-items: end;
         padding-right: 12px;
     }
+
     #profile>div>div:nth-child(2)>img {
-        width: 250px;
+        width: 248px;
         height: 260px;
-        aspect-ratio: 1/1;
+        object-fit: cover;
     }
-    
+
     #profile>div>div:nth-child(2) {
         border-radius: 44px;
         width: 248px;
         padding-right: 0px;
     }
+
     .info2 p {
         font-size: 16px;
     }
-    .courses > li > a {
+
+    .courses>li>a {
         font-size: 18px;
 
     }
-    #expirience > div > div > ul > li > p:nth-child(1) {
+
+    #expirience>div>div>ul>li>p:nth-child(1) {
         font-size: 18px;
     }
+
     #certBtn2 {
         padding: 10px 12px 6px 12px;
         border-radius: 24px;
@@ -346,23 +403,54 @@ b {
         margin-bottom: 6px;
         text-decoration: none;
     }
-    #education > div > div > ul > li:nth-child(3) > ol > li:nth-child(2n-1) {
+
+    #education>div>div>ul>li:nth-child(3)>ol>li:nth-child(2n-1) {
         position: relative;
         left: -100px;
     }
-    #contacts > div {
-        gap:32px;
+
+    #contacts>div {
+        gap: 32px;
     }
-    #profile > div > div:nth-child(3) {
+
+    #profile>div>div:nth-child(3) {
         align-items: start;
     }
+
     .certPics>div>img {
-        height: 390px;
-        width: 300px;
+        /* height: 290px;
+        width: 300px; */
         object-fit: cover;
     }
+
     .certPics>div {
-        width: 47%;
-        height: 390px;
+        width: 48%;
+        height: 54vw;
+    }
+    .logos {
+        position: relative;
+        top: 420px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .logos > img {
+        width: 108px;
+        object-fit: cover;
     }
 }
+@media (orientation: landscape) {
+    body {
+        min-width: 630px;
+    }
+}
+@media only screen and (max-width: 500px) {
+    .certPics>div {
+        width: 94%;
+        height: 130vw;
+    }
+    .certPics>div>img {
+        height: 130vw;
+        width: 90vw;
+    }
+  }
