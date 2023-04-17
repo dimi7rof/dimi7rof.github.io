@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todor's CV</title>
     <link rel="stylesheet" href="style2.css">
+    <!-- <link rel="stylesheet/less" type="text/css" href="style2.less" /> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -21,7 +22,16 @@
         <div><a href="#contacts">Contacts</a></div>
         <div><a id="certBtn" href="#cert">Certificates</a></div>
     </nav>
+    <div class="wrapper">
+        <div class="ciao-frames">
+            <div class="frame" id="one"></div>
+            <div class="frame" id="two"></div>
+            <div class="frame" id="three"></div>
+            <div class="frame" id="four"></div>
+        </div>
+    </div>
     <main>
+        <section id="pad"></section>
         <section id="profile">
             <header>
                 <h1>Profile</h1>
@@ -125,17 +135,52 @@
                     </ul>
                 </div>
             </div>
+            <div class="flower">
+                <div class="f-wrapper">
+                    <div class="flower__line"></div>
+                    <div class="f">
+                        <div class="flower__leaf flower__leaf--1"></div>
+                        <div class="flower__leaf flower__leaf--2"></div>
+                        <div class="flower__leaf flower__leaf--3"></div>
+                        <div class="flower__leaf flower__leaf--4"></div>
+                        <div class="flower__leaf flower__leaf--5"></div>
+                        <div class="flower__leaf flower__leaf--6"></div>
+                        <div class="flower__leaf flower__leaf--7"></div>
+                        <div class="flower__leaf flower__leaf--8 flower__fall-down--yellow"></div>
+                    </div>
+                </div>
+
+                <div class="f-wrapper f-wrapper--2">
+                    <div class="flower__line"></div>
+                    <div class="f">
+                        <div class="flower__leaf flower__leaf--1"></div>
+                        <div class="flower__leaf flower__leaf--2"></div>
+                        <div class="flower__leaf flower__leaf--3"></div>
+                        <div class="flower__leaf flower__leaf--4"></div>
+                        <div class="flower__leaf flower__leaf--5"></div>
+                        <div class="flower__leaf flower__leaf--6"></div>
+                        <div class="flower__leaf flower__leaf--7"></div>
+                        <div class="flower__leaf flower__leaf--8 flower__fall-down--pink"></div>
+                    </div>
+                </div>
+
+                <div class="f-wrapper f-wrapper--3">
+                    <div class="flower__line"></div>
+                    <div class="f">
+                        <div class="flower__leaf flower__leaf--1"></div>
+                        <div class="flower__leaf flower__leaf--2"></div>
+                        <div class="flower__leaf flower__leaf--3"></div>
+                        <div class="flower__leaf flower__leaf--4"></div>
+                        <div class="flower__leaf flower__leaf--5"></div>
+                        <div class="flower__leaf flower__leaf--6"></div>
+                        <div class="flower__leaf flower__leaf--7"></div>
+                        <div class="flower__leaf flower__leaf--8 flower__fall-down--purple"></div>
+                    </div>
+                </div>
+                <div class="flower__glass"></div>
+            </div>
         </section>
         <section id="skills">
-            <div class="logos"></div>
-            <div class="logos2">
-                <img src="logos/csharp_original_logo_icon_146578.png" alt="CsharpLogo">
-                <img src="logos/sql.png" alt="MSSQLlogo">
-                <img src="logos/vb-net-icon-1.jpg" alt="EFClogo">
-                <img src="logos/html5-logo.png" alt="">
-                <img src="logos/css-3.png" alt="">
-                <img src="logos/js.png" alt="">
-            </div>
             <header>
                 <h1>Skills</h1>
             </header>
@@ -169,9 +214,23 @@
                             <p>English</p>
                         <dd>Advanced</dd>
                         </dt>
+                        <hr>
+                        <dt>
+                            <p>Design</p>
+                            <dd>Obviously Bad</dd>
+                        </dt>
                     </dl>
                 </div>
             </div>
+            <div class="logos2">
+                <img src="logos/csharp_original_logo_icon_146578.png" alt="CsharpLogo">
+                <img src="logos/sql.png" alt="MSSQLlogo">
+                <img src="logos/vb-net-icon-1.jpg" alt="EFClogo">
+                <img src="logos/html5-logo.png" alt="">
+                <img src="logos/css-3.png" alt="">
+                <img src="logos/js.png" alt="">
+            </div>
+            <div class="growing"></div>
         </section>
         <section id="expirience">
             <header>
@@ -204,7 +263,6 @@
                 </div>
             </div>
         </section>
-        
         <section id="contacts">
             <header>
                 <h1>Contacts</h1>
@@ -212,10 +270,14 @@
             <div class="information">
                 <div class="social">
                     <i>
-                        <a class="fa-brands fa-linkedin-in" href="http://linkedin.com/in/dimi7rof" target="_blank"></a>
+                        <a class="fa-brands fa-linkedin-in" href="http://linkedin.com/in/dimi7rof" target="_blank"><span
+                                class="socialText" style="display: none;">LinkedIn</span></a>
                     </i>
                     <i>
                         <a class="fa-brands fa-github" href="https://github.com/dimi7rof" target="_blank"></a>
+                    </i>
+                    <i>
+                        <a class="fab fa-facebook-f" href="http://facebook/dimi7rof" target="_blank"></a>
                     </i>
                 </div>
                 <div class="info4">
@@ -229,13 +291,13 @@
                             <p>Email</p>
                             <p>dimi7rof@gmail.com</p>
                         </li>
-                        <hr>
+                        <!-- <hr>
                         <li>
                             <address>
                                 <p>Bulgaria</p>
                                 <p>Bratsigovo</p>
                             </address>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
             </div>
@@ -269,7 +331,6 @@
             </div>
         </section>
     </main>
-
     <script src="app.js"></script>
 </body>
 
