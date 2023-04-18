@@ -62,7 +62,6 @@ nav a:not(:hover) {
     border-radius: 24px;
     font-size: 16px;
     background-color: #00a6a0;
-    /* color: darkgrey; */
     filter: blur(0.3px);
     border: 2px solid #00a6a0;
     outline-offset: 0px;
@@ -97,20 +96,17 @@ header {
     border-bottom-right-radius: 30px;
 }
 
-/* #pad {
-    height: 40px;
-} */
-
 #profile>div>div:nth-child(2)>img {
-    width: 250px;
-    height: 320px;
-    aspect-ratio: 1/1;
+    width: 270px;
+    height: 360px;
+    object-fit: cover;
 }
 
 #profile>div>div:nth-child(2) {
     border-radius: 80px;
     overflow: hidden;
     width: 250px;
+    height: 360px;
 }
 
 h1,
@@ -123,11 +119,9 @@ h3,
     color: #00ede5;
 }
 
-
 h1 {
     font-size: 48px;
 }
-
 
 h2 {
     font-size: 28px;
@@ -199,6 +193,7 @@ b {
 
 .info2 {
     line-height: 1;
+    margin-top: 36px;
 }
 
 .info2 p {
@@ -210,6 +205,7 @@ b {
     font-weight: bold;
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 4px;
 }
 
@@ -241,19 +237,24 @@ b {
 .info3 {
     line-height: 2.2;
     border: 1px solid #222222;
-    border-radius: 200px;
-    padding: 60px 100px;
+    border-radius: 56px;
+    padding: 50px 0px;
     border-style: inherit;
-    height: 40vw;
+    height: 270px;
     width: 40vw;
+    display: flex;
+    justify-content: center;
+}
+
+#skills > div.information > div.info3 > dl,
+#skills > div.information > div.info31 > dl {
+    width: 25vw;
 }
 
 .logos2 {
     position: relative;
     top: -140px;
-    /* width: 90vw; */
     display: flex;
-    /* flex: 1 1 10vw; */
     left: 2vw;
     flex-direction: row;
     gap: 4vw;
@@ -273,15 +274,21 @@ b {
 
 .info5 {
     line-height: 2.5;
+    padding-left: 40px;
 }
 
 .info4 {
     line-height: 2.5;
-    border: 1px solid;
-    border-radius: 200px;
-    padding: 45px 60px;
     height: 300px;
     width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.social a {
+    width: 100px;
+    height: 100px;
 }
 
 #expirience>div>div>ul>li>p:nth-child(1) {
@@ -349,9 +356,35 @@ b {
 }
 
 #education {
-    height: 620px;
+    height: 640px;
 }
 
+.info,
+.info2,
+.info3,
+.info31,
+.info4,
+.info5 {
+    background-color: #616161;
+    border-radius: 40px;
+    padding: 10px;
+    border: 1px solid black;
+}
+.info:nth-child(2) {
+    padding: 0px;
+}
+
+#expirience > div > div > ul,
+#education > div.information > div > ul {
+    list-style: none;
+}
+
+
+@media (max-width: 999px) {
+    #profile > header > h2 {
+        font-size: 16px;
+    }
+}
 
 @media (orientation: portrait) {
     body {
@@ -372,7 +405,7 @@ b {
     }
 
     h2 {
-        font-size: 14px;
+        font-size: 12px;
     }
 
     h3 {
@@ -389,8 +422,9 @@ b {
     }
 
     .information {
+        height: 600px;
         flex-direction: column;
-        justify-content: center;
+        justify-content: space-evenly;
     }
 
     .info {
@@ -400,6 +434,10 @@ b {
         flex-direction: column;
         align-items: end;
         padding-right: 12px;
+    }
+
+    #profile > div > div:nth-child(3) > p:nth-child(3) {
+        font-size: 26px;
     }
 
     #profile>div>div:nth-child(2)>img {
@@ -427,12 +465,17 @@ b {
         font-size: 18px;
     }
 
+    #skills > div.information {
+        align-items: end;
+        padding-right: 12px;
+    }
+
     #certBtn2 {
         padding: 10px 12px 6px 12px;
         border-radius: 24px;
         font-size: 22px;
-        background-color: transparent;
-        color: #00a6a0;
+        background-color: #00a6a0;
+        color: #000000;
         border: 2px solid #00a6a0;
         display: flex;
         justify-content: center;
@@ -441,7 +484,7 @@ b {
     }
 
     #contacts>div {
-        gap: 32px;
+        gap: 80px;
     }
 
     #profile>div>div:nth-child(3) {
@@ -457,33 +500,43 @@ b {
         height: 54vw;
     }
 
-    /* .logos {
-        position: absolute;
-        top: 1166px;
-        flex-direction: column;
-        gap: 10px;
-    } */
-
     .info3,
     .info31 {
-        height: 70vw;
-        width: 90vw;
-        padding: 40px 80px;
+        height: 50vw;
+        width: 70vw;
+        padding: 10px 10px 10px 20px;
     }
 
+    #skills > div.information > div.info31 > dl {
+        width: 50vw;
+    }
 
     #skills {
-        height: 620px;
+        height: 640px;
     }
 
     .logos2 {
-        top: -50px;
+        top: -560px;
+        display: grid;
+        gap: 40px;
+        left: 40px;
     }
+
+    .logos2 > img {
+        width: 40px;
+        padding: 0px;
+        height: 40px;
+    }
+    
 }
 
 @media (orientation: landscape) {
     body {
         min-width: 630px;
+    }
+
+    .avatar:hover {
+        height: 400px;
     }
 
     #profile>div>div:nth-child(3) {
@@ -529,8 +582,7 @@ b {
     }
 
     .info4:hover {
-        background-color: #00a6a0;
-
+        background-color: #005a57;
     }
 
     #skills {
@@ -546,15 +598,14 @@ b {
         border: 1px solid #222222;
         border-radius: 30px;
         margin: 1vw;
+        background-color: #616161;
     }
 
     #skills>div.logos2>img:hover {
         width: 12vw;
         height: 12vw;
         margin: 0px;
-        /* flex: 5 1 10vw;  */
     }
-
 }
 
 @media only screen and (max-width: 500px) {
@@ -580,19 +631,6 @@ b {
     --citation-a-hover-color: DeepPink;
 }
 
-*:focus {
-    outline: none;
-}
-
-* {
-    font-family: monaco, courier;
-}
-
-body {
-    margin: 0;
-    padding: 0;
-}
-
 .wrapper {
     width: 100%;
     min-height: 100vh;
@@ -606,9 +644,6 @@ body {
     position: fixed;
     opacity: 0.05;
 }
-
-
-
 .ciao-frames {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
