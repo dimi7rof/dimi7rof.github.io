@@ -259,14 +259,14 @@ b {
     display: flex;
     left: 2vw;
     flex-direction: row;
-    gap: 4vw;
+    gap: 10vw;
 }
 
 .logos2>img {
-    width: 10vw;
+    width: 5vw;
     object-fit: contain;
     padding: 6px;
-    height: 10vw;
+    height: 5vw;
 }
 
 .info3>dl>dt>p,
