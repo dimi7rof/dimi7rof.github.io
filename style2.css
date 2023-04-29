@@ -611,8 +611,8 @@ b {
     }
 
     #skills>div.logos2>img:hover {
-        width: 12vw;
-        height: 12vw;
+        width: 8vw;
+        height: 8vw;
         margin: 0px;
     }
 }
