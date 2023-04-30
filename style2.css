@@ -130,7 +130,7 @@ h2 {
 
 h3 {
     font-size: 28px;
-    margin: 0px 0px 16px 12px;
+    margin: 0px 16px 16px 12px;
 }
 
 .information {
@@ -420,7 +420,8 @@ b {
         width: 100vw;
     }
 
-    .growing {
+    .growing,
+    .flower {
         display: none;
     }
 
@@ -428,6 +429,17 @@ b {
         height: 705px;
         flex-direction: column;
         justify-content: space-evenly;
+    }
+
+    .information1 {
+        height: 840px;
+        gap: 16px;
+    }
+
+    .information2,
+    .information5,
+    .information6 {
+        height: 540px;
     }
 
     .info {
@@ -497,7 +509,7 @@ b {
     }
 
     #profile>div>div:nth-child(3) {
-        align-items: start;
+        align-items: center;
     }
 
     .certPics>div>img {
@@ -511,9 +523,13 @@ b {
 
     .info3,
     .info31 {
-        height: 50vw;
+        height: 60vw;
         width: 70vw;
         padding: 10px 10px 10px 20px;
+    }
+
+    .info5 {
+        width: 90vw;
     }
 
     #skills>div.information>div.info31>dl {
