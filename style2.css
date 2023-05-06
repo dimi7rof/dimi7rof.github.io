@@ -2,6 +2,7 @@
     box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
     margin: 0px;
+    /* border: 1px solid red; */
 }
 
 body {
@@ -194,8 +195,7 @@ b {
 
 .info2 {
     line-height: 1;
-    /* margin-top: 36px; */
-    /* width: 68vw; */
+    height: 520px;
 }
 
 .info2 p {
@@ -257,7 +257,7 @@ b {
     position: relative;
     top: 65px;
     display: flex;
-    left: 2vw;
+    left: 0vw;
     flex-direction: row;
     gap: 10vw;
 }
@@ -353,6 +353,15 @@ b {
 }
 
 #education>div>div>ul>li:nth-child(3)>ol>li:nth-child(2n) {
+    position: relative;
+    left: 30px;
+}
+
+#education>div>div>ul>li:nth-child(3)>ol>li:nth-child(7) {
+    left: -10px;
+}
+
+#education>div>div>ul>li:nth-child(3)>ol>li:nth-child(2n) {
     display: flex;
     justify-content: end;
 }
@@ -386,6 +395,7 @@ b {
 @media (max-width: 999px) {
     #profile>header>h2 {
         font-size: 16px;
+        padding-left: 12px;
     }
 }
 
@@ -432,9 +442,16 @@ b {
     }
 
     .information1 {
-        height: 840px;
-        gap: 16px;
+        height: 880px;
+        gap: 6px;
     }
+
+    #profile>div>div:nth-child(2) {
+    border-radius: 80px;
+    overflow: hidden;
+    width: 250px;
+    height: 260px;
+}
 
     .information2,
     .information5,
@@ -468,7 +485,7 @@ b {
     }
 
     .info2 {
-        width: 68vw;
+        width: 70vw;
     }
 
     .info2 p {
@@ -523,7 +540,7 @@ b {
 
     .info3,
     .info31 {
-        height: 60vw;
+        height: 65vw;
         width: 70vw;
         padding: 10px 10px 10px 20px;
     }
@@ -541,10 +558,11 @@ b {
     }
 
     .logos2 {
-        top: -560px;
+        top: -540px;
         display: grid;
         gap: 40px;
-        left: 40px;
+        left: 30px;
+        width: 40px;
     }
 
     .logos2>img {
@@ -809,7 +827,7 @@ b {
     position: relative;
     bottom: 237px;
     z-index: -2;
-    right: -30vw;
+    right: 0vw;
 }
 
 .flower__glass {
