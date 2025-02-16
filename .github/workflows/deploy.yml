@@ -1,9 +1,7 @@
 name: Deploy Angular to GitHub Pages
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 
 jobs:
   build-and-deploy:
@@ -27,5 +25,5 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          branch: gh-pages
+          branch: main
           folder: dist/web-app
