@@ -1,16 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+* {
+  box-sizing: border-box;
+}
+
 html {
   background-color: black;
 }
 
 body {
   margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   min-height: 100vh;
   background: #1e1e2e;
-  font-family: Arial, sans-serif;
+  font-family: "Courier New", Courier, monospace;
 }
 
 ul,
@@ -25,6 +26,11 @@ li {
   border: 1px solid rgb(0, 75, 14);
   border-radius: 8px;
   margin-top: 6px;
+  width: 90%;
+}
+
+p {
+  margin: 2px;
 }
 
 .flex {
@@ -38,6 +44,10 @@ li {
 
 .column {
   flex-direction: column;
+}
+
+.row {
+  flex-direction: row;
 }
 
 .wide50 {
@@ -62,6 +72,7 @@ li {
   background-color: rgb(20, 20, 20);
   color: rgb(239, 239, 239);
   width: 90vw;
+  max-width: 90%;
   height: 600px;
   padding: 10px;
   display: flex;
@@ -73,6 +84,10 @@ li {
   margin: 10px;
 }
 
+.inner {
+  max-width: 90%;
+}
+
 .head {
   height: 60px;
 }
@@ -82,7 +97,7 @@ li {
 }
 
 .education {
-  height: 800px;
+  height: 740px;
 }
 
 .welcome {
@@ -113,8 +128,15 @@ li {
   flex-direction: column;
 }
 
+.education > ol li {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .education > div > ul {
-  width: 400px;
+  width: 80vw;
 }
 
 .education > div > ul > li > ol > li {
@@ -182,6 +204,13 @@ li {
   }
 }
 
+.logos {
+  gap: 44px;
+  background-color: darkgray;
+  padding: 30px 10px;
+  border-radius: 55px;
+}
+
 .social {
   display: flex;
   flex-direction: row;
@@ -215,4 +244,47 @@ li {
 .social i {
   border: 1px solid black;
   border-radius: 100%;
+}
+
+img {
+  height: 40px;
+  width: 40px;
+}
+
+.three-d-text {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 2rem;
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+}
+
+@media (orientation: portrait) {
+  .three-d-text {
+    font-size: x-large;
+  }
+  .inner {
+    width: 90%;
+  }
+
+  .social {
+    flex-direction: column;
+  }
+
+  .info {
+    height: 760px;
+  }
+
+  .wide50 {
+    width: 80vw;
+  }
+
+  .experience {
+    height: 700px;
+  }
+
+  .logos {
+    flex-direction: column;
+    gap: 6px;
+    padding: 10px;
+  }
 }

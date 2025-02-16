@@ -39,9 +39,9 @@ export class MainComponent {
     this.minutes = Math.floor((diff % multiplier) / (60 * 1000));
     this.seconds = Math.floor((diff % (60 * 1000)) / 1000);
 
-    this.currentPossitionTime = `${this.years} years: ${this.months} months: ${
+    this.currentPossitionTime = `${this.years} years, ${this.months} months, ${
       this.days
-    } days: ${this.hours.toString().padStart(2, '0')}:${this.minutes
+    } days, ${this.hours.toString().padStart(2, '0')}:${this.minutes
       .toString()
       .padStart(2, '0')}:${this.seconds.toString().padStart(2, '0')}`;
   }
