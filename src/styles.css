@@ -1,0 +1,218 @@
+/* You can add global styles to this file, and also import other style files */
+html {
+  background-color: black;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #1e1e2e;
+  font-family: Arial, sans-serif;
+}
+
+ul,
+ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  padding: 6px;
+  border: 1px solid rgb(0, 75, 14);
+  border-radius: 8px;
+  margin-top: 6px;
+}
+
+.flex {
+  display: flex;
+}
+
+.center {
+  align-items: center;
+  justify-content: center;
+}
+
+.column {
+  flex-direction: column;
+}
+
+.wide50 {
+  width: 50vw;
+}
+
+.wide80 {
+  width: 80vw;
+}
+
+.gap20 {
+  gap: 20px;
+}
+
+.company {
+  margin-left: 20px;
+  background-color: black;
+}
+
+.wrapper {
+  position: relative;
+  background-color: rgb(20, 20, 20);
+  color: rgb(239, 239, 239);
+  width: 90vw;
+  height: 600px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid rgb(0, 75, 14);
+  border-radius: 16px;
+  overflow: hidden;
+  margin: 10px;
+}
+
+.head {
+  height: 60px;
+}
+
+.summary {
+  height: 460px;
+}
+
+.education {
+  height: 800px;
+}
+
+.welcome {
+  position: absolute;
+  top: -100px; /* Start from above */
+  left: 50%;
+  transform: translateX(-50%); /* Center horizontally */
+  opacity: 0;
+  animation: fallDown 2s ease-out forwards;
+}
+
+@keyframes fallDown {
+  from {
+    top: -100px;
+    opacity: 0;
+  }
+  to {
+    top: 50%;
+    transform: translate(-50%, -50%); /* Perfect center */
+    opacity: 1;
+  }
+}
+
+.education > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.education > div > ul {
+  width: 400px;
+}
+
+.education > div > ul > li > ol > li {
+  border: 1px solid rgb(0, 201, 27);
+  padding: 4px 20px;
+}
+
+.box {
+  position: relative;
+  opacity: 0;
+  animation: slide-in 1s ease-out forwards;
+}
+
+.box.left {
+  animation-delay: 0.2s;
+  transform: translateX(-100%);
+}
+
+.box.right {
+  animation-delay: 0.4s;
+  transform: translateX(100%);
+}
+
+@keyframes slide-in {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Text animations */
+.text {
+  position: absolute;
+  opacity: 0;
+  animation: text-appear 2s forwards ease-out;
+}
+
+.text.drop {
+  animation-name: drop-text;
+}
+
+.text.rise {
+  animation-name: rise-text;
+}
+
+@keyframes drop-text {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes rise-text {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.social {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 20px;
+  gap: 32px;
+  width: 60vw;
+}
+
+.social a {
+  width: 120px;
+  height: 120px;
+  font-size: 60px;
+  text-decoration: none;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 60px;
+}
+
+.social a:hover {
+  background-color: #00a6a0;
+}
+
+.social a:hover > .socialText {
+  display: inline;
+}
+
+.social i {
+  border: 1px solid black;
+  border-radius: 100%;
+}
