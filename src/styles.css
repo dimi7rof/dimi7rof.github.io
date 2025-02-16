@@ -94,7 +94,7 @@ p {
 }
 
 .summary {
-  height: 460px;
+  height: 160px;
 }
 
 .education {
@@ -355,14 +355,14 @@ p {
   height: 50px;
   border: none;
   border-radius: 50%;
-  background-color: #007bff;
+  background-color: #000000;
   color: white;
   font-size: 24px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(126, 126, 126, 0.1);
   transition: opacity 0.3s, transform 0.3s;
 }
 

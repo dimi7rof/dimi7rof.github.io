@@ -13,7 +13,7 @@ export class ScrollToTopComponent {
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
-    this.isVisible = window.scrollY > 300; // Show button after scrolling 300px
+    this.isVisible = window.scrollY > 1;
   }
 
   scrollToTop() {
