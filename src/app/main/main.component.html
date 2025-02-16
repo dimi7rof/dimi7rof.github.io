@@ -33,3 +33,15 @@
 @error {
 <p>Error loading data!</p>
 }
+
+@defer (on interaction) {
+<cert-component />
+}
+@placeholder {
+<div class="wrapper button">
+    <p>Load certificates</p>
+</div>
+}
+@error {
+<p>Error loading data!</p>
+}

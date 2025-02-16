@@ -156,6 +156,11 @@ p {
   padding: 4px 20px;
 }
 
+.logos > img {
+  height: 40px;
+  width: 40px;
+}
+
 .box {
   position: relative;
   opacity: 0;
@@ -226,7 +231,7 @@ p {
 .social {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
   margin-top: 20px;
   gap: 32px;
@@ -258,11 +263,6 @@ p {
   border-radius: 100%;
 }
 
-img {
-  height: 40px;
-  width: 40px;
-}
-
 .three-d-text {
   font-family: "Courier New", Courier, monospace;
   font-size: 1.4rem;
@@ -272,6 +272,95 @@ img {
 
 .experience {
   height: 700px;
+}
+
+.button {
+  height: 100px;
+}
+
+.button > p {
+  border: 2px solid rgb(0, 201, 27);
+  padding: 8px;
+  border-radius: 20px;
+}
+
+.button > p:hover,
+.button > p:focus {
+  padding: 16px;
+  color: black;
+  background-color: #00a6a0;
+  font-weight: 700;
+}
+
+.cert {
+  height: fit-content;
+}
+
+.certPics {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.certPics > div {
+  width: 48%;
+  height: 54vw;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #222222;
+  border-radius: 12px;
+  background-color: white;
+}
+
+.certPics > div:nth-child(2n-1) {
+  background-color: #c47a23;
+}
+
+.certPics > div > img {
+  object-fit: cover;
+}
+
+.udemy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.certPics > div > img {
+  height: 560px;
+  width: 400px;
+}
+
+.udemy > img {
+  width: 94vw;
+  border: 1px solid black;
+  border-radius: 10px;
+  object-fit: scale-down;
+  height: 560px;
+  width: 800px;
+}
+
+@media only screen and (max-width: 500px) {
+  .certPics > div {
+    width: 94%;
+    height: 130vw;
+  }
+
+  .certPics > div > img {
+    height: 130vw;
+    width: 88vw;
+  }
+
+  .udemy > img {
+    height: auto;
+    width: 88vw;
+  }
 }
 
 @media (orientation: portrait) {
