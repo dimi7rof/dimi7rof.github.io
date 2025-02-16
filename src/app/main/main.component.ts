@@ -7,6 +7,7 @@ import { ExperienceComponent } from './containers/experience.component';
 import { SkillsComponent } from './containers/skills.component';
 import { ContactComponent } from './containers/contact.component';
 import { CertificateComponent } from './containers/certificate.component';
+import { ScrollToTopComponent } from './containers/scroll-to-top.component';
 
 @Component({
   selector: 'main-component',
@@ -20,6 +21,7 @@ import { CertificateComponent } from './containers/certificate.component';
     SkillsComponent,
     ContactComponent,
     CertificateComponent,
+    ScrollToTopComponent,
   ],
   templateUrl: './main.component.html',
 })
