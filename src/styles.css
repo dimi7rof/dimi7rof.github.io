@@ -72,7 +72,7 @@ p {
   background-color: rgb(20, 20, 20);
   color: rgb(239, 239, 239);
   width: 90vw;
-  max-width: 90%;
+  max-width: 1024px;
   height: 600px;
   padding: 10px;
   display: flex;
@@ -121,11 +121,17 @@ p {
   }
 }
 
+.list {
+  width: 90vw;
+  max-width: 90%;
+}
+
 .education > div {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  width: 90vw;
 }
 
 .education > ol li {
@@ -133,10 +139,16 @@ p {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 85vw;
 }
 
-.education > div > ul {
+.education > ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 80vw;
+  max-width: 900px;
 }
 
 .education > div > ul > li > ol > li {
@@ -205,7 +217,7 @@ p {
 }
 
 .logos {
-  gap: 44px;
+  gap: 32px;
   background-color: darkgray;
   padding: 30px 10px;
   border-radius: 55px;
@@ -253,14 +265,14 @@ img {
 
 .three-d-text {
   font-family: "Courier New", Courier, monospace;
-  font-size: 2rem;
+  font-size: 1.4rem;
   font-weight: bold;
   color: rgb(255, 255, 255);
 }
 
 @media (orientation: portrait) {
   .three-d-text {
-    font-size: x-large;
+    font-size: 1.2rem;
   }
   .inner {
     width: 90%;
