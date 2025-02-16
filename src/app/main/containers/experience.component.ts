@@ -24,7 +24,7 @@ import { Component } from '@angular/core';
           </ol>
           <li>Production Line Leader</li>
           <ol>
-            <li class="company">Sensata Technologies: 2 years, 1 months</li>
+            <li class="company">Sensata Technologies: 2 years, 2 months</li>
           </ol>
           <li>Senior Production Line Leader</li>
           <ol>
