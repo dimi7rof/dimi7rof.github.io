@@ -270,6 +270,10 @@ img {
   color: rgb(255, 255, 255);
 }
 
+.experience {
+  height: 700px;
+}
+
 @media (orientation: portrait) {
   .three-d-text {
     font-size: 1.2rem;
@@ -291,7 +295,7 @@ img {
   }
 
   .experience {
-    height: 700px;
+    height: 740px;
   }
 
   .logos {
