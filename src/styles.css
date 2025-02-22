@@ -431,8 +431,12 @@ p {
   text-align: left;
   max-height: 800px;
 }
+
 .user-table > tbody {
   max-height: 700px;
+}
+.user-table > tbody > tr > td {
+  padding: 0px;
 }
 
 .user-table th,
@@ -499,6 +503,10 @@ p {
   .udemy > img {
     height: auto;
     width: 88vw;
+  }
+  .user-table {
+    margin: 10px 0;
+    font-size: 8px;
   }
 }
 
