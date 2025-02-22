@@ -8,6 +8,7 @@ import { SkillsComponent } from './containers/skills.component';
 import { ContactComponent } from './containers/contact.component';
 import { CertificateComponent } from './containers/certificate.component';
 import { ScrollToTopComponent } from './containers/scroll-to-top.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'main-component',
@@ -25,4 +26,10 @@ import { ScrollToTopComponent } from './containers/scroll-to-top.component';
   ],
   templateUrl: './main.component.html',
 })
-export class MainComponent {}
+export class MainComponent {
+  constructor(private router: Router) {}
+
+  openLogin() {
+    this.router.navigate(['/login']);
+  }
+}

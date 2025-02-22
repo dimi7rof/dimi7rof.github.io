@@ -1,49 +1,53 @@
-<title-component />
+<div class="oveflow-hidden">
+    <button class="round-btn" (click)="openLogin()">.</button>
 
-<summary-component />
+    <title-component />
 
-<education-component />
+    <summary-component />
 
-@defer (on viewport) {
-<experience-component />
-}
-@placeholder {
-<p>Loading...</p>
-}
-@error {
-<p>Error loading data!</p>
-}
+    <education-component />
 
-@defer (on viewport) {
-<skills-component />
-}
-@placeholder {
-<p>Loading...</p>
-}
-@error {
-<p>Error loading data!</p>
-}
+    @defer (on viewport) {
+    <experience-component />
+    }
+    @placeholder {
+    <p>Loading...</p>
+    }
+    @error {
+    <p>Error loading data!</p>
+    }
 
-@defer (on viewport) {
-<contact-component />
-}
-@placeholder {
-<p>Loading...</p>
-}
-@error {
-<p>Error loading data!</p>
-}
+    @defer (on viewport) {
+    <skills-component />
+    }
+    @placeholder {
+    <p>Loading...</p>
+    }
+    @error {
+    <p>Error loading data!</p>
+    }
 
-@defer (on interaction) {
-<cert-component />
-}
-@placeholder {
-<div class="wrapper button">
-    <p>Certificates</p>
+    @defer (on viewport) {
+    <contact-component />
+    }
+    @placeholder {
+    <p>Loading...</p>
+    }
+    @error {
+    <p>Error loading data!</p>
+    }
+
+    @defer (on interaction) {
+    <cert-component />
+    }
+    @placeholder {
+    <div class="wrapper button">
+        <p>Certificates</p>
+    </div>
+    }
+    @error {
+    <p>Error loading data!</p>
+    }
+
+    <app-scroll-to-top />
 </div>
-}
-@error {
-<p>Error loading data!</p>
-}
-
-<app-scroll-to-top />
