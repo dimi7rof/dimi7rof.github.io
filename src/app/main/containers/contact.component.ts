@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   template: `
-    <section class="wrapper info box right">
+    <section class="wrapper info box right contacts">
       <div class="inner text rise flex center column gap20">
         <h3>Contacts</h3>
         <div class="social">

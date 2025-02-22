@@ -34,6 +34,18 @@ p {
   margin: 2px;
 }
 
+.oveflow-hidden {
+  overflow: hidden;
+}
+
+.grid {
+  display: grid;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: repeat(6, 1fr);
+}
+
 .flex {
   display: flex;
 }
@@ -94,11 +106,15 @@ p {
 }
 
 .summary {
-  height: 160px;
+  height: 350px;
 }
 
 .education {
   height: 740px;
+}
+
+.info {
+  height: 350px;
 }
 
 .welcome {
@@ -157,9 +173,15 @@ p {
   padding: 4px 20px;
 }
 
+.logos {
+  gap: 32px;
+}
+
 .logos > img {
-  height: 40px;
-  width: 40px;
+  height: 60px;
+  width: 60px;
+  background-color: darkgray;
+  border-radius: 55px;
 }
 
 .box {
@@ -222,13 +244,6 @@ p {
   }
 }
 
-.logos {
-  gap: 32px;
-  background-color: darkgray;
-  padding: 30px 10px;
-  border-radius: 55px;
-}
-
 .social {
   display: flex;
   flex-direction: row;
@@ -249,6 +264,7 @@ p {
   justify-content: center;
   align-items: center;
   border-radius: 60px;
+  background-color: #386365;
 }
 
 .social a:hover {
@@ -260,8 +276,9 @@ p {
 }
 
 .social i {
-  border: 1px solid black;
-  border-radius: 100%;
+  height: 120px;
+  display: flex;
+  justify-content: center;
 }
 
 .three-d-text {
@@ -273,6 +290,10 @@ p {
 
 .experience {
   height: 700px;
+}
+
+.skills {
+  height: 350px;
 }
 
 .button {
@@ -399,12 +420,18 @@ p {
     width: 90%;
   }
 
+  .skills {
+    height: 520px;
+  }
+
   .social {
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
   }
 
   .info {
-    height: 760px;
+    height: 520px;
   }
 
   .wide50 {
@@ -417,7 +444,11 @@ p {
 
   .logos {
     flex-direction: column;
-    gap: 6px;
     padding: 10px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
   }
 }

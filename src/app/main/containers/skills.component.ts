@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
     <section class="wrapper skills box left">
       <div class="inner text drop flex center column">
         <h3 class="flex center">Skills</h3>
-        <div class="flex center logos">
+        <div class="grid center logos">
           <img src="assets/logos/git.png" alt="github" />
           <img src="assets/logos/csharp.png" alt="C#" />
           <img src="assets/logos/sql.png" alt="MSSQL" />
@@ -20,6 +20,7 @@ import { Component } from '@angular/core';
           <img src="assets/logos/html5-logo.png" alt="HTML" />
           <img src="assets/logos/css.webp" alt="CSS" />
           <img src="assets/logos/js.png" alt="JS" />
+          <img src="assets/logos/excel.svg" alt="Excel" />
         </div>
       </div>
     </section>

@@ -10,7 +10,7 @@ import { Component } from '@angular/core';
         <h3>Summary</h3>
         <p>Hello</p>
         <p>I am <b>not</b> looking for a job</p>
-        <p>This page is for practice purpose</p>
+        <p>This page is for practice only</p>
       </div>
     </section>
   `,
