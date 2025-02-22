@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { UserService } from '../services/user.service';
-import { interval } from 'rxjs';
+import { interval, Subscription } from 'rxjs';
 
 interface UserData {
   ip: string;
@@ -38,13 +38,21 @@ interface UserData {
     </section>
   `,
 })
-export class StatisticsComponent {
+export class StatisticsComponent implements OnDestroy {
   data: UserData[] = [];
+  private subscription: Subscription = new Subscription();
+
   constructor(private userService: UserService) {
-    interval(5000).subscribe(() =>
+    const intervalSubscription = interval(5000).subscribe(() => {
       this.userService.getStat().subscribe((data: UserData[]) => {
         this.data = data;
-      })
-    );
+      });
+    });
+
+    this.subscription.add(intervalSubscription); // Add subscription for cleanup
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe(); // Clean up when component is destroyed
   }
 }
