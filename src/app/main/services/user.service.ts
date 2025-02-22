@@ -17,8 +17,8 @@ export class UserService {
     return this.http.post(`${environment.backendUrl}/user`, userData);
   }
 
-  getStat(): Observable<any> {
-    return this.http.get(`${environment.backendUrl}/logs`);
+  getStat(filter: boolean): Observable<any> {
+    return this.http.get(`${environment.backendUrl}/logs?filter=${filter}`);
   }
 
   getLocation(ip: string): Observable<any> {

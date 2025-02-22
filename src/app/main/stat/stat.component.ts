@@ -1,6 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { interval, Subscription } from 'rxjs';
+import { FormsModule } from '@angular/forms';
 
 interface UserData {
   ip: string;
@@ -15,9 +16,13 @@ interface UserData {
 @Component({
   selector: 'stat-component',
   standalone: true,
-  imports: [],
+  imports: [FormsModule],
   template: `
     <section class="wrapper stat">
+      <label>
+        <input type="checkbox" [(ngModel)]="filter" name="logData" /> Exclude my
+        IP
+      </label>
       <table class="user-table">
         <thead>
           <tr>
@@ -50,10 +55,11 @@ interface UserData {
 export class StatisticsComponent implements OnDestroy {
   data: UserData[] = [];
   private subscription: Subscription = new Subscription();
+  filter = false;
 
   constructor(private userService: UserService) {
     const intervalSubscription = interval(5000).subscribe(() => {
-      this.userService.getStat().subscribe((data: UserData[]) => {
+      this.userService.getStat(this.filter).subscribe((data: UserData[]) => {
         this.data = data;
       });
     });
