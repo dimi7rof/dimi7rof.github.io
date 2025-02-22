@@ -7,6 +7,9 @@ interface UserData {
   os: string;
   browser: string;
   dateTime: string;
+  org: string;
+  city: string;
+  country: string;
 }
 
 @Component({
@@ -18,19 +21,25 @@ interface UserData {
       <table class="user-table">
         <thead>
           <tr>
+            <th>Country</th>
+            <th>City</th>
+            <th>Provider</th>
             <th>IP Address</th>
-            <th>Operating System</th>
-            <th>Browser</th>
-            <th>Date & Time</th>
+            <th class="mobile-hide">Operating System</th>
+            <th class="mobile-hide">Browser</th>
+            <th class="mobile-hide">Date & Time</th>
           </tr>
         </thead>
         <tbody>
           @for (user of data; track user.dateTime) {
           <tr>
+            <td>{{ user.country }}</td>
+            <td>{{ user.city }}</td>
+            <td>{{ user.org }}</td>
             <td>{{ user.ip }}</td>
-            <td>{{ user.os }}</td>
-            <td>{{ user.browser }}</td>
-            <td>{{ user.dateTime }}</td>
+            <td class="mobile-hide">{{ user.os }}</td>
+            <td class="mobile-hide">{{ user.browser }}</td>
+            <td class="mobile-hide">{{ user.dateTime }}</td>
           </tr>
           }
         </tbody>

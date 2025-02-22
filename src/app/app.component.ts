@@ -14,15 +14,20 @@ export class AppComponent {
 
   ngOnInit(): void {
     this.userService.getUserIp().subscribe((ipData) => {
-      const userData = {
-        ip: ipData.ip,
-        os: this.getOperatingSystem(),
-        browser: this.getBrowserInfo(),
-      };
+      this.userService.getLocation(ipData.ip).subscribe((loc) => {
+        const userData = {
+          ip: ipData.ip,
+          os: this.getOperatingSystem(),
+          browser: this.getBrowserInfo(),
+          city: loc.city,
+          country: loc.country,
+          org: loc.org,
+        };
 
-      this.userService.sendUserData(userData).subscribe({
-        next: () => console.info(userData.ip),
-        error: () => console.error('Error'),
+        this.userService.sendUserData(userData).subscribe({
+          next: () => console.info(userData.ip),
+          error: () => console.error('Error'),
+        });
       });
     });
   }

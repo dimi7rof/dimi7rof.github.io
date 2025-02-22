@@ -490,6 +490,10 @@ p {
 }
 
 @media only screen and (max-width: 500px) {
+  .mobile-hide {
+    display: none;
+  }
+
   .certPics > div {
     width: 94%;
     height: 130vw;

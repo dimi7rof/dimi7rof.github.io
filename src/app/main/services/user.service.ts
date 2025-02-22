@@ -20,4 +20,8 @@ export class UserService {
   getStat(): Observable<any> {
     return this.http.get(`${environment.backendUrl}/logs`);
   }
+
+  getLocation(ip: string): Observable<any> {
+    return this.http.get(`https://ipapi.co/${ip}/json/`);
+  }
 }
