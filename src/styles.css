@@ -423,6 +423,29 @@ p {
   overflow: auto;
 }
 
+.user-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 16px;
+  text-align: left;
+  max-height: 800px;
+}
+.user-table > tbody {
+  max-height: 700px;
+}
+
+.user-table th,
+.user-table td {
+  border: 1px solid #ddd;
+  padding: 12px;
+}
+
+.user-table th {
+  background-color: #4caf50;
+  color: white;
+}
+
 /* Login Form */
 
 /* app-login {
