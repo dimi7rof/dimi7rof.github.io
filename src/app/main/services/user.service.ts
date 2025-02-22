@@ -7,8 +7,6 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root',
 })
 export class UserService {
-  private apiUrl = `${environment.backendUrl}/user`;
-
   constructor(private http: HttpClient) {}
 
   getUserIp(): Observable<any> {

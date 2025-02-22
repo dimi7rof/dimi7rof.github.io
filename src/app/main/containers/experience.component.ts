@@ -63,10 +63,10 @@ export class ExperienceComponent {
     const diff = currentDate.getTime() - this.startDate.getTime();
 
     this.years = Math.floor(diff / (365.25 * 24 * multiplier));
-    this.months = Math.floor(
-      (diff % (12 * 24 * multiplier)) / (24 * multiplier)
-    );
-
+    this.months =
+      currentDate.getMonth() - 8 < 1
+        ? currentDate.getMonth() - 8 + 12
+        : currentDate.getMonth() - 8;
     this.days = currentDate.getDate();
     this.hours = Math.floor((diff % (24 * multiplier)) / multiplier);
     this.minutes = Math.floor((diff % multiplier) / (60 * 1000));

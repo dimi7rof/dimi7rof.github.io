@@ -1,7 +1,5 @@
 import { Routes } from '@angular/router';
 import { MainComponent } from './main/main.component';
-import { LoginComponent } from './main/login/login.component';
-import { StatisticsComponent } from './main/stat/stat.component';
 
 export const routes: Routes = [
   { path: '', component: MainComponent },
