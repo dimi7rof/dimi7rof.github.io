@@ -70,12 +70,11 @@ export class StatisticsComponent implements OnDestroy {
 
   constructor(private userService: UserService) {
     this.getData();
-    const intervalSubscription = interval(10000).subscribe(() => {
+    const intervalSubscription = interval(60000).subscribe(() => {
       this.getData();
     });
 
     this.subscription.add(intervalSubscription);
-
     this.userService.getUserIp().subscribe((ipData) => (this.ip = ipData.ip));
   }
 
