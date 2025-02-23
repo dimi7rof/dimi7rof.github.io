@@ -69,6 +69,6 @@ export class MainComponent {
   }
 
   openLogin() {
-    this.router.navigate(['/login']);
+    this.router.navigate(['/stat']);
   }
 }
