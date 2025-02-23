@@ -1,6 +1,9 @@
 name: Deploy Angular to GitHub Pages
 
 on:
+  push:
+    branches:
+      - "*.*.*"
   workflow_dispatch:
 
 jobs:
