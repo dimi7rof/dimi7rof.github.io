@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, timeout } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
 @Injectable({
@@ -14,13 +14,17 @@ export class UserService {
   }
 
   sendUserData(userData: any): Observable<any> {
-    return this.http.post(`${environment.backendUrl}/user`, userData);
+    return this.http
+      .post(`${environment.backendUrl}/user`, userData)
+      .pipe(timeout(120000));
   }
 
   getStat(filter: boolean, ip: string, page: number): Observable<any> {
-    return this.http.get(
-      `${environment.backendUrl}/logs?filter=${filter}&ip=${ip}&page=${page}`
-    );
+    return this.http
+      .get(
+        `${environment.backendUrl}/logs?filter=${filter}&ip=${ip}&page=${page}`
+      )
+      .pipe(timeout(120000));
   }
 
   getLocation(ip: string): Observable<any> {
