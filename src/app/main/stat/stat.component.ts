@@ -50,8 +50,11 @@ interface UserData {
       </table>
       <div class="arrows">
         <div class="arrows">
+          @if (page > 0) {
           <button class="arrow" (click)="previous()"><</button>
+          } @if (data.length === 20) {
           <button class="arrow" (click)="next()">></button>
+          }
         </div>
         <p class="pagenumber">{{ page }}</p>
       </div>
@@ -86,6 +89,7 @@ export class StatisticsComponent implements OnDestroy {
 
   filter() {
     this.exclude = !this.exclude;
+    this.page = 0;
     this.getData();
   }
 
