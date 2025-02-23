@@ -71,7 +71,7 @@ export class StatisticsComponent implements OnDestroy {
   data: UserData[] = [];
   private subscription: Subscription = new Subscription();
   exclude = false;
-  ip = '';
+  ip = '0.0.0.0';
   page = 1;
 
   constructor(private userService: UserService, private router: Router) {

@@ -22,7 +22,7 @@ export class UserService {
   getStat(filter: boolean, ip: string, page: number): Observable<any> {
     return this.http
       .get(
-        `${environment.backendUrl}/logs?filter=${filter}&ip=${ip}&page=${page}`
+        `${environment.backendUrl}/logs?filter=${filter}&ip=${ip}&page=${page}&size=20`
       )
       .pipe(timeout(120000));
   }
