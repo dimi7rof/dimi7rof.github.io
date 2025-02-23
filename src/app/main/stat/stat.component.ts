@@ -50,7 +50,7 @@ interface UserData {
       </table>
       <div class="arrows">
         <div class="arrows">
-          @if (page > 0) {
+          @if (page > 1) {
           <button class="arrow" (click)="previous()"><</button>
           } @if (data.length === 25) {
           <button class="arrow" (click)="next()">></button>
@@ -66,7 +66,7 @@ export class StatisticsComponent implements OnDestroy {
   private subscription: Subscription = new Subscription();
   exclude = false;
   ip = '';
-  page = 0;
+  page = 1;
 
   constructor(private userService: UserService) {
     this.getData();
@@ -81,7 +81,7 @@ export class StatisticsComponent implements OnDestroy {
 
   getData() {
     this.userService
-      .getStat(this.exclude, this.ip, this.page)
+      .getStat(this.exclude, this.ip, this.page - 1)
       .subscribe((data: UserData[]) => {
         this.data = data;
       });
@@ -89,12 +89,12 @@ export class StatisticsComponent implements OnDestroy {
 
   filter() {
     this.exclude = !this.exclude;
-    this.page = 0;
+    this.page = 1;
     this.getData();
   }
 
   previous() {
-    this.page = this.page === 0 ? 0 : this.page - 1;
+    this.page--;
     this.getData();
   }
   next() {
