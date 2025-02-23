@@ -538,6 +538,7 @@ p {
 
 .back {
   height: 5vh;
+  max-width: 100vw;
 }
 
 @media only screen and (max-width: 920px) {
