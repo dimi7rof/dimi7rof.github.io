@@ -439,24 +439,30 @@ p {
   color: rgb(251, 255, 0);
 }
 
-/* Round Button */
+/* Stat Button */
 .round-btn {
   position: absolute;
-  top: 20px;
-  right: 20px;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
+  top: 12px;
+  left: 4vw;
+  width: 90vw;
+  height: 60px;
+  border-radius: 16px;
   font-size: 24px;
   border: none;
-  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background-color 0.3s ease;
   background-color: transparent;
   z-index: 100;
-  color: rgb(0, 75, 14);
+}
+
+.back-btn {
+  border: none;
+  background-color: transparent;
+  color: burlywood;
+  width: 90vw;
+  height: 32px;
+  padding: 0px;
 }
 
 .stat {
@@ -495,12 +501,6 @@ p {
 
 /* Login Form */
 
-/* app-login {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-} */
 .login-container {
   width: 300px;
   padding: 20px;
@@ -535,6 +535,11 @@ p {
 .placeholder {
   height: 400px;
 }
+
+.back {
+  height: 5vh;
+}
+
 @media only screen and (max-width: 920px) {
   .user-table {
     margin: 10px 0;
@@ -576,6 +581,10 @@ p {
 }
 
 @media (orientation: portrait) {
+  li {
+    font-size: small;
+  }
+
   .three-d-text {
     font-size: 1.2rem;
   }
@@ -602,7 +611,7 @@ p {
   }
 
   .experience {
-    height: 740px;
+    height: 620px;
   }
 
   .logos {

@@ -2,6 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { interval, Subscription } from 'rxjs';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 interface UserData {
   ip: string;
@@ -20,7 +21,7 @@ interface UserData {
   template: `
     <section class="wrapper stat">
       <label>
-        <input type="checkbox" (click)="filter()" /> Exclude my IP
+        <input type="checkbox" (click)="filter()" /> Exclude this device
       </label>
       <table class="user-table">
         <thead>
@@ -52,12 +53,17 @@ interface UserData {
         <div class="arrows">
           @if (page > 1) {
           <button class="arrow" (click)="previous()"><</button>
+          }@if (page <= 1) {
+          <div class="arrow"></div>
           } @if (data.length === 25) {
           <button class="arrow" (click)="next()">></button>
           }
         </div>
         <p class="pagenumber">{{ page }}</p>
       </div>
+    </section>
+    <section class="wrapper back">
+      <button class="back-btn" (click)="back()">Back</button>
     </section>
   `,
 })
@@ -68,7 +74,7 @@ export class StatisticsComponent implements OnDestroy {
   ip = '';
   page = 1;
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private router: Router) {
     this.getData();
     const intervalSubscription = interval(60000).subscribe(() => {
       this.getData();
@@ -96,9 +102,14 @@ export class StatisticsComponent implements OnDestroy {
     this.page--;
     this.getData();
   }
+
   next() {
     this.page++;
     this.getData();
+  }
+
+  back() {
+    this.router.navigate(['/']);
   }
 
   ngOnDestroy(): void {
