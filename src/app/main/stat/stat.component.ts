@@ -56,15 +56,20 @@ export class StatisticsComponent implements OnDestroy {
   data: UserData[] = [];
   private subscription: Subscription = new Subscription();
   filter = false;
+  ip = '';
 
   constructor(private userService: UserService) {
     const intervalSubscription = interval(5000).subscribe(() => {
-      this.userService.getStat(this.filter).subscribe((data: UserData[]) => {
-        this.data = data;
-      });
+      this.userService
+        .getStat(this.filter, this.ip)
+        .subscribe((data: UserData[]) => {
+          this.data = data;
+        });
     });
 
     this.subscription.add(intervalSubscription); // Add subscription for cleanup
+
+    this.userService.getUserIp().subscribe((ipData) => (this.ip = ipData.ip));
   }
 
   ngOnDestroy(): void {
