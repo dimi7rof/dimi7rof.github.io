@@ -19,3 +19,4 @@ updates:
       - "ci/cd"
     commit-message:
       prefix: "ci(deps):"
+
