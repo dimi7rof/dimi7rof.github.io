@@ -17,9 +17,9 @@ export class UserService {
     return this.http.post(`${environment.backendUrl}/user`, userData);
   }
 
-  getStat(filter: boolean, ip: string): Observable<any> {
+  getStat(filter: boolean, ip: string, page: number): Observable<any> {
     return this.http.get(
-      `${environment.backendUrl}/logs?filter=${filter}&ip=${ip}&page=0`
+      `${environment.backendUrl}/logs?filter=${filter}&ip=${ip}&page=${page}`
     );
   }
 

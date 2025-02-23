@@ -20,8 +20,7 @@ interface UserData {
   template: `
     <section class="wrapper stat">
       <label>
-        <input type="checkbox" [(ngModel)]="filter" name="logData" /> Exclude my
-        IP
+        <input type="checkbox" (click)="filter()" /> Exclude my IP
       </label>
       <table class="user-table">
         <thead>
@@ -49,27 +48,49 @@ interface UserData {
           }
         </tbody>
       </table>
+      <button class="arrow" (click)="previous()"><</button>
+      <button class="arrow" (click)="next()">></button>
     </section>
   `,
 })
 export class StatisticsComponent implements OnDestroy {
   data: UserData[] = [];
   private subscription: Subscription = new Subscription();
-  filter = false;
+  exclude = false;
   ip = '';
+  page = 0;
 
   constructor(private userService: UserService) {
+    this.getData();
     const intervalSubscription = interval(5000).subscribe(() => {
-      this.userService
-        .getStat(this.filter, this.ip)
-        .subscribe((data: UserData[]) => {
-          this.data = data;
-        });
+      this.getData();
     });
 
     this.subscription.add(intervalSubscription); // Add subscription for cleanup
 
     this.userService.getUserIp().subscribe((ipData) => (this.ip = ipData.ip));
+  }
+
+  getData() {
+    this.userService
+      .getStat(this.exclude, this.ip, this.page)
+      .subscribe((data: UserData[]) => {
+        this.data = data;
+      });
+  }
+
+  filter() {
+    this.exclude = !this.exclude;
+    this.getData();
+  }
+
+  previous() {
+    this.page = this.page === 0 ? 0 : this.page - 1;
+    this.getData();
+  }
+  next() {
+    this.page++;
+    this.getData();
   }
 
   ngOnDestroy(): void {

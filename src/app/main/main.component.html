@@ -11,7 +11,7 @@
     <experience-component />
     }
     @placeholder {
-    <p>Loading...</p>
+    <p class="placeholder">Loading...</p>
     }
     @error {
     <p>Error loading data!</p>
@@ -21,7 +21,7 @@
     <skills-component />
     }
     @placeholder {
-    <p>Loading...</p>
+    <p class="placeholder">Loading...</p>
     }
     @error {
     <p>Error loading data!</p>
@@ -31,12 +31,13 @@
     <contact-component />
     }
     @placeholder {
-    <p>Loading...</p>
+    <p class="placeholder">Loading...</p>
     }
     @error {
     <p>Error loading data!</p>
     }
 
+    @defer (on viewport) {
     @defer (on interaction) {
     <cert-component />
     }
@@ -44,6 +45,13 @@
     <div class="wrapper button">
         <p>Certificates</p>
     </div>
+    }
+    @error {
+    <p>Error loading data!</p>
+    }
+    }
+    @placeholder {
+    <p class="placeholder">Loading...</p>
     }
     @error {
     <p>Error loading data!</p>
