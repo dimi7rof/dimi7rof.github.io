@@ -13,7 +13,7 @@ import { Component } from '@angular/core';
             <p>2003-2008 PGMET Pazardjik</p>
           </li>
           <li>
-            <p>2008-2021 Only working</p>
+            <p>2008-2021 Work only</p>
           </li>
           <li>
             <p>2021-2023 SoftUni University</p>

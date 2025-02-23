@@ -27,11 +27,11 @@ interface UserData {
           <tr>
             <th>Country</th>
             <th>City</th>
-            <th>Provider</th>
+            <th class="mobile-hide">Provider</th>
             <th>IP Address</th>
             <th class="mobile-hide">Operating System</th>
             <th class="mobile-hide">Browser</th>
-            <th class="mobile-hide">Date & Time</th>
+            <th>Date & Time</th>
           </tr>
         </thead>
         <tbody>
@@ -39,17 +39,22 @@ interface UserData {
           <tr>
             <td>{{ user.country }}</td>
             <td>{{ user.city }}</td>
-            <td>{{ user.org }}</td>
+            <td class="mobile-hide">{{ user.org }}</td>
             <td>{{ user.ip }}</td>
             <td class="mobile-hide">{{ user.os }}</td>
             <td class="mobile-hide">{{ user.browser }}</td>
-            <td class="mobile-hide">{{ user.dateTime }}</td>
+            <td>{{ user.dateTime }}</td>
           </tr>
           }
         </tbody>
       </table>
-      <button class="arrow" (click)="previous()"><</button>
-      <button class="arrow" (click)="next()">></button>
+      <div class="arrows">
+        <div class="arrows">
+          <button class="arrow" (click)="previous()"><</button>
+          <button class="arrow" (click)="next()">></button>
+        </div>
+        <p class="pagenumber">{{ page }}</p>
+      </div>
     </section>
   `,
 })
@@ -62,11 +67,11 @@ export class StatisticsComponent implements OnDestroy {
 
   constructor(private userService: UserService) {
     this.getData();
-    const intervalSubscription = interval(5000).subscribe(() => {
+    const intervalSubscription = interval(10000).subscribe(() => {
       this.getData();
     });
 
-    this.subscription.add(intervalSubscription); // Add subscription for cleanup
+    this.subscription.add(intervalSubscription);
 
     this.userService.getUserIp().subscribe((ipData) => (this.ip = ipData.ip));
   }
@@ -94,6 +99,6 @@ export class StatisticsComponent implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe(); // Clean up when component is destroyed
+    this.subscription.unsubscribe();
   }
 }
