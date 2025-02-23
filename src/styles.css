@@ -624,4 +624,8 @@ p {
     grid-template-columns: repeat(3, 1fr);
     gap: 40px;
   }
+
+  .education {
+    height: 660px;
+  }
 }
