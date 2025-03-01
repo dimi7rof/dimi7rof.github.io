@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Output } from '@angular/core';
 import { TitleComponent } from './containers/title.component';
 import { SummaryComponent } from './containers/summary.component';
 import { EducationComponent } from './containers/education.component';
@@ -10,6 +10,7 @@ import { CertificateComponent } from './containers/certificate.component';
 import { ScrollToTopComponent } from './containers/scroll-to-top.component';
 import { Router } from '@angular/router';
 import { UserService } from './services/user.service';
+import { SummaryStatComponent } from './stat/summary.component';
 
 @Component({
   selector: 'main-component',
@@ -24,10 +25,12 @@ import { UserService } from './services/user.service';
     ContactComponent,
     CertificateComponent,
     ScrollToTopComponent,
+    SummaryStatComponent,
   ],
   templateUrl: './main.component.html',
 })
 export class MainComponent {
+  summaryPopupVisible = false;
   constructor(private router: Router, private userService: UserService) {
     this.userService.getUserIp().subscribe((ipData) => {
       this.userService.getLocation(ipData.ip).subscribe((loc) => {
@@ -46,6 +49,10 @@ export class MainComponent {
         });
       });
     });
+  }
+
+  showSummary() {
+    this.summaryPopupVisible = !this.summaryPopupVisible;
   }
 
   getOperatingSystem(): string {

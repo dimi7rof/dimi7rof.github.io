@@ -120,6 +120,32 @@ p {
   height: 350px;
 }
 
+.sum {
+  width: 50%;
+  height: 50%;
+}
+
+.sum-popup {
+  position: absolute;
+  z-index: 200;
+  width: 98vw;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.close-btn {
+  width: 94vw;
+  height: 94vh;
+  position: absolute;
+  z-index: 1000;
+  background: transparent;
+  border: none;
+  left: 0;
+  top: 0;
+}
+
 .welcome {
   position: absolute;
   top: -100px; /* Start from above */
@@ -456,6 +482,22 @@ p {
   z-index: 100;
 }
 
+.sum-btn {
+  position: absolute;
+  top: 80px;
+  left: 4vw;
+  width: 90vw;
+  height: 350px;
+  border-radius: 16px;
+  font-size: 24px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  z-index: 100;
+}
+
 .back-btn {
   border: none;
   background-color: transparent;
@@ -545,7 +587,7 @@ p {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 100%;
 }
 
 .spinner {
@@ -606,6 +648,16 @@ p {
 @media (orientation: portrait) {
   li {
     font-size: small;
+  }
+
+  .sum {
+    width: 70%;
+    height: 40%;
+  }
+
+  .sum-popup {
+    width: 100vw;
+    height: 100vh;
   }
 
   .stat {
