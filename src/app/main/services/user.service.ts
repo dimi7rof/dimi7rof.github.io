@@ -15,15 +15,21 @@ export class UserService {
 
   sendUserData(userData: any): Observable<any> {
     return this.http
-      .post(`${environment.backendUrl}/user`, userData)
+      .post(`${environment.backendUrl}/insertUser`, userData)
       .pipe(timeout(120000));
   }
 
-  getStat(filter: boolean, ip: string, page: number): Observable<any> {
+  getAll(filter: boolean, ip: string, page: number): Observable<any> {
     return this.http
       .get(
-        `${environment.backendUrl}/logs?filter=${filter}&ip=${ip}&page=${page}&size=20`
+        `${environment.backendUrl}/getUsers?filter=${filter}&ip=${ip}&page=${page}&size=20`
       )
+      .pipe(timeout(120000));
+  }
+
+  getStat(): Observable<any> {
+    return this.http
+      .get(`${environment.backendUrl}/getStatistics`)
       .pipe(timeout(120000));
   }
 

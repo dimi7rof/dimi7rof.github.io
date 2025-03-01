@@ -20,6 +20,7 @@ interface UserData {
   imports: [FormsModule],
   template: `
     <section class="wrapper stat">
+      @if (data.length !== 0) {
       <label>
         <input type="checkbox" (click)="filter()" /> Exclude this device
       </label>
@@ -61,6 +62,11 @@ interface UserData {
         </div>
         <p class="pagenumber">{{ page }}</p>
       </div>
+      } @if (data.length === 0) {
+      <div class="spinner-container">
+        <div class="spinner"></div>
+      </div>
+      }
     </section>
     <section class="wrapper back">
       <button class="back-btn" (click)="back()">Back</button>
@@ -86,7 +92,7 @@ export class StatisticsComponent implements OnDestroy {
 
   getData() {
     this.userService
-      .getStat(this.exclude, this.ip, this.page - 1)
+      .getAll(this.exclude, this.ip, this.page - 1)
       .subscribe((data: UserData[]) => {
         this.data = data;
       });
