@@ -37,13 +37,6 @@ import { Component } from '@angular/core';
             ></a>
           </i>
         </div>
-        <div>
-          <ul class="flex center column">
-            <li class="flex center column wide50">
-              <p>+359 883 470 209</p>
-            </li>
-          </ul>
-        </div>
       </div>
     </section>
   `,
