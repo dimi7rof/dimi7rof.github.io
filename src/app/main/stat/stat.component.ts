@@ -56,7 +56,7 @@ interface UserData {
           <button class="arrow" (click)="previous()"><</button>
           }@if (page <= 1) {
           <div class="arrow"></div>
-          } @if (data.length === 25) {
+          } @if (data.length === 20) {
           <button class="arrow" (click)="next()">></button>
           }
         </div>
