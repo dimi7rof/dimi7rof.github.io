@@ -15,14 +15,14 @@ export class UserService {
 
   sendUserData(userData: any): Observable<any> {
     return this.http
-      .post(`${environment.backendUrl}/insertUser`, userData)
+      .post(`${environment.backendUrl}/insertVisitor`, userData)
       .pipe(timeout(120000));
   }
 
   getAll(filter: boolean, ip: string, page: number): Observable<any> {
     return this.http
       .get(
-        `${environment.backendUrl}/getUsers?filter=${filter}&ip=${ip}&page=${page}&size=20`
+        `${environment.backendUrl}/getVisitors?filter=${filter}&ip=${ip}&page=${page}&size=20`
       )
       .pipe(timeout(120000));
   }

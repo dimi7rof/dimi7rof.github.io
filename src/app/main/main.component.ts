@@ -68,7 +68,7 @@ export class MainComponent {
     return 'Unknown Browser';
   }
 
-  openLogin() {
+  openHistory() {
     this.router.navigate(['/stat']);
   }
 }
