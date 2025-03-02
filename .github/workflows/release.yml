@@ -14,7 +14,7 @@ on:
           - patch
 
 jobs:
-  build-and-deploy:
+  create-release:
     runs-on: ubuntu-latest
 
     steps:
