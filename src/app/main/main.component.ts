@@ -1,16 +1,16 @@
 import { CommonModule } from '@angular/common';
-import { Component, Output } from '@angular/core';
-import { TitleComponent } from './containers/title.component';
-import { SummaryComponent } from './containers/summary.component';
-import { EducationComponent } from './containers/education.component';
-import { ExperienceComponent } from './containers/experience.component';
-import { SkillsComponent } from './containers/skills.component';
-import { ContactComponent } from './containers/contact.component';
-import { CertificateComponent } from './containers/certificate.component';
-import { ScrollToTopComponent } from './containers/scroll-to-top.component';
+import { Component } from '@angular/core';
+import { TitleComponent } from './containers/title.component/title.component';
+import { SummaryComponent } from './containers/summary.component/summary.component';
+import { EducationComponent } from './containers/education.component/education.component';
+import { ExperienceComponent } from './containers/experience.component/experience.component';
+import { SkillsComponent } from './containers/skills.component/skills.component';
+import { ContactComponent } from './containers/contact.component/contact.component';
+import { CertificateComponent } from './containers/certificate-component/certificate.component';
+import { ScrollToTopComponent } from './containers/scroll-to-top.component/scroll-to-top.component';
 import { Router } from '@angular/router';
 import { UserService } from './services/user.service';
-import { SummaryStatComponent } from './stat/summary.component';
+import { SummaryStatComponent } from './hidden/summary.component/summary.component';
 
 @Component({
   selector: 'main-component',
@@ -28,6 +28,7 @@ import { SummaryStatComponent } from './stat/summary.component';
     SummaryStatComponent,
   ],
   templateUrl: './main.component.html',
+  styleUrl: './main.component.css',
 })
 export class MainComponent {
   summaryPopupVisible = false;

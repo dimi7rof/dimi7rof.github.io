@@ -1,0 +1,44 @@
+.education {
+  height: 740px;
+}
+
+.list {
+  width: 90vw;
+  max-width: 90%;
+}
+
+.education > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 90vw;
+}
+
+.education > ol li {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 85vw;
+}
+
+.education > ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80vw;
+  max-width: 900px;
+}
+
+.education > div > ul > li > ol > li {
+  border: 1px solid rgb(0, 201, 27);
+  padding: 4px 20px;
+}
+
+@media (orientation: portrait) {
+  .education {
+    height: 660px;
+  }
+}

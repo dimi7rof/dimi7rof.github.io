@@ -1,0 +1,14 @@
+.company {
+  margin-left: 20px;
+  background-color: black;
+}
+
+.experience {
+  height: 700px;
+}
+
+@media (orientation: portrait) {
+  .experience {
+    height: 620px;
+  }
+}

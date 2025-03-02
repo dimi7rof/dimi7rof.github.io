@@ -1,0 +1,70 @@
+.cert {
+  height: fit-content;
+}
+
+.certPics {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.certPics > div {
+  width: 48%;
+  height: 36vw;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #222222;
+  border-radius: 12px;
+  background-color: white;
+}
+
+.certPics > div:nth-child(2n-1) {
+  background-color: #c47a23;
+}
+
+.certPics > div > img {
+  object-fit: cover;
+}
+
+.udemy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.certPics > div > img {
+  height: 520px;
+  width: 400px;
+}
+
+.udemy > img {
+  width: 94vw;
+  border: 1px solid black;
+  border-radius: 10px;
+  object-fit: fill;
+  height: 560px;
+  width: 800px;
+}
+
+@media only screen and (max-width: 500px) {
+  .certPics > div {
+    width: 94%;
+    height: 130vw;
+  }
+
+  .certPics > div > img {
+    height: 130vw;
+    width: 88vw;
+  }
+
+  .udemy > img {
+    height: auto;
+    width: 88vw;
+  }
+}

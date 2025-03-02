@@ -1,4 +1,3 @@
-/* You can add global styles to this file, and also import other style files */
 * {
   box-sizing: border-box;
 }
@@ -78,18 +77,12 @@ p {
   gap: 20px;
 }
 
-.company {
-  margin-left: 20px;
-  background-color: black;
-}
-
 .wrapper {
   position: relative;
   background-color: rgb(20, 20, 20);
   color: rgb(239, 239, 239);
   width: 90vw;
   max-width: 1024px;
-  height: 600px;
   padding: 10px;
   display: flex;
   justify-content: center;
@@ -104,57 +97,6 @@ p {
   max-width: 90%;
 }
 
-.head {
-  height: 60px;
-}
-
-.summary {
-  height: 350px;
-}
-
-.education {
-  height: 740px;
-}
-
-.info {
-  height: 350px;
-}
-
-.sum {
-  width: 50%;
-  height: 50%;
-}
-
-.sum-popup {
-  position: absolute;
-  z-index: 200;
-  width: 98vw;
-  height: 100vh;
-  left: 0;
-  top: 0;
-  background: rgba(0, 0, 0, 0.8);
-}
-
-.close-btn {
-  width: 94vw;
-  height: 94vh;
-  position: absolute;
-  z-index: 1000;
-  background: transparent;
-  border: none;
-  left: 0;
-  top: 0;
-}
-
-.welcome {
-  position: absolute;
-  top: -100px; /* Start from above */
-  left: 50%;
-  transform: translateX(-50%); /* Center horizontally */
-  opacity: 0;
-  animation: fallDown 2s ease-out forwards;
-}
-
 @keyframes fallDown {
   from {
     top: -100px;
@@ -165,52 +107,6 @@ p {
     transform: translate(-50%, -50%); /* Perfect center */
     opacity: 1;
   }
-}
-
-.list {
-  width: 90vw;
-  max-width: 90%;
-}
-
-.education > div {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  width: 90vw;
-}
-
-.education > ol li {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 85vw;
-}
-
-.education > ul {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 80vw;
-  max-width: 900px;
-}
-
-.education > div > ul > li > ol > li {
-  border: 1px solid rgb(0, 201, 27);
-  padding: 4px 20px;
-}
-
-.logos {
-  gap: 32px;
-}
-
-.logos > img {
-  height: 60px;
-  width: 60px;
-  background-color: darkgray;
-  border-radius: 55px;
 }
 
 .box {
@@ -236,7 +132,6 @@ p {
   }
 }
 
-/* Text animations */
 .text {
   position: absolute;
   opacity: 0;
@@ -273,316 +168,6 @@ p {
   }
 }
 
-.social {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-  gap: 32px;
-  width: 60vw;
-}
-
-.social a {
-  width: 120px;
-  height: 120px;
-  font-size: 60px;
-  text-decoration: none;
-  color: black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 60px;
-  background-color: #386365;
-}
-
-.social a:hover {
-  background-color: #00a6a0;
-}
-
-.social a:hover > .socialText {
-  display: inline;
-}
-
-.social i {
-  height: 120px;
-  display: flex;
-  justify-content: center;
-}
-
-.three-d-text {
-  font-family: "Courier New", Courier, monospace;
-  font-size: 1.4rem;
-  font-weight: bold;
-  color: rgb(255, 255, 255);
-}
-
-.experience {
-  height: 700px;
-}
-
-.skills {
-  height: 350px;
-}
-
-.button {
-  height: 100px;
-}
-
-.button > p {
-  border: 2px solid rgb(0, 201, 27);
-  padding: 8px;
-  border-radius: 20px;
-}
-
-.button > p:hover,
-.button > p:focus {
-  padding: 16px;
-  color: black;
-  background-color: #00a6a0;
-  font-weight: 700;
-}
-
-.cert {
-  height: fit-content;
-}
-
-.certPics {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 16px;
-}
-
-.certPics > div {
-  width: 48%;
-  height: 36vw;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid #222222;
-  border-radius: 12px;
-  background-color: white;
-}
-
-.certPics > div:nth-child(2n-1) {
-  background-color: #c47a23;
-}
-
-.certPics > div > img {
-  object-fit: cover;
-}
-
-.udemy {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-}
-
-.certPics > div > img {
-  height: 520px;
-  width: 400px;
-}
-
-.udemy > img {
-  width: 94vw;
-  border: 1px solid black;
-  border-radius: 10px;
-  object-fit: fill;
-  height: 560px;
-  width: 800px;
-}
-
-.scroll-to-top {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 50px;
-  height: 50px;
-  border: none;
-  border-radius: 50%;
-  background-color: #000000;
-  color: white;
-  font-size: 24px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 6px rgba(126, 126, 126, 0.1);
-  transition: opacity 0.3s, transform 0.3s;
-}
-
-.scroll-to-top:hover {
-  background-color: #0056b3;
-}
-
-.scroll-to-top:active {
-  transform: scale(0.9);
-}
-
-.pagenumber {
-  position: relative;
-  bottom: 0px;
-  right: 20px;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.3s ease;
-  background-color: transparent;
-  color: rgb(251, 255, 0);
-}
-
-.arrows {
-  display: flex;
-  justify-content: space-between;
-}
-
-.arrow {
-  position: relative;
-  bottom: 0px;
-  left: 0px;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.3s ease;
-  background-color: transparent;
-  color: rgb(251, 255, 0);
-}
-
-/* Stat Button */
-.round-btn {
-  position: absolute;
-  top: 12px;
-  left: 4vw;
-  width: 90vw;
-  height: 60px;
-  border-radius: 16px;
-  font-size: 24px;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: transparent;
-  z-index: 100;
-}
-
-.sum-btn {
-  position: absolute;
-  top: 80px;
-  left: 4vw;
-  width: 90vw;
-  height: 350px;
-  border-radius: 16px;
-  font-size: 24px;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: transparent;
-  z-index: 100;
-}
-
-.back-btn {
-  border: none;
-  background-color: transparent;
-  color: burlywood;
-  width: 90vw;
-  height: 32px;
-  padding: 0px;
-}
-
-.stat {
-  max-width: 100vw;
-  height: 86vh;
-  overflow: auto;
-  display: block;
-}
-
-.user-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 20px 0;
-  font-size: 16px;
-  text-align: left;
-  max-height: 800px;
-}
-
-.user-table > tbody {
-  max-height: 700px;
-}
-.user-table > tbody > tr > td {
-  padding: 0px;
-}
-
-.user-table th,
-.user-table td {
-  border: 1px solid #ddd;
-  padding: 12px;
-}
-
-.user-table th {
-  background-color: #4caf50;
-  color: white;
-}
-
-/* Login Form */
-
-.login-container {
-  width: 300px;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin: 100px auto;
-  text-align: center;
-  background-color: dimgrey;
-}
-
-.login-container input {
-  width: 100%;
-  padding: 8px;
-  margin: 8px 0;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-}
-
-.login-container button {
-  padding: 8px 12px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.login-container button:hover {
-  background-color: #0056b3;
-}
-
-.placeholder {
-  height: 400px;
-}
-
-.back {
-  height: 5vh;
-  max-width: 100vw;
-}
-
 .spinner-container {
   display: flex;
   justify-content: center;
@@ -605,105 +190,21 @@ p {
   }
 }
 
-@media only screen and (max-width: 920px) {
-  .user-table {
-    margin: 10px 0;
-    font-size: 8px;
-    padding: 2px;
-  }
-
-  .user-table th,
-  .user-table td {
-    border: 1px solid #ddd;
-    padding: 0px;
-  }
-}
-
-@media only screen and (max-width: 500px) {
-  .mobile-hide {
-    display: none;
-  }
-
-  .certPics > div {
-    width: 94%;
-    height: 130vw;
-  }
-
-  .certPics > div > img {
-    height: 130vw;
-    width: 88vw;
-  }
-
-  .udemy > img {
-    height: auto;
-    width: 88vw;
-  }
-
-  .user-table {
-    margin: 10px 0;
-    font-size: 8px;
-  }
-}
-
 @media (orientation: portrait) {
   li {
     font-size: small;
   }
 
-  .sum {
-    width: 70%;
-    height: 40%;
-  }
-
-  .sum-popup {
-    width: 100vw;
-    height: 100vh;
-  }
-
-  .stat {
-    height: 75vh;
-  }
-
-  .three-d-text {
-    font-size: 1.2rem;
-  }
   .inner {
     width: 90%;
-  }
-
-  .skills {
-    height: 520px;
-  }
-
-  .social {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    justify-content: center;
-  }
-
-  .info {
-    height: 520px;
   }
 
   .wide50 {
     width: 80vw;
   }
 
-  .experience {
-    height: 620px;
-  }
-
-  .logos {
-    flex-direction: column;
-    padding: 10px;
-  }
-
   .grid {
     grid-template-columns: repeat(3, 1fr);
     gap: 40px;
-  }
-
-  .education {
-    height: 660px;
   }
 }

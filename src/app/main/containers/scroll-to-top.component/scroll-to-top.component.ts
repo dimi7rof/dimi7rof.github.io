@@ -7,6 +7,7 @@ import { Component, HostListener } from '@angular/core';
     <button (click)="scrollToTop()" class="scroll-to-top">⬆</button>
     }
   `,
+  styleUrl: './scroll-to-top.component.css',
 })
 export class ScrollToTopComponent {
   isVisible = false;

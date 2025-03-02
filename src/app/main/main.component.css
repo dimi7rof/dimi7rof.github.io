@@ -1,0 +1,54 @@
+.button {
+  height: 100px;
+}
+
+.button > p {
+  border: 2px solid rgb(0, 201, 27);
+  padding: 8px;
+  border-radius: 20px;
+}
+
+.button > p:hover,
+.button > p:focus {
+  padding: 16px;
+  color: black;
+  background-color: #00a6a0;
+  font-weight: 700;
+}
+
+/* Stat Button */
+.visitors-btn {
+  position: absolute;
+  top: 12px;
+  left: 4vw;
+  width: 90vw;
+  height: 60px;
+  border-radius: 16px;
+  font-size: 24px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  z-index: 100;
+}
+
+.sum-btn {
+  position: absolute;
+  top: 80px;
+  left: 4vw;
+  width: 90vw;
+  height: 350px;
+  border-radius: 16px;
+  font-size: 24px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  z-index: 100;
+}
+
+.placeholder {
+  height: 400px;
+}

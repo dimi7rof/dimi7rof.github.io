@@ -1,0 +1,37 @@
+.sum {
+  width: 50%;
+  height: 50%;
+}
+
+.sum-popup {
+  position: absolute;
+  z-index: 200;
+  width: 98vw;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.close-btn {
+  width: 94vw;
+  height: 94vh;
+  position: absolute;
+  z-index: 1000;
+  background: transparent;
+  border: none;
+  left: 0;
+  top: 0;
+}
+
+@media (orientation: portrait) {
+  .sum {
+    width: 70%;
+    height: 40%;
+  }
+
+  .sum-popup {
+    width: 100vw;
+    height: 100vh;
+  }
+}
