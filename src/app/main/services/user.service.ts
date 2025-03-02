@@ -16,21 +16,21 @@ export class UserService {
   sendUserData(userData: any): Observable<any> {
     return this.http
       .post(`${environment.backendUrl}/insertVisitor`, userData)
-      .pipe(timeout(120000));
+      .pipe(timeout(300000));
   }
 
   getAll(filter: boolean, ip: string, page: number): Observable<any> {
     return this.http
       .get(
-        `${environment.backendUrl}/getVisitors?filter=${filter}&ip=${ip}&page=${page}&size=20`
+        `${environment.backendUrl}/getVisitors?filter=${filter}&ip=${ip}&page=${page}&size=${environment.pageSize}`
       )
-      .pipe(timeout(120000));
+      .pipe(timeout(300000));
   }
 
   getStat(): Observable<any> {
     return this.http
       .get(`${environment.backendUrl}/getStatistics`)
-      .pipe(timeout(120000));
+      .pipe(timeout(300000));
   }
 
   getLocation(ip: string): Observable<any> {

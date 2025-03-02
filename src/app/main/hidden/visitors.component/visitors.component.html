@@ -36,7 +36,7 @@
                 &lt;</button>
             } @if (page <= 1) { <div class="arrow">
         </div>
-        } @if (data.length === 20) {
+        } @if (data.length === pageSize) {
         <button class="arrow" (click)="next()"> &gt;</button>
         }
     </div>

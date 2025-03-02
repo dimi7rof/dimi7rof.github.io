@@ -3,6 +3,7 @@ import { UserService } from '../../services/user.service';
 import { interval, Subscription } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { environment } from '../../../../environments/environment';
 
 interface UserData {
   ip: string;
@@ -21,12 +22,13 @@ interface UserData {
   templateUrl: './visitors.component.html',
   styleUrl: './visitors.component.css',
 })
-export class StatisticsComponent implements OnDestroy {
+export class VisitorsComponent implements OnDestroy {
   data: UserData[] = [];
   private subscription: Subscription = new Subscription();
   exclude = false;
   ip = '0.0.0.0';
   page = 1;
+  pageSize = environment.pageSize;
 
   constructor(private userService: UserService, private router: Router) {
     this.getData();

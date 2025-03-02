@@ -7,7 +7,7 @@ export const routes: Routes = [
     path: 'stat',
     loadComponent: () =>
       import('./main/hidden/visitors.component/visitors.component').then(
-        (m) => m.StatisticsComponent
+        (m) => m.VisitorsComponent
       ),
   },
   { path: '**', redirectTo: '/' },
