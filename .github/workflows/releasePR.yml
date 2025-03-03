@@ -1,0 +1,84 @@
+name: Create new release with PR titles and descriptions
+
+on:
+  workflow_dispatch:
+    inputs:
+      version_bump:
+        description: "Version bump type"
+        required: true
+        default: "patch"
+        type: choice
+        options:
+          - major
+          - minor
+          - patch
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get Latest Tag
+        id: get_tag
+        run: |
+          latest_tag=$(git tag --sort=-v:refname | head -n 1)
+          echo "Latest tag: $latest_tag"
+          if [[ -z "$latest_tag" ]]; then
+            latest_tag="0.0.0"
+          fi
+          echo "latest_tag=$latest_tag" >> $GITHUB_ENV
+
+      - name: Get PR Titles and Descriptions Since Last Tag
+        id: get_prs
+        run: |
+          prs=$(gh pr list --state merged --base main --json title,body --jq '.[] | "- \(.title)\n  \(.body)"')
+          echo -e "PRs since last tag:\n$prs"
+          echo "prs<<EOF" >> $GITHUB_ENV
+          echo "$prs" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+          echo "prs<<EOF" >> "$GITHUB_OUTPUT"
+          echo "$prs" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
+
+      - name: Calculate Next Tag
+        id: next_tag
+        run: |
+          IFS='.' read -r major minor patch <<< "$latest_tag"
+          bump_type="${{ github.event.inputs.version_bump || 'patch' }}"
+          echo "Version bump type: $bump_type"
+          case "$bump_type" in
+            major) major=$((major + 1)); minor=0; patch=0 ;;
+            minor) minor=$((minor + 1)); patch=0 ;;
+            patch) patch=$((patch + 1)) ;;
+            *) echo "Invalid version bump type"; exit 1 ;;
+          esac
+          new_tag="$major.$minor.$patch"
+          echo "New tag: $new_tag"
+          echo "new_tag=$new_tag" >> $GITHUB_ENV
+          echo "new_tag=$new_tag" >> "$GITHUB_OUTPUT"
+
+      - name: Create Git Tag
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git tag -a "$new_tag" -m "Release $new_tag\n\n$prs"
+          git push origin "$new_tag"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create GitHub Release
+        uses: actions/create-release@v1
+        with:
+          tag_name: ${{ env.new_tag }}
+          release_name: Release ${{ env.new_tag }}
+          body: |
+            Changes in this release:
+            ${{ env.prs }}
+          draft: false
+          prerelease: false
+          token: ${{ secrets.GITHUB_TOKEN }}
