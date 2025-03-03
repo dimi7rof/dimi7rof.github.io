@@ -1,4 +1,4 @@
-name: Create new release with commits
+name: Release [commits]
 
 on:
   workflow_dispatch:
