@@ -86,7 +86,7 @@ jobs:
           tag_name: ${{ env.new_tag }}
           release_name: Release ${{ env.new_tag }}
           body: |
-            Changes in this release:
+            What's new:
             ${{ env.commits }}
           draft: false
           prerelease: false
