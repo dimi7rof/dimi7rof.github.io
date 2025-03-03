@@ -1,4 +1,4 @@
-name: Create new release with PR titles and descriptions
+name: Create new release with PR titles
 
 on:
   workflow_dispatch:
@@ -23,23 +23,13 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Get Latest Tag
-        id: get_tag
-        run: |
-          latest_tag=$(git tag --sort=-v:refname | head -n 1)
-          echo "Latest tag: $latest_tag"
-          if [[ -z "$latest_tag" ]]; then
-            latest_tag="0.0.0"
-          fi
-          echo "latest_tag=$latest_tag" >> $GITHUB_ENV
-
       - name: Get Last Release Date
         id: last_release_date
         run: |
           LAST_TAG_DATE=$(gh release view --json publishedAt --jq '.publishedAt' || echo "")
           echo "LAST_TAG_DATE=$LAST_TAG_DATE" >> $GITHUB_ENV
 
-      - name: Get PR Titles and Descriptions Since Last Tag
+      - name: Get merged PR Titles Since Last Release
         id: get_prs
         run: |
           prs=$(gh pr list --state merged --json title,mergedAt --jq "map(select(.mergedAt > \"$LAST_TAG_DATE\"))[] | \"- \(.title)\"")
@@ -52,6 +42,16 @@ jobs:
           echo "EOF" >> "$GITHUB_OUTPUT"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Get Latest Tag
+        id: get_tag
+        run: |
+          latest_tag=$(git tag --sort=-v:refname | head -n 1)
+          echo "Latest tag: $latest_tag"
+          if [[ -z "$latest_tag" ]]; then
+            latest_tag="0.0.0"
+          fi
+          echo "latest_tag=$latest_tag" >> $GITHUB_ENV
 
       - name: Calculate Next Tag
         id: next_tag
