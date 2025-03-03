@@ -42,7 +42,7 @@ jobs:
       - name: Get PR Titles and Descriptions Since Last Tag
         id: get_prs
         run: |
-          prs=$(gh pr list --state merged --json title,body,mergedAt --jq "map(select(.mergedAt > \"$LAST_TAG_DATE\"))[] | \"- \(.title)\n  \(.body // \"No description\")\"")
+          prs=$(gh pr list --state merged --json title,mergedAt --jq "map(select(.mergedAt > \"$LAST_TAG_DATE\"))[] | \"- \(.title)\"")
           echo -e "PRs since last tag:\n$prs"
           echo "prs<<EOF" >> $GITHUB_ENV
           echo "$prs" >> $GITHUB_ENV
