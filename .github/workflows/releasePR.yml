@@ -33,16 +33,17 @@ jobs:
           fi
           echo "latest_tag=$latest_tag" >> $GITHUB_ENV
 
-      - name: Get Last Release Date
-        id: last_release_date
+      - name: Get Last Tag Date
+        id: get_tag_date
         run: |
-          LAST_TAG_DATE=$(gh release view --json publishedAt --jq '.publishedAt' || echo "")
-          echo "LAST_TAG_DATE=$LAST_TAG_DATE" >> $GITHUB_ENV
+          last_tag_date=$(git log -1 --format=%ai "$latest_tag")
+          echo "Last tag date: $last_tag_date"
+          echo "last_tag_date=$last_tag_date" >> $GITHUB_ENV
 
       - name: Get PR Titles and Descriptions Since Last Tag
         id: get_prs
         run: |
-          prs=$(gh pr list --state merged --json title,body,mergedAt --jq '.[] | map(select(.mergedAt > \"$LAST_TAG_DATE\")) | "- \(.title)\n  \(.body)"')
+          prs=$(gh pr list --state merged --json title,body,mergedAt --jq '.[] | select(.mergedAt > "'$last_tag_date'") | "- \(.title)\n  \(.body)"')
           echo -e "PRs since last tag:\n$prs"
           echo "prs<<EOF" >> $GITHUB_ENV
           echo "$prs" >> $GITHUB_ENV
