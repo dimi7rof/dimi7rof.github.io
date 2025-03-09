@@ -25,7 +25,7 @@ interface UserData {
 export class VisitorsComponent implements OnDestroy {
   data: UserData[] = [];
   private subscription: Subscription = new Subscription();
-  exclude = true;
+  exclude = false;
   ip = '0.0.0.0';
   page = 1;
   pageSize = environment.pageSize;
