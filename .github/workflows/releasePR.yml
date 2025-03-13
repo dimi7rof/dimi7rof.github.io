@@ -32,7 +32,7 @@ jobs:
       - name: Get merged PR Titles Since Last Release
         id: get_prs
         run: |
-          prs=$(gh pr list --state merged --json title,mergedAt,author,url,number --jq "map(select(.mergedAt > \"$LAST_TAG_DATE\"))[] | \"- \(.title) by \(.author.login) in [\(.number)](\(.url))\"")
+          prs=$(gh pr list --state merged --json title,mergedAt,author,url,number --jq "map(select(.mergedAt > \"$LAST_TAG_DATE\"))[] | \"- \(.title) by @\(.author.login) in [\(.number)](\(.url))\"")
           echo -e "PRs since last tag:\n$prs"
           echo "prs<<EOF" >> $GITHUB_ENV
           echo "$prs" >> $GITHUB_ENV
@@ -99,7 +99,8 @@ jobs:
           body: |
             What's new:
             ${{ env.prs }}
-            \n\n${{ env.commits }}
+
+            ${{ env.commits }}
           draft: false
           prerelease: false
         env:
