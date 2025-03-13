@@ -53,6 +53,18 @@ jobs:
           fi
           echo "latest_tag=$latest_tag" >> $GITHUB_ENV
 
+      - name: Get Commits Containing '!> ' Since Last Release
+        id: get_commits
+        run: |
+          commits=$(git log "$latest_tag"..HEAD --grep='!: ' --pretty=format:"- BREAKING CHANGE: %h - %s")
+          echo -e "Commits since last tag:\n$commits"
+          echo "commits<<EOF" >> $GITHUB_ENV
+          echo "$commits" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+          echo "commits<<EOF" >> "$GITHUB_OUTPUT"
+          echo "$commits" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
+
       - name: Calculate Next Tag
         id: next_tag
         run: |
@@ -87,6 +99,7 @@ jobs:
           body: |
             What's new:
             ${{ env.prs }}
+            \n\n${{ env.commits }}
           draft: false
           prerelease: false
         env:
