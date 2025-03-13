@@ -28,6 +28,8 @@ jobs:
         run: |
           LAST_TAG_DATE=$(gh release view --json publishedAt --jq '.publishedAt' || echo "")
           echo "LAST_TAG_DATE=$LAST_TAG_DATE" >> $GITHUB_ENV
+        env:
+          GH_TOKEN: ${{ github.token }}
 
       - name: Get merged PR Titles Since Last Release
         id: get_prs
@@ -41,7 +43,7 @@ jobs:
           echo "$prs" >> "$GITHUB_OUTPUT"
           echo "EOF" >> "$GITHUB_OUTPUT"
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
 
       - name: Get Latest Tag
         id: get_tag
@@ -52,6 +54,8 @@ jobs:
             latest_tag="0.0.0"
           fi
           echo "latest_tag=$latest_tag" >> $GITHUB_ENV
+        env:
+          GH_TOKEN: ${{ github.token }}
 
       - name: Get Commits Containing '!> ' Since Last Release
         id: get_commits
@@ -89,7 +93,7 @@ jobs:
           git tag -a "$new_tag" -m "Release $new_tag\n\n$prs"
           git push origin "$new_tag"
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
 
       - name: Create GitHub Release
         uses: actions/create-release@v1
@@ -104,4 +108,4 @@ jobs:
           draft: false
           prerelease: false
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
