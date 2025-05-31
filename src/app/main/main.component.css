@@ -16,13 +16,10 @@
   font-weight: 700;
 }
 
-/* Stat Button */
-.visitors-btn {
+.btn {
   position: absolute;
-  top: 12px;
   left: 4vw;
   width: 90vw;
-  height: 60px;
   border-radius: 16px;
   font-size: 24px;
   border: none;
@@ -33,20 +30,19 @@
   z-index: 100;
 }
 
+.visitors-btn {
+  top: 12px;
+  height: 60px;
+}
+
 .sum-btn {
-  position: absolute;
   top: 80px;
-  left: 4vw;
-  width: 90vw;
   height: 350px;
-  border-radius: 16px;
-  font-size: 24px;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: transparent;
-  z-index: 100;
+}
+
+.link-btn {
+  top: 1900px;
+  height: 350px;
 }
 
 .placeholder {

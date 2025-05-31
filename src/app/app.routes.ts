@@ -10,5 +10,12 @@ export const routes: Routes = [
         (m) => m.VisitorsComponent
       ),
   },
+  {
+    path: 'links',
+    loadComponent: () =>
+      import('./main/hidden/links.component/links.component').then(
+        (m) => m.LinksComponent
+      ),
+  },
   { path: '**', redirectTo: '/' },
 ];

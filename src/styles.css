@@ -77,6 +77,14 @@ p {
   gap: 20px;
 }
 
+.height-auto {
+  height: auto;
+}
+
+.height-links {
+  height: 6330px;
+}
+
 .wrapper {
   position: relative;
   background-color: rgb(20, 20, 20);
@@ -95,6 +103,20 @@ p {
 
 .inner {
   max-width: 90%;
+}
+
+.back-btn {
+  border: none;
+  background-color: transparent;
+  color: burlywood;
+  width: 90vw;
+  height: 32px;
+  padding: 0px;
+}
+
+ol > li > a {
+  text-decoration: none;
+  color: white;
 }
 
 @keyframes fallDown {
@@ -206,5 +228,14 @@ p {
   .grid {
     grid-template-columns: repeat(3, 1fr);
     gap: 40px;
+  }
+
+  .height-links {
+    height: 6830px;
+  }
+
+  .link-btn {
+    top: 1740px;
+    height: 520px;
   }
 }

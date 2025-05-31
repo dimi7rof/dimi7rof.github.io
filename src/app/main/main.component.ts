@@ -79,4 +79,8 @@ export class MainComponent {
   openHistory() {
     this.router.navigate(['/stat']);
   }
+
+  openLinks() {
+    this.router.navigate(['/links']);
+  }
 }

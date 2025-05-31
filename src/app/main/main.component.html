@@ -1,9 +1,9 @@
 <div class="oveflow-hidden">
-    <button class="visitors-btn" (click)="openHistory()"></button>
+    <button class="visitors-btn btn" (click)="openHistory()"></button>
 
     <title-component />
 
-    <button class="sum-btn" (click)="showSummary()"></button>
+    <button class="sum-btn btn" (click)="showSummary()"></button>
     <sum-stat-component [isPopupVisible]="summaryPopupVisible" />
 
     <summary-component />
@@ -21,6 +21,7 @@
     }
 
     @defer (on viewport) {
+    <button class="link-btn btn" (click)="openLinks()"></button>
     <skills-component />
     }
     @placeholder {
