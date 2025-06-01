@@ -1,5 +1,6 @@
 .button {
   height: 100px;
+  z-index: 1000;
 }
 
 .button > p {
@@ -41,10 +42,16 @@
 }
 
 .link-btn {
-  top: 1900px;
-  height: 350px;
+  top: 440px;
+  height: 740px;
 }
 
 .placeholder {
   height: 400px;
+}
+@media (orientation: portrait) {
+  .link-btn {
+    top: 440px;
+    height: 740px;
+  }
 }

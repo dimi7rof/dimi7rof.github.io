@@ -125,58 +125,6 @@ export const links: Course[] = [
     ],
   },
   {
-    title: 'C# Advanced',
-    links: [
-      {
-        id: '5gN7onLn0xU',
-        label: 'Course Introduction',
-      },
-      { id: 'ahJNFgbcbc8', label: 'Exercise' },
-      {
-        id: '0DNCQRisf',
-        label: 'Stacks and Queues',
-      },
-      { id: 'rNr4KTwKwk8', label: 'Exercise' },
-      { id: '3dVoFMcC2qE', label: 'Multidimensional Arrays' },
-      { id: 'xcJPwhcPNHc', label: 'Exercise' },
-      {
-        id: 'xSFlKL5FZi8',
-        label: 'Sets and Dictionaries Advanced',
-      },
-      { id: 'wl_qSDbUil8', label: 'Exercise' },
-      {
-        id: 'ulFLjTqEciA',
-        label: 'Streams, Files and Directories',
-      },
-      { id: 'kGT5xX4Vvu4', label: 'Exercise' },
-      { id: 'hEwSqJdZp9Y', label: 'Functional Programming' },
-      { id: 'pd_6ElH6B78', label: 'Exercise' },
-      { id: '2NAUIxo3bJA', label: 'Defining classes' },
-      {
-        id: 'bMlZo2XXcBE',
-        label: 'Implementing Linked List',
-      },
-      {
-        id: 'mQwzT9cMfTA',
-        label: 'Implementing Stack and Queue',
-      },
-      { id: 'I4R3BnjDR0M', label: 'Exercise' },
-      { id: 'BXyFCyfgYqk', label: 'Generics' },
-      { id: '75wvJHW6N9A', label: 'Exercise' },
-      {
-        id: 'raKE0ABuWOo',
-        label: 'Iterators and Comparators',
-      },
-      {
-        id: 'eMqrCwiRWZ8',
-        label: 'Exam Preparation 1.1',
-      },
-      { id: '4ZSxohofwTA', label: 'Exam Preparation 1.2' },
-      { id: 'CXNnpvtwn14', label: 'Exam Preparation2' },
-      { id: '2dm3omhRlag', label: 'Algorithms Introduction' },
-    ],
-  },
-  {
     title: 'C# OOP',
     links: [
       {
@@ -234,6 +182,58 @@ export const links: Course[] = [
       { id: 'pCCHojcAh7g', label: 'Exam Preparation' },
       { id: 'zbeEGjcWvDs', label: 'Exam Preparation 2' },
       { id: 'DXfaidRPF4', label: 'Q&A Session' },
+    ],
+  },
+  {
+    title: 'C# Advanced',
+    links: [
+      {
+        id: '5gN7onLn0xU',
+        label: 'Course Introduction',
+      },
+      { id: 'ahJNFgbcbc8', label: 'Exercise' },
+      {
+        id: '0DNCQRisf',
+        label: 'Stacks and Queues',
+      },
+      { id: 'rNr4KTwKwk8', label: 'Exercise' },
+      { id: '3dVoFMcC2qE', label: 'Multidimensional Arrays' },
+      { id: 'xcJPwhcPNHc', label: 'Exercise' },
+      {
+        id: 'xSFlKL5FZi8',
+        label: 'Sets and Dictionaries Advanced',
+      },
+      { id: 'wl_qSDbUil8', label: 'Exercise' },
+      {
+        id: 'ulFLjTqEciA',
+        label: 'Streams, Files and Directories',
+      },
+      { id: 'kGT5xX4Vvu4', label: 'Exercise' },
+      { id: 'hEwSqJdZp9Y', label: 'Functional Programming' },
+      { id: 'pd_6ElH6B78', label: 'Exercise' },
+      { id: '2NAUIxo3bJA', label: 'Defining classes' },
+      {
+        id: 'bMlZo2XXcBE',
+        label: 'Implementing Linked List',
+      },
+      {
+        id: 'mQwzT9cMfTA',
+        label: 'Implementing Stack and Queue',
+      },
+      { id: 'I4R3BnjDR0M', label: 'Exercise' },
+      { id: 'BXyFCyfgYqk', label: 'Generics' },
+      { id: '75wvJHW6N9A', label: 'Exercise' },
+      {
+        id: 'raKE0ABuWOo',
+        label: 'Iterators and Comparators',
+      },
+      {
+        id: 'eMqrCwiRWZ8',
+        label: 'Exam Preparation 1.1',
+      },
+      { id: '4ZSxohofwTA', label: 'Exam Preparation 1.2' },
+      { id: 'CXNnpvtwn14', label: 'Exam Preparation2' },
+      { id: '2dm3omhRlag', label: 'Algorithms Introduction' },
     ],
   },
   {

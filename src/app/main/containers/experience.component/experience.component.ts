@@ -32,7 +32,7 @@ export class ExperienceComponent {
       currentDate.getMonth() - 8 < 1
         ? currentDate.getMonth() - 8 + 12
         : currentDate.getMonth() - 8;
-    this.days = currentDate.getDate();
+    this.days = currentDate.getDate() - 1;
     this.hours = Math.floor((diff % (24 * multiplier)) / multiplier);
     this.minutes = Math.floor((diff % multiplier) / (60 * 1000));
     this.seconds = Math.floor((diff % (60 * 1000)) / 1000);
