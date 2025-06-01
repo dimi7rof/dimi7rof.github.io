@@ -1,0 +1,19 @@
+.list > li > ol > li {
+  border: 1px solid rgb(0, 201, 27);
+  padding: 4px 20px;
+}
+ol > li > a {
+  display: flex;
+  width: 100%;
+}
+li {
+  width: 100%;
+}
+h2 {
+  display: flex;
+  justify-content: center;
+}
+.links-columns > p {
+  display: flex;
+  justify-content: end;
+}

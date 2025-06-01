@@ -1,22 +1,22 @@
 <section class="wrapper box height-links">
-    <div class="inner text drop">
+    <div class="inner">
         <div class="links-columns">
-            <p>Total links: {{ totalLinks }}</p>
 
             <ul class="list">
-                @for (section of links; track section) {
+                @for (course of courses; track course.title) {
                 <li>
-                    <h2>{{ section.title }}</h2>
+                    <h2>{{ course.title }}</h2>
                     <ol>
-                        @for (link of section.items; track link) {
+                        @for (link of course.links; track link.id) {
                         <li>
-                            <a [href]="link.url" target="_blank">{{ link.label }}</a>
+                            <a [href]="'https://youtu.be/' + link.id" target="_blank">{{ link.label }}</a>
                         </li>
                         }
                     </ol>
                 </li>
                 }
             </ul>
+            <p>Total: {{ totalLinks }} videos</p>
         </div>
     </div>
 </section>
