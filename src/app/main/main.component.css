@@ -1,6 +1,5 @@
 .button {
   height: 100px;
-  z-index: 1000;
 }
 
 .button > p {
