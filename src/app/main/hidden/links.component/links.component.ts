@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Course, links } from './links.data';
+import { ScrollToTopComponent } from '../../containers/scroll-to-top.component/scroll-to-top.component';
 
 @Component({
   selector: 'links-component',
   standalone: true,
   templateUrl: './links.component.html',
   styleUrl: './links.component.css',
-  imports: [],
+  imports: [ScrollToTopComponent],
 })
 export class LinksComponent {
   courses: Course[] = links;

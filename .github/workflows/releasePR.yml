@@ -23,52 +23,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Get Last Release Date
-        id: last_release_date
-        run: |
-          LAST_TAG_DATE=$(gh release view --json publishedAt --jq '.publishedAt' || echo "")
-          echo "LAST_TAG_DATE=$LAST_TAG_DATE" >> $GITHUB_ENV
-        env:
-          GH_TOKEN: ${{ github.token }}
-
-      - name: Get merged PR Titles Since Last Release
-        id: get_prs
-        run: |
-          prs=$(gh pr list --state merged --json title,mergedAt,author,url,number --jq "map(select(.mergedAt > \"$LAST_TAG_DATE\"))[] | \"- \(.title) by @\(.author.login) in [\(.number)](\(.url))\"")
-          echo -e "PRs since last tag:\n$prs"
-          echo "prs<<EOF" >> $GITHUB_ENV
-          echo "$prs" >> $GITHUB_ENV
-          echo "EOF" >> $GITHUB_ENV
-          echo "prs<<EOF" >> "$GITHUB_OUTPUT"
-          echo "$prs" >> "$GITHUB_OUTPUT"
-          echo "EOF" >> "$GITHUB_OUTPUT"
-        env:
-          GH_TOKEN: ${{ github.token }}
-
-      - name: Get Latest Tag
-        id: get_tag
-        run: |
-          latest_tag=$(git tag --sort=-v:refname | head -n 1)
-          echo "Latest tag: $latest_tag"
-          if [[ -z "$latest_tag" ]]; then
-            latest_tag="0.0.0"
-          fi
-          echo "latest_tag=$latest_tag" >> $GITHUB_ENV
-        env:
-          GH_TOKEN: ${{ github.token }}
-
-      - name: Get Commits Containing '!> ' Since Last Release
-        id: get_commits
-        run: |
-          commits=$(git log "$latest_tag"..HEAD --grep='!: ' --pretty=format:"- BREAKING CHANGE: %h - %s")
-          echo -e "Commits since last tag:\n$commits"
-          echo "commits<<EOF" >> $GITHUB_ENV
-          echo "$commits" >> $GITHUB_ENV
-          echo "EOF" >> $GITHUB_ENV
-          echo "commits<<EOF" >> "$GITHUB_OUTPUT"
-          echo "$commits" >> "$GITHUB_OUTPUT"
-          echo "EOF" >> "$GITHUB_OUTPUT"
-
       - name: Calculate Next Tag
         id: next_tag
         run: |
@@ -86,26 +40,10 @@ jobs:
           echo "new_tag=$new_tag" >> $GITHUB_ENV
           echo "new_tag=$new_tag" >> "$GITHUB_OUTPUT"
 
-      - name: Create Git Tag
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git tag -a "$new_tag" -m "Release $new_tag\n\n$prs"
-          git push origin "$new_tag"
-        env:
-          GH_TOKEN: ${{ github.token }}
-
-      - name: Create GitHub Release
-        uses: actions/create-release@v1
+      - name: Run release action
+        uses: dimi7rof/create-release@v2
         with:
-          tag_name: ${{ env.new_tag }}
-          release_name: Release ${{ env.new_tag }}
-          body: |
-            What's new:
-            ${{ env.prs }}
-
-            ${{ env.commits }}
-          draft: false
-          prerelease: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          name: Dimi7rof's CV app
+          version: ${{ env.new_tag }}
+          Team_webhook: ${{ '' }}
+          github-token: ${{ github.token }}
