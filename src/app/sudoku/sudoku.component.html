@@ -1,0 +1,12 @@
+<div class="wrapper">
+    <div class="sudoku-board">
+        <div class="sudoku-row" *ngFor="let row of board; let i = index">
+            <input class="sudoku-cell" *ngFor="let cell of row; let j = index" [readonly]="!isEditable(i, j)"
+                [value]="cell !== 0 ? cell : ''" maxlength="1" (input)="onInput($event, i, j)" type="text" />
+        </div>
+    </div>
+</div>
+
+<section class="wrapper back">
+    <button class="back-btn" (click)="back()">Back</button>
+</section>

@@ -83,4 +83,7 @@ export class MainComponent {
   openLinks() {
     this.router.navigate(['/links']);
   }
+  openSudoku() {
+    this.router.navigate(['/sudoku']);
+  }
 }

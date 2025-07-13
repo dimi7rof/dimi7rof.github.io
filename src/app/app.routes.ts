@@ -17,5 +17,10 @@ export const routes: Routes = [
         (m) => m.LinksComponent
       ),
   },
+  {
+    path: 'sudoku',
+    loadComponent: () =>
+      import('./sudoku/sudoku.component').then((m) => m.SudokuComponent),
+  },
   { path: '**', redirectTo: '/' },
 ];

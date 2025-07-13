@@ -48,6 +48,12 @@
 .placeholder {
   height: 400px;
 }
+
+.sudoku {
+  top: 800;
+  height: 350px;
+}
+
 @media (orientation: portrait) {
   .link-btn {
     top: 440px;
