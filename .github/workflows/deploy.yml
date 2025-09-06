@@ -20,9 +20,6 @@ jobs:
         with:
           node-version: 22
 
-      - name: Install Angular CLI
-        run: npm install -g @angular/cli
-
       - name: Install Dependencies
         run: npm install
 
@@ -40,6 +37,24 @@ jobs:
     env:
       VERSION: ${{ github.event.inputs.version || github.ref_name }}
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Get last tag and increment version
+        id: version
+        run: |
+          last_tag=$(git describe --tags --abbrev=0)
+          IFS='.' read -ra parts <<< "$last_tag"
+          last_index=$((${#parts[@]} - 1))
+          parts[$last_index]=$((parts[$last_index] + 1))
+          new_version="${parts[*]}"
+          new_version="${new_version// /"."}"
+          echo "VERSION=$new_version" >> $GITHUB_ENV
+          echo "VERSION: $new_version" >> $GITHUB_STEP_SUMMARY
+
+      - name: Use version
+        run: echo "Version is ${{ env.VERSION }}"
+
       - name: Run release action
         uses: dimi7rof/create-release@v3
         with:
