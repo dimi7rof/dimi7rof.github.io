@@ -2,10 +2,17 @@ name: Deploy Angular to GitHub Pages
 
 on:
   workflow_dispatch:
+    inputs:
+      version:
+        description: "Release version"
+        required: false
+        default: "1.20.0"
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    env:
+      VERSION: ${{ github.event.inputs.version || github.ref_name }}
 
     steps:
       - name: Checkout Repository
@@ -30,3 +37,10 @@ jobs:
         with:
           branch: main
           folder: dist/web-app/browser
+
+      - name: Run release action
+        uses: dimi7rof/create-release@main
+        with:
+          name: dimi7rof.github.io
+          version: ${{ env.VERSION }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
