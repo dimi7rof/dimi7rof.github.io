@@ -1,66 +1,60 @@
 <div class="oveflow-hidden">
-    <button class="visitors-btn btn" (click)="openHistory()"></button>
-
-    <title-component />
-
-    <button class="sum-btn btn" (click)="showSummary()"></button>
-    <sum-stat-component [isPopupVisible]="summaryPopupVisible" />
-
-    <summary-component />
-
-    <button class="link-btn btn" (click)="openLinks()"></button>
-    <education-component />
-
-    @defer (on viewport) {
-    <experience-component />
-    }
-    @placeholder {
-    <p class="placeholder"> </p>
-    }
-    @error {
-    <p>Error loading data!</p>
-    }
-
-    @defer (on viewport) {
-    <button class="sudoku btn" (click)="openSudoku()"></button>
-    <skills-component />
-    }
-    @placeholder {
-    <p class="placeholder"> </p>
-    }
-    @error {
-    <p>Error loading data!</p>
-    }
-
-    @defer (on viewport) {
-    <contact-component />
-    }
-    @placeholder {
-    <p class="placeholder"> </p>
-    }
-    @error {
-    <p>Error loading data!</p>
-    }
-
-    @defer (on viewport) {
-    @defer (on interaction) {
-    <cert-component />
-    }
-    @placeholder {
-    <div class="wrapper button">
-        <p>Certificates</p>
+    <button (click)="downloadPDF()" style="position: fixed; top: 20px; right: 20px; z-index: 1000;">PDF</button>
+    <div id="cv-section">
+        <button class="visitors-btn btn" (click)="openHistory()"></button>
+        <title-component />
+        <button class="sum-btn btn" (click)="showSummary()"></button>
+        <sum-stat-component [isPopupVisible]="summaryPopupVisible" />
+        <summary-component />
+        <button class="link-btn btn" (click)="openLinks()"></button>
+        <education-component />
+        @defer (on viewport) {
+        <experience-component />
+        }
+        @placeholder {
+        <p class="placeholder"> </p>
+        }
+        @error {
+        <p>Error loading data!</p>
+        }
+        @defer (on viewport) {
+        <button class="sudoku btn" (click)="openSudoku()"></button>
+        <skills-component />
+        }
+        @placeholder {
+        <p class="placeholder"> </p>
+        }
+        @error {
+        <p>Error loading data!</p>
+        }
+        @defer (on viewport) {
+        <contact-component />
+        }
+        @placeholder {
+        <p class="placeholder"> </p>
+        }
+        @error {
+        <p>Error loading data!</p>
+        }
+        @defer (on viewport) {
+        @defer (on interaction) {
+        <cert-component />
+        }
+        @placeholder {
+        <div class="wrapper button">
+            <p>Certificates</p>
+        </div>
+        }
+        @error {
+        <p>Error loading data!</p>
+        }
+        }
+        @placeholder {
+        <p class="placeholder"> </p>
+        }
+        @error {
+        <p>Error loading data!</p>
+        }
+        <app-scroll-to-top />
     </div>
-    }
-    @error {
-    <p>Error loading data!</p>
-    }
-    }
-    @placeholder {
-    <p class="placeholder"> </p>
-    }
-    @error {
-    <p>Error loading data!</p>
-    }
-
-    <app-scroll-to-top />
 </div>

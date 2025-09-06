@@ -11,6 +11,8 @@ import { ScrollToTopComponent } from './containers/scroll-to-top.component/scrol
 import { Router } from '@angular/router';
 import { UserService } from './services/user.service';
 import { SummaryStatComponent } from './hidden/summary.component/summary.component';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'main-component',
@@ -32,6 +34,21 @@ import { SummaryStatComponent } from './hidden/summary.component/summary.compone
 })
 export class MainComponent {
   summaryPopupVisible = false;
+  downloadPDF() {
+    const element = document.getElementById('cv-section');
+    if (!element) return;
+    html2canvas(element, { scale: 2 }).then((canvas) => {
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF({
+        orientation: 'portrait',
+        unit: 'px',
+        format: [canvas.width, canvas.height],
+      });
+      pdf.addImage(imgData, 'PNG', 0, 0, canvas.width, canvas.height);
+      pdf.save('TodorDimitrovCV.pdf');
+    });
+  }
+
   constructor(private router: Router, private userService: UserService) {
     this.userService.getUserIp().subscribe((ipData) => {
       this.userService.getLocation(ipData.ip).subscribe((loc) => {
