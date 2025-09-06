@@ -2,9 +2,27 @@
     <div class="sudoku-board">
         <div class="sudoku-row" *ngFor="let row of board; let i = index">
             <input class="sudoku-cell" *ngFor="let cell of row; let j = index" [readonly]="!isEditable(i, j)"
-                [value]="cell !== 0 ? cell : ''" maxlength="1" (input)="onInput($event, i, j)" type="text" />
+                [ngModel]="board[i][j] === 0 ? '' : board[i][j]" maxlength="1" (ngModelChange)="onInput($event, i, j)"
+                type="text" />
         </div>
     </div>
+</div>
+<div class="sudoku-header">
+    <label for="difficulty">Difficulty:</label>
+    <select id="difficulty" [(ngModel)]="difficulty" (change)="onDifficultyChange()">
+        <option value="easy">Easy</option>
+        <option value="medium">Medium</option>
+        <option value="hard">Hard</option>
+    </select>
+    <button (click)="newGame()">New Game</button>
+</div>
+<div class="sudoku-results">
+    <h3>Game Results</h3>
+    <ul>
+        <li *ngFor="let result of results">
+            {{ result.date | date:'short' }} - {{ result.difficulty }} - {{ result.time }}s
+        </li>
+    </ul>
 </div>
 
 <section class="wrapper back">
