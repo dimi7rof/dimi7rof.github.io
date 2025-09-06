@@ -19,7 +19,7 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
@@ -41,7 +41,7 @@ jobs:
           echo "new_tag=$new_tag" >> "$GITHUB_OUTPUT"
 
       - name: Run release action
-        uses: dimi7rof/create-release@v2
+        uses: dimi7rof/create-release@v3
         with:
           name: Dimi7rof's CV app
           version: ${{ env.new_tag }}
