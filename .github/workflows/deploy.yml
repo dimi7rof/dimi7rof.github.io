@@ -11,9 +11,6 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    env:
-      VERSION: ${{ github.event.inputs.version || github.ref_name }}
-
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v5
@@ -38,8 +35,13 @@ jobs:
           branch: main
           folder: dist/web-app/browser
 
+  release:
+    runs-on: ubuntu-latest
+    env:
+      VERSION: ${{ github.event.inputs.version || github.ref_name }}
+    steps:
       - name: Run release action
-        uses: dimi7rof/create-release@main
+        uses: dimi7rof/create-release@v3
         with:
           name: dimi7rof.github.io
           version: ${{ env.VERSION }}
