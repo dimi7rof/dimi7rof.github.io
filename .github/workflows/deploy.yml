@@ -3,11 +3,10 @@ name: Deploy App to GitHub Pages
 on:
   workflow_dispatch:
     inputs:
-      version:
-        description: "Release version"
+      Final:
         required: false
-        default: "1.20.0"
-
+        default: false
+        type: boolean
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -41,7 +40,7 @@ jobs:
     #needs: build-and-deploy
     runs-on: ubuntu-latest
     env:
-      VERSION: ${{ github.event.inputs.version || github.ref_name }}
+      VERSION: ${{ github.ref_name }}
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v5
@@ -49,10 +48,16 @@ jobs:
           fetch-depth: 0
 
       - name: Get last tag and increment version
+        if: ${{ github.event.inputs.Final != 'true' }}
         id: version
         run: |
+          branch_name="${GITHUB_REF##*/}"
           last_tag=$(git tag --sort=-v:refname | head -n 1)
           echo "Last tag: $last_tag"
+          if [[ "$last_tag" != "$branch_name"* ]]; then
+            last_tag="${{ github.ref_name }}-dev.0"
+            echo "No tag for branch, using: $last_tag"
+          fi
           IFS='.' read -ra parts <<< "$last_tag"
           echo "Parts: ${parts[*]}"
           last_index=$((${#parts[@]} - 1))
@@ -65,9 +70,6 @@ jobs:
           echo "New version: $new_version"
           echo "VERSION=$new_version" >> $GITHUB_ENV
           echo "VERSION: $new_version" >> $GITHUB_STEP_SUMMARY
-
-      - name: Use version
-        run: echo "Version is ${{ env.VERSION }}"
 
       - name: Run release action
         uses: dimi7rof/create-release@v3
