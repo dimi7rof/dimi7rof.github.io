@@ -40,7 +40,7 @@ jobs:
     needs: build-and-deploy
     runs-on: ubuntu-latest
     env:
-      VERSION: ${{ github.ref_name }}
+      VERSION: '${{ github.ref_name }}-final
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v5
