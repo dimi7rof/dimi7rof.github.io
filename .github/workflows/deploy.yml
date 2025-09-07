@@ -42,11 +42,12 @@ jobs:
       VERSION: ${{ github.event.inputs.version || github.ref_name }}
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v5
 
       - name: Get last tag and increment version
         id: version
         run: |
+          git tag --list
           last_tag=$(git describe --tags --abbrev=0)
           echo "Last tag: $last_tag"
           IFS='.' read -ra parts <<< "$last_tag"
