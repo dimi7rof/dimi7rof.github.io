@@ -37,7 +37,7 @@ jobs:
           folder: dist/web-app/browser
 
   release:
-    #needs: build-and-deploy
+    needs: build-and-deploy
     runs-on: ubuntu-latest
     env:
       VERSION: ${{ github.ref_name }}
