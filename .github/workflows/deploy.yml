@@ -36,7 +36,7 @@ jobs:
           folder: dist/web-app/browser
 
   release:
-    needs: build-and-deploy
+    #needs: build-and-deploy
     runs-on: ubuntu-latest
     env:
       VERSION: ${{ github.event.inputs.version || github.ref_name }}
@@ -47,8 +47,7 @@ jobs:
       - name: Get last tag and increment version
         id: version
         run: |
-          git tag --list
-          last_tag=$(git describe --tags --abbrev=0)
+          last_tag=$(git tag --sort=-v:refname | head -n 1)
           echo "Last tag: $last_tag"
           IFS='.' read -ra parts <<< "$last_tag"
           echo "Parts: ${parts[*]}"
