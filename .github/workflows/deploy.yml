@@ -40,7 +40,7 @@ jobs:
     needs: build-and-deploy
     runs-on: ubuntu-latest
     env:
-      VERSION: "${{ github.ref_name }}-final"
+      VERSION: ${{ github.ref_name }}
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v5
@@ -70,6 +70,12 @@ jobs:
           echo "New version: $new_version"
           echo "VERSION=$new_version" >> $GITHUB_ENV
           echo "VERSION: $new_version" >> $GITHUB_STEP_SUMMARY
+
+      - name: Set final version
+        if: ${{ github.event.inputs.Final == 'true' }}
+        run: |
+          echo "VERSION=${{ github.ref_name }}-final" >> $GITHUB_ENV
+          echo "VERSION=${{ github.ref_name }}-final" >> $GITHUB_STEP_SUMMARY
 
       - name: Run release action
         uses: dimi7rof/create-release@v3
