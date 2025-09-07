@@ -17,7 +17,7 @@ jobs:
           fetch-depth: 0
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: 22
 
@@ -70,6 +70,12 @@ jobs:
           echo "New version: $new_version"
           echo "VERSION=$new_version" >> $GITHUB_ENV
           echo "VERSION: $new_version" >> $GITHUB_STEP_SUMMARY
+
+      - name: Set final version
+        if: ${{ github.event.inputs.Final == 'true' }}
+        run: |
+          echo "VERSION=${{ github.ref_name }}-final" >> $GITHUB_ENV
+          echo "VERSION=${{ github.ref_name }}-final" >> $GITHUB_STEP_SUMMARY
 
       - name: Run release action
         uses: dimi7rof/create-release@v3
