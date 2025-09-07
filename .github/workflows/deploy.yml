@@ -1,4 +1,4 @@
-name: Deploy Angular to GitHub Pages
+name: Deploy App to GitHub Pages
 
 on:
   workflow_dispatch:
@@ -36,6 +36,7 @@ jobs:
           folder: dist/web-app/browser
 
   release:
+    needs: build-and-deploy
     runs-on: ubuntu-latest
     env:
       VERSION: ${{ github.event.inputs.version || github.ref_name }}
@@ -43,20 +44,26 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      # - name: Get last tag and increment version
-      #   id: version
-      #   run: |
-      #     last_tag=$(git describe --tags --abbrev=0)
-      #     IFS='.' read -ra parts <<< "$last_tag"
-      #     last_index=$((${#parts[@]} - 1))
-      #     parts[$last_index]=$((parts[$last_index] + 1))
-      #     new_version="${parts[*]}"
-      #     new_version="${new_version// /"."}"
-      #     echo "VERSION=$new_version" >> $GITHUB_ENV
-      #     echo "VERSION: $new_version" >> $GITHUB_STEP_SUMMARY
+      - name: Get last tag and increment version
+        id: version
+        run: |
+          last_tag=$(git describe --tags --abbrev=0)
+          echo "Last tag: $last_tag"
+          IFS='.' read -ra parts <<< "$last_tag"
+          echo "Parts: ${parts[*]}"
+          last_index=$((${#parts[@]} - 1))
+          echo "Last index: $last_index"
+          parts[$last_index]=$((parts[$last_index] + 1))
+          echo "Updated parts: ${parts[*]}"
+          new_version="${parts[*]}"
+          echo "New version before formatting: $new_version"
+          new_version="${new_version// /"."}"
+          echo "New version: $new_version"
+          echo "VERSION=$new_version" >> $GITHUB_ENV
+          echo "VERSION: $new_version" >> $GITHUB_STEP_SUMMARY
 
-      # - name: Use version
-      #   run: echo "Version is ${{ env.VERSION }}"
+      - name: Use version
+        run: echo "Version is ${{ env.VERSION }}"
 
       - name: Run release action
         uses: dimi7rof/create-release@v3
