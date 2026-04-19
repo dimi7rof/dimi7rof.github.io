@@ -1,12 +1,9 @@
 name: App Deploy to GitHub Pages
 
 on:
-  workflow_dispatch:
-    inputs:
-      Final:
-        required: false
-        default: false
-        type: boolean
+  push:
+    tags:
+      - "*"
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -47,35 +44,10 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Get last tag and increment version
-        if: ${{ github.event.inputs.Final != 'true' }}
-        id: version
+      - name: Set version from tag
         run: |
-          branch_name="${GITHUB_REF##*/}"
-          last_tag=$(git tag --sort=-v:refname | head -n 1)
-          echo "Last tag: $last_tag"
-          if [[ "$last_tag" != "$branch_name"* ]]; then
-            last_tag="${{ github.ref_name }}-dev.0"
-            echo "No tag for branch, using: $last_tag"
-          fi
-          IFS='.' read -ra parts <<< "$last_tag"
-          echo "Parts: ${parts[*]}"
-          last_index=$((${#parts[@]} - 1))
-          echo "Last index: $last_index"
-          parts[$last_index]=$((parts[$last_index] + 1))
-          echo "Updated parts: ${parts[*]}"
-          new_version="${parts[*]}"
-          echo "New version before formatting: $new_version"
-          new_version="${new_version// /"."}"
-          echo "New version: $new_version"
-          echo "VERSION=$new_version" >> $GITHUB_ENV
-          echo "VERSION: $new_version" >> $GITHUB_STEP_SUMMARY
-
-      - name: Set final version
-        if: ${{ github.event.inputs.Final == 'true' }}
-        run: |
-          echo "VERSION=${{ github.ref_name }}-final" >> $GITHUB_ENV
-          echo "VERSION=${{ github.ref_name }}-final" >> $GITHUB_STEP_SUMMARY
+          echo "VERSION=${{ github.ref_name }}" >> $GITHUB_ENV
+          echo "VERSION: ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
 
       - name: Run release action
         uses: dimi7rof/create-release@v3
