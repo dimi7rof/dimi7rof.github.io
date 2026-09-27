@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { cvData } from '../../cv-data';
 
 @Component({
   selector: 'experience-component',
@@ -8,6 +9,7 @@ import { Component } from '@angular/core';
   styleUrl: './experience.component.css',
 })
 export class ExperienceComponent {
+  experience = cvData.experience;
   currentPossitionTime: any;
   startDate: Date = new Date('September 1, 2023 09:00:00');
   years: number = 0;

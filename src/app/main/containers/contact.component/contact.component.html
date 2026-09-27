@@ -3,14 +3,14 @@
         <h3>Contacts</h3>
         <div class="social">
             <i>
-                <a class="fa-solid fa-envelope"
-                    href="mailto:dimi7rof@gmail.com?subject=Offer, you cannot refuse&body=Hello. We would like to make an offer to you."></a>
+                <a class="fa-solid fa-envelope" [href]="'mailto:' + profile.email"></a>
             </i>
             <i>
-                <a class="fa-brands fa-linkedin-in" href="http://linkedin.com/in/dimi7rof" target="_blank"></a>
+                <a class="fa-brands fa-linkedin-in" [href]="profile.linkedinUrl" target="_blank"
+                    rel="noopener noreferrer"></a>
             </i>
             <i>
-                <a class="fa-brands fa-github" href="https://github.com/dimi7rof" target="_blank"></a>
+                <a class="fa-brands fa-github" [href]="profile.githubUrl" target="_blank" rel="noopener noreferrer"></a>
             </i>
             <i>
                 <a style="display: none;" class="fab fa-facebook-f" href="http://facebook.com/dimi7rof"

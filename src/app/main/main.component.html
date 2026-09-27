@@ -1,5 +1,8 @@
+<button class="pdf-download" type="button" (click)="downloadPDF()" aria-label="Download CV as PDF">
+    <i class="fa-solid fa-download" aria-hidden="true"></i>
+    <span>Download CV</span>
+</button>
 <div class="oveflow-hidden">
-    <button (click)="downloadPDF()" style="position: fixed; top: 20px; right: 20px; z-index: 1000;">PDF</button>
     <div id="cv-section">
         <button class="visitors-btn btn" (click)="openHistory()"></button>
         <title-component />

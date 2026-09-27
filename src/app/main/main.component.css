@@ -1,3 +1,45 @@
+.pdf-download {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 0 16px;
+  border: 1px solid #9bdbbc;
+  border-radius: 8px;
+  background: #155b43;
+  color: #fff;
+  font:
+    700 14px/1 "Courier New",
+    Courier,
+    monospace;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgb(0 0 0 / 35%);
+  transition: background-color 160ms ease;
+}
+
+.pdf-download:hover {
+  background: #207957;
+}
+
+.pdf-download:focus-visible {
+  outline: 3px solid #c4f2d9;
+  outline-offset: 3px;
+}
+
+@media (max-width: 500px) {
+  .pdf-download {
+    top: 12px;
+    right: 12px;
+    min-height: 40px;
+    padding: 0 12px;
+  }
+}
+
 .button {
   height: 100px;
 }

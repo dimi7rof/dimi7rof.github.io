@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 import { UserService } from './services/user.service';
 import { SummaryStatComponent } from './hidden/summary.component/summary.component';
 import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
+import { cvData } from './cv-data';
 
 @Component({
   selector: 'main-component',
@@ -37,18 +37,171 @@ import html2canvas from 'html2canvas';
 export class MainComponent {
   summaryPopupVisible = false;
   downloadPDF() {
-    const element = document.getElementById('cv-section');
-    if (!element) return;
-    html2canvas(element, { scale: 2 }).then((canvas) => {
-      const imgData = canvas.toDataURL('image/png');
-      const pdf = new jsPDF({
-        orientation: 'portrait',
-        unit: 'px',
-        format: [canvas.width, canvas.height],
-      });
-      pdf.addImage(imgData, 'PNG', 0, 0, canvas.width, canvas.height);
-      pdf.save('TodorDimitrovCV.pdf');
+    const pdf = new jsPDF({
+      orientation: 'portrait',
+      unit: 'mm',
+      format: 'a4',
     });
+    const pageWidth = pdf.internal.pageSize.getWidth();
+    const pageHeight = pdf.internal.pageSize.getHeight();
+    const margin = 15;
+    const contentWidth = pageWidth - margin * 2;
+    const bottom = pageHeight - 16;
+    const lineHeight = 4.8;
+    let y = 0;
+
+    pdf.setProperties({
+      title: `${cvData.profile.name} - Curriculum Vitae`,
+      subject: 'Curriculum Vitae',
+      author: cvData.profile.name,
+    });
+
+    const addPage = () => {
+      pdf.addPage();
+      y = 20;
+      pdf.setTextColor(28, 52, 48);
+      pdf.setFont('helvetica', 'bold');
+      pdf.setFontSize(11);
+      pdf.text(cvData.profile.name, margin, 12);
+      pdf.setDrawColor(38, 119, 85);
+      pdf.setLineWidth(0.6);
+      pdf.line(margin, 15, pageWidth - margin, 15);
+    };
+
+    const ensureSpace = (height: number) => {
+      if (y + height > bottom) addPage();
+    };
+
+    const addSection = (title: string) => {
+      ensureSpace(12);
+      y += 4;
+      pdf.setFont('helvetica', 'bold');
+      pdf.setFontSize(11);
+      pdf.setTextColor(28, 78, 61);
+      pdf.text(title.toUpperCase(), margin, y);
+      pdf.setDrawColor(156, 197, 175);
+      pdf.setLineWidth(0.35);
+      pdf.line(margin, y + 2, pageWidth - margin, y + 2);
+      y += 8;
+    };
+
+    const addParagraph = (
+      text: string,
+      options: {
+        bold?: boolean;
+        color?: [number, number, number];
+        size?: number;
+      } = {},
+    ) => {
+      const size = options.size ?? 9.5;
+      pdf.setFont('helvetica', options.bold ? 'bold' : 'normal');
+      pdf.setFontSize(size);
+      pdf.setTextColor(...(options.color ?? [55, 65, 63]));
+      const lines = pdf.splitTextToSize(text, contentWidth) as string[];
+      for (const line of lines) {
+        ensureSpace(lineHeight);
+        pdf.text(line, margin, y);
+        y += lineHeight;
+      }
+      y += 1;
+    };
+
+    const addEntry = (title: string, detail: string, period?: string) => {
+      ensureSpace(13);
+      pdf.setFont('helvetica', 'bold');
+      pdf.setFontSize(9.5);
+      pdf.setTextColor(37, 46, 43);
+      pdf.text(title, margin, y);
+      if (period) {
+        pdf.setFont('helvetica', 'normal');
+        pdf.setFontSize(8.5);
+        pdf.setTextColor(100, 113, 108);
+        pdf.text(period, pageWidth - margin, y, { align: 'right' });
+      }
+      y += lineHeight;
+      addParagraph(detail, { color: [81, 94, 88], size: 9 });
+    };
+
+    pdf.setFillColor(25, 53, 48);
+    pdf.rect(0, 0, pageWidth, 47, 'F');
+    pdf.setFillColor(43, 137, 96);
+    pdf.rect(0, 45, pageWidth, 2, 'F');
+    pdf.setTextColor(255, 255, 255);
+    pdf.setFont('helvetica', 'bold');
+    pdf.setFontSize(25);
+    pdf.text(cvData.profile.name, margin, 19);
+    pdf.setFont('helvetica', 'normal');
+    pdf.setFontSize(11);
+    pdf.setTextColor(193, 226, 207);
+    pdf.text(cvData.profile.role.toUpperCase(), margin, 27);
+
+    pdf.setFontSize(8.5);
+    pdf.setTextColor(245, 250, 247);
+    pdf.textWithLink(cvData.profile.email, margin, 38, {
+      url: `mailto:${cvData.profile.email}`,
+    });
+    pdf.textWithLink('LinkedIn', 82, 38, { url: cvData.profile.linkedinUrl });
+    pdf.textWithLink('GitHub', 115, 38, { url: cvData.profile.githubUrl });
+    y = 57;
+
+    addSection('Profile');
+    addParagraph(cvData.profile.summary);
+
+    addSection('Work experience');
+    for (const job of cvData.experience) {
+      const period = job.current ? `${job.since} - Present` : job.duration;
+      addEntry(job.title, job.company, period);
+    }
+
+    addSection('Education and training');
+    for (const item of cvData.education) {
+      addEntry(item.institution, item.courses.join('  |  '), item.period);
+      if (item.courses.length === 0) y -= lineHeight;
+    }
+
+    addSection('Digital skills');
+    addParagraph(cvData.skills.map((skill) => skill.name).join('  |  '));
+
+    addSection('Projects');
+    for (const project of cvData.projects) {
+      ensureSpace(16);
+      pdf.setFont('helvetica', 'bold');
+      pdf.setFontSize(9.5);
+      pdf.setTextColor(37, 46, 43);
+      pdf.text(project.name, margin, y);
+      pdf.setFont('helvetica', 'bold');
+      pdf.setFontSize(8);
+      pdf.setTextColor(43, 119, 85);
+      pdf.text(project.status, pageWidth - margin, y, { align: 'right' });
+      y += lineHeight;
+      pdf.setFont('helvetica', 'normal');
+      pdf.setFontSize(8.5);
+      pdf.textWithLink('GitHub repository', margin, y, {
+        url: project.githubUrl,
+      });
+      pdf.textWithLink('Live project', margin + 42, y, {
+        url: project.projectUrl,
+      });
+      y += lineHeight + 2;
+    }
+
+    const pageCount = pdf.getNumberOfPages();
+    for (let page = 1; page <= pageCount; page++) {
+      pdf.setPage(page);
+      pdf.setFont('helvetica', 'normal');
+      pdf.setFontSize(8);
+      pdf.setTextColor(130, 140, 135);
+      pdf.text(
+        `${cvData.profile.name}  |  ${page}/${pageCount}`,
+        pageWidth - margin,
+        pageHeight - 7,
+        {
+          align: 'right',
+        },
+      );
+    }
+
+    pdf.save('Todor-Dimitrov-CV.pdf');
   }
 
   constructor(

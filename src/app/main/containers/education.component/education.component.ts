@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { cvData } from '../../cv-data';
 
 @Component({
   selector: 'education-component',
@@ -7,4 +8,6 @@ import { Component } from '@angular/core';
   templateUrl: './education.component.html',
   styleUrl: './education.component.css',
 })
-export class EducationComponent {}
+export class EducationComponent {
+  education = cvData.education;
+}

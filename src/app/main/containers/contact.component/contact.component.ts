@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { cvData } from '../../cv-data';
 
 @Component({
   selector: 'contact-component',
@@ -7,4 +8,6 @@ import { Component } from '@angular/core';
   templateUrl: './contact.component.html',
   styleUrl: './contact.component.css',
 })
-export class ContactComponent {}
+export class ContactComponent {
+  profile = cvData.profile;
+}
