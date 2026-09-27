@@ -7,8 +7,7 @@
             <thead>
                 <tr>
                     <th scope="col">Name</th>
-                    <th scope="col">GitHub repo</th>
-                    <th scope="col">Project link</th>
+                    <th scope="col">GitHub</th>
                     <th scope="col">Status</th>
                 </tr>
             </thead>
@@ -16,9 +15,10 @@
                 @for (project of projects; track project.name) {
                 <tr>
                     <td>{{ project.name }}</td>
-                    <td><a [href]="project.githubUrl" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-                    <td><a [href]="project.projectUrl" target="_blank" rel="noopener noreferrer">Open project</a></td>
-                    <td>{{ project.status }}</td>
+                    <td><a [href]="project.githubUrl" target="_blank" rel="noopener noreferrer">Repository</a></td>
+                    <td><a [href]="project.projectUrl" class="no-link" target="_blank" rel="noopener noreferrer">{{
+                            project.status
+                            }}</a></td>
                 </tr>
                 } @empty {
                 <tr>
