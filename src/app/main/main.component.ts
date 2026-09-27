@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import jsPDF from 'jspdf';
 import { cvData } from './cv-data';
@@ -35,7 +35,7 @@ import { UserService } from './services/user.service';
   styleUrl: './main.component.css',
 })
 export class MainComponent {
-  summaryPopupVisible = false;
+  summaryPopupVisible = signal(false);
 
   constructor(
     private router: Router,
@@ -276,7 +276,11 @@ export class MainComponent {
   }
 
   showSummary() {
-    this.summaryPopupVisible = !this.summaryPopupVisible;
+    this.summaryPopupVisible.update((visible) => !visible);
+  }
+
+  hideSummary() {
+    this.summaryPopupVisible.set(false);
   }
 
   getOperatingSystem(): string {

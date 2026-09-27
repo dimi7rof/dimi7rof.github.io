@@ -1,5 +1,5 @@
 <section class="wrapper stat">
-    @if (data.length !== 0) {
+    @if (data().length !== 0) {
     <label>
         <input type="checkbox" (click)="filter()" /> Exclude this device
     </label>
@@ -16,7 +16,7 @@
             </tr>
         </thead>
         <tbody>
-            @for (user of data; track user.dateTime) {
+            @for (user of data(); track user.dateTime) {
             <tr>
                 <td>{{ user.country }}</td>
                 <td>{{ user.city }}</td>
@@ -31,18 +31,18 @@
     </table>
     <div class="arrows">
         <div class="arrows">
-            @if (page > 1) {
+            @if (page() > 1) {
             <button class="arrow" (click)="previous()">
                 &lt;</button>
-            } @if (page <= 1) { <div class="arrow">
+            } @if (page() <= 1) { <div class="arrow">
         </div>
-        } @if (data.length === pageSize) {
+        } @if (data().length === pageSize) {
         <button class="arrow" (click)="next()"> &gt;</button>
         }
     </div>
-    <p class="pagenumber">{{ page }}</p>
+    <p class="pagenumber">{{ page() }}</p>
     </div>
-    } @if (data.length === 0) {
+    } @if (data().length === 0) {
     <div class="spinner-container">
         <div class="spinner"></div>
     </div>

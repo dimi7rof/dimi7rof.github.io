@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input, output, signal } from '@angular/core';
 import { UserService } from '../../services/user.service';
 
 interface Data {
@@ -15,15 +15,16 @@ interface Data {
   imports: [],
 })
 export class SummaryStatComponent {
-  data: Data | undefined;
-  @Input() isPopupVisible: boolean | undefined;
+  data = signal<Data | undefined>(undefined);
+  isPopupVisible = input(false);
+  closeRequested = output<void>();
 
   constructor(private userService: UserService) {
     this.userService.getStat().subscribe((data: Data) => {
-      this.data = data;
+      this.data.set(data);
     });
   }
   close() {
-    this.isPopupVisible = false;
+    this.closeRequested.emit();
   }
 }

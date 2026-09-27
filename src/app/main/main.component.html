@@ -1,13 +1,13 @@
 <button class="pdf-download" type="button" (click)="downloadPDF()" aria-label="Download CV as PDF">
     <i class="fa-solid fa-download" aria-hidden="true"></i>
-    <span>Download CV</span>
+    <span>CV</span>
 </button>
 <div class="oveflow-hidden">
     <div id="cv-section">
         <button class="visitors-btn btn" (click)="openHistory()"></button>
         <title-component />
         <button class="sum-btn btn" (click)="showSummary()"></button>
-        <sum-stat-component [isPopupVisible]="summaryPopupVisible" />
+        <sum-stat-component [isPopupVisible]="summaryPopupVisible()" (closeRequested)="hideSummary()" />
         <summary-component />
         <button class="link-btn btn" (click)="openLinks()"></button>
         <education-component />

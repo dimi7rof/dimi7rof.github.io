@@ -16,16 +16,13 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: 22
-
-      - name: Install Angular CLI
-        run: npm install -g @angular/cli
+          node-version: 24.15.0
 
       - name: Install Dependencies
-        run: npm install --force --ignore-scripts
+        run: npm ci
 
       - name: Build Angular App
-        run: ng build --configuration production
+        run: npm run build -- --configuration production
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4

@@ -1,12 +1,12 @@
-@if (isPopupVisible) {
+@if (isPopupVisible()) {
 <div class="sum-popup flex center">
     <section class="sum wrapper flex center column gap20">
         <div class="flex center column">
-            @if (data) {
-            <P>Visits: {{ data.all }}</P>
-            <P>Unique visits: {{ data.unique }}</P>
-            <P>Monthly visits: {{ data.monthly }}</P>
-            } @if (!data) {
+            @if (data(); as stats) {
+            <P>Visits: {{ stats.all }}</P>
+            <P>Unique visits: {{ stats.unique }}</P>
+            <P>Monthly visits: {{ stats.monthly }}</P>
+            } @if (!data()) {
             <div class="spinner-container">
                 <div class="spinner"></div>
             </div>
