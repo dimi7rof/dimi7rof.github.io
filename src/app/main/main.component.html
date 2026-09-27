@@ -37,6 +37,15 @@
         <p>Error loading data!</p>
         }
         @defer (on viewport) {
+        <projects-component />
+        }
+        @placeholder {
+        <p class="placeholder"> </p>
+        }
+        @error {
+        <p>Error loading data!</p>
+        }
+        @defer (on viewport) {
         @defer (on interaction) {
         <cert-component />
         }

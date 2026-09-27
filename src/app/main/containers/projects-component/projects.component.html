@@ -1,0 +1,31 @@
+<section class="wrapper projects">
+    <header>
+        <h3>Projects</h3>
+    </header>
+    <div class="table-scroll">
+        <table class="projects-table">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">GitHub repo</th>
+                    <th scope="col">Project link</th>
+                    <th scope="col">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (project of projects; track project.name) {
+                <tr>
+                    <td>{{ project.name }}</td>
+                    <td><a [href]="project.githubUrl" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+                    <td><a [href]="project.projectUrl" target="_blank" rel="noopener noreferrer">Open project</a></td>
+                    <td>{{ project.status }}</td>
+                </tr>
+                } @empty {
+                <tr>
+                    <td class="empty" colspan="4">No projects added yet.</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>

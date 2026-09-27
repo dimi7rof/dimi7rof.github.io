@@ -7,6 +7,7 @@ import { ExperienceComponent } from './containers/experience.component/experienc
 import { SkillsComponent } from './containers/skills.component/skills.component';
 import { ContactComponent } from './containers/contact.component/contact.component';
 import { CertificateComponent } from './containers/certificate-component/certificate.component';
+import { ProjectsComponent } from './containers/projects-component/projects.component';
 import { ScrollToTopComponent } from './containers/scroll-to-top.component/scroll-to-top.component';
 import { Router } from '@angular/router';
 import { UserService } from './services/user.service';
@@ -25,6 +26,7 @@ import html2canvas from 'html2canvas';
     ExperienceComponent,
     SkillsComponent,
     ContactComponent,
+    ProjectsComponent,
     CertificateComponent,
     ScrollToTopComponent,
     SummaryStatComponent,
@@ -49,7 +51,10 @@ export class MainComponent {
     });
   }
 
-  constructor(private router: Router, private userService: UserService) {
+  constructor(
+    private router: Router,
+    private userService: UserService,
+  ) {
     this.userService.getUserIp().subscribe((ipData) => {
       this.userService.getLocation(ipData.ip).subscribe((loc) => {
         const userData = {
