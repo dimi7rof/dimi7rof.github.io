@@ -14,6 +14,7 @@ import 'chartjs-adapter-date-fns';
 import { I18nService } from '../i18n.service';
 import { ClimatePoint } from '../models';
 import { PelletApiService } from '../pellet-api.service';
+import { finalize, timeout } from 'rxjs';
 
 Chart.register(...registerables);
 
@@ -185,37 +186,48 @@ export class ClimateComponent implements OnInit, OnDestroy {
   }
 
   private load() {
-    this.api.climate().subscribe({
-      next: (res) => {
-        this.loading.set(false);
-        if (!res || res.error) {
-          this.error.set(res?.error || this.t('serverNoData'));
-          return;
-        }
-        this.error.set('');
-        this.now.set(Date.now());
-        this.points.set(
-          res.rows
-            .map((r) => ({
-              t: new Date(r[0]).getTime(),
-              floor0: r[1],
-              floor1: r[2],
-              floor2: r[3],
-              out: r[4],
-              hot: r[5],
-              cold: r[6],
-              pressure: r[7],
-              humidity: r[8],
-            }))
-            .filter((p) => Number.isFinite(p.t))
-            .sort((a, b) => a.t - b.t),
-        );
-      },
-      error: (e) => {
-        this.loading.set(false);
-        this.error.set(e?.message || String(e));
-      },
-    });
+    this.api
+      .climate()
+      .pipe(
+        timeout(300000), // a hanging request ends with an error instead of spinning forever
+        finalize(() => {
+          // runs on success, error, timeout and unsubscribe
+          this.loading.set(false);
+          this.refreshing.set(false);
+        }),
+      )
+      .subscribe({
+        next: (res) => {
+          if (!res || res.error || !Array.isArray(res.rows)) {
+            this.error.set(res?.error || this.t('serverNoData'));
+            return;
+          }
+          this.error.set('');
+          this.now.set(Date.now());
+          this.points.set(
+            res.rows
+              .map((r) => ({
+                t: new Date(r[0]).getTime(),
+                floor0: r[1],
+                floor1: r[2],
+                floor2: r[3],
+                out: r[4],
+                hot: r[5],
+                cold: r[6],
+                pressure: r[7],
+                humidity: r[8],
+              }))
+              .filter((p) => Number.isFinite(p.t))
+              .sort((a, b) => a.t - b.t),
+          );
+        },
+        error: (e) =>
+          this.error.set(
+            e?.name === 'TimeoutError'
+              ? 'Timeout: the server did not answer in time.'
+              : e?.message || String(e),
+          ),
+      });
   }
 
   // ---- charts ----
