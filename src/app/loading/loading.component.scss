@@ -1,0 +1,27 @@
+.loading-container {
+  width: 280px;
+  margin: auto;
+  text-align: center;
+  font-family: "Inter", sans-serif;
+}
+
+.loading-text {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  font-variant-numeric: tabular-nums;
+}
+
+.progress-track {
+  height: 6px;
+  background: #e5e7eb;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #3985e8;
+  border-radius: inherit;
+  transition: width 40ms linear;
+}

@@ -1,0 +1,326 @@
+<main class="app">
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark">♨</div>
+      <div>
+        <div class="eyebrow">{{ t('eyebrow') }}</div>
+        <h1>{{ t('appTitle') }}</h1>
+      </div>
+    </div>
+    <div class="top-meta">
+      <span><i class="status-dot"></i><span>{{ t('connected') }}</span></span>
+      @if (updatedAt()) { <span>{{ updatedAt() }}</span> }
+    </div>
+  </header>
+
+  <div class="toolbar">
+    <nav class="tabs">
+      @for (tab of tabs; track tab.view) {
+      <button class="tab" [class.active]="view() === tab.view" (click)="switchView(tab.view)">{{ t(tab.label)
+        }}</button>
+      }
+    </nav>
+    <div class="select-wrap">
+      @if (view() !== 'climate') {
+      <label for="seasonSelect">{{ t('seasonLabel') }}</label>
+      <select id="seasonSelect" (change)="onSeasonChange($event)">
+        @for (s of sheets(); track s.name) {
+        <option [value]="s.name" [selected]="s.name === selectedSeason()">{{ s.name }}</option>
+        }
+      </select>
+      }
+      <button type="button" class="refresh-btn" [class.spinning]="refreshing()" [disabled]="refreshing()"
+        [title]="t('refresh')" [attr.aria-label]="t('refresh')" (click)="refresh()">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12a9 9 0 1 1-3-6.7" />
+          <path d="M21 4v5h-5" />
+        </svg>
+      </button>
+      <label for="languageSelect">{{ t('languageLabel') }}</label>
+      <select id="languageSelect" (change)="onLangChange($event)">
+        <option value="bg" [selected]="i18n.lang() === 'bg'">Български</option>
+        <option value="en" [selected]="i18n.lang() === 'en'">English</option>
+      </select>
+    </div>
+  </div>
+
+  @if (view() !== 'climate') {
+  @if (message()) { <div class="error" role="alert">{{ message() }}</div> }
+  @if (loading()) { <div class="loading">{{ t('loading') }}</div> }
+  }
+
+  <!-- ===================== CLIMATE (main tab) ===================== -->
+  <section [class.hidden]="view() !== 'climate'">
+    <app-climate />
+  </section>
+
+  <!-- ===================== SEASON ===================== -->
+  <section [class.hidden]="view() !== 'season'">
+    <div class="section-head">
+      <div>
+        <h2>{{ t('seasonGlance') }}</h2>
+        <p>{{ selectedSeason() }} · {{ records().length }} {{ t('records') }}</p>
+      </div>
+      <span class="pill">{{ records().length }} {{ t('readings') }}</span>
+    </div>
+    <div class="grid kpi-grid">
+      @for (k of kpiItems(); track k.label) {
+      <article class="card kpi" [class]="k.accent">
+        <span class="kpi-icon">{{ k.icon }}</span>
+        <div class="kpi-label">{{ k.label }}</div>
+        <div class="kpi-value">{{ k.value }}</div>
+        <div class="kpi-foot">{{ k.foot }}</div>
+      </article>
+      }
+    </div>
+
+    <div class="section-head">
+      <div>
+        <h2>{{ t('performanceTrends') }}</h2>
+        <p>{{ t('consumptionCost24') }}</p>
+      </div>
+    </div>
+    <div class="grid content-grid">
+      <article class="card chart-card">
+        <div class="card-head">
+          <div>
+            <div class="card-title">{{ t('pelletConsumption') }}</div>
+            <div class="card-subtitle">{{ t('kgDayRecorded') }}</div>
+          </div>
+          <span class="pill">TREND</span>
+        </div>
+        <div class="chart-wrap"><canvas #consumptionChart></canvas></div>
+      </article>
+
+      <article class="card inventory-card">
+        <div class="inventory-top">
+          <div class="card-title">{{ t('pelletInventory') }}</div>
+          <span class="pill">{{ t('liveSheetValue') }}</span>
+        </div>
+        <div class="inventory-number">{{ fmt(kpis().stockBags, 0) }} <small>{{ t('remaining') }} {{ t('bags') }}</small>
+        </div>
+        <div class="legend-note">
+          @if (kpis().stockKg == null) { {{ t('noStockValue') }} }
+          @else { {{ fmt(kpis().stockKg, 0) }} kg {{ t('remaining') }} · 15 kg {{ t('perBag') }} }
+        </div>
+        <div class="inventory-stats">
+          <div>
+            <div class="mini-label">{{ t('autonomy') }}</div>
+            <div class="mini-value">{{ fmt(kpis().estimatedDaysRemaining, 0, ' ' + t('estimatedDays')) }}</div>
+          </div>
+          <div>
+            <div class="mini-label">{{ t('recentBurn') }}</div>
+            <div class="mini-value">{{ fmt(kpis().latestKgPerDay, 1, ' ' + t('kgPerDay')) }}</div>
+          </div>
+        </div>
+        <div class="legend-note" style="margin-top:15px">{{ t('autonomyNote') }}</div>
+      </article>
+    </div>
+
+    <div class="section-head">
+      <div>
+        <h2>{{ t('temperatureTelemetry') }}</h2>
+        <p>{{ t('tempTelemetryDesc') }}</p>
+      </div>
+    </div>
+    <div class="grid content-grid">
+      <article class="card chart-card">
+        <div class="card-head">
+          <div>
+            <div class="card-title">{{ t('temperatureHistory') }}</div>
+            <div class="card-subtitle">{{ t('temperatureHistoryDesc') }}</div>
+          </div>
+        </div>
+        <div class="chart-wrap"><canvas #temperatureChart></canvas></div>
+      </article>
+      <article class="card chart-card">
+        <div class="card-head">
+          <div>
+            <div class="card-title">{{ t('dailyHeatingCost') }}</div>
+            <div class="card-subtitle">{{ t('recordedCost') }} {{ currency() }} {{ t('perDay') }}</div>
+          </div>
+        </div>
+        <div class="chart-wrap"><canvas #costChart></canvas></div>
+      </article>
+    </div>
+
+    <div class="section-head">
+      <div>
+        <h2>{{ t('latestTemperatures') }}</h2>
+        <p>{{ t('mostRecentValues') }}</p>
+      </div>
+    </div>
+    <div class="grid temperature-grid">
+      @for (tile of tempTiles(); track tile.name; let i = $index) {
+      <article class="card temp-tile">
+        <div class="temp-name">{{ tile.name }}</div>
+        <div class="temp-value" [style.color]="palette[i]">{{ fmt(tile.value, 1, '°') }}</div>
+        <div class="temp-range">{{ tile.meta }}</div>
+      </article>
+      }
+    </div>
+
+    <div class="section-head">
+      <div>
+        <h2>{{ t('latestSensorFeeds') }}</h2>
+        <p>{{ t('sensorFeedsDesc') }}</p>
+      </div>
+    </div>
+    <div class="grid temperature-grid">
+      @for (tile of liveTiles(); track $index) {
+      <article class="card temp-tile">
+        <div class="temp-name">{{ tile.name }}</div>
+        <div class="temp-value" [style.color]="palette[$index % palette.length]">{{ fmt(tile.value, 1) }}</div>
+        <div class="temp-range">{{ tile.meta }}</div>
+      </article>
+      } @empty {
+      <article class="card temp-tile" style="grid-column:1/-1">
+        <div class="empty">{{ t('noLiveSensors') }}</div>
+      </article>
+      }
+    </div>
+
+    <div class="section-head">
+      <div>
+        <h2>{{ t('latestBurnerConfig') }}</h2>
+        <p>{{ t('burnerConfigDesc') }}</p>
+      </div>
+    </div>
+    <div class="grid settings-grid">
+      @for (s of settings(); track s.label) {
+      <article class="card setting">
+        <div class="mini-label">{{ s.label }}</div>
+        <div class="mini-value">{{ s.value }}</div>
+      </article>
+      }
+    </div>
+
+    <div class="section-head">
+      <div>
+        <h2>{{ t('latestNoteTitle') }}</h2>
+      </div>
+    </div>
+    <article class="card chart-card">{{ latest()?.info || t('noLatestNote') }}</article>
+  </section>
+
+  <!-- ===================== COMPARE ===================== -->
+  <section [class.hidden]="view() !== 'compare'">
+    <div class="section-head">
+      <div>
+        <h2>{{ t('seasonComparison') }}</h2>
+        <p>{{ t('seasonComparisonDesc') }}</p>
+      </div>
+    </div>
+    <article class="card chart-card">
+      <div class="card-head">
+        <div>
+          <div class="card-title">{{ t('monthlyAvgConsumption') }}</div>
+          <div class="card-subtitle">{{ t('monthlyAvgDesc') }}</div>
+        </div>
+      </div>
+      <div class="chart-wrap"><canvas #monthlyAverageChart></canvas></div>
+    </article>
+
+    <div class="section-head">
+      <div>
+        <h2>{{ t('recordedPelletQuantities') }}</h2>
+        <p>{{ t('recordedPelletDesc') }}</p>
+      </div>
+    </div>
+    <article class="card chart-card">
+      <div class="chart-wrap"><canvas #monthlyTotalChart></canvas></div>
+    </article>
+
+    <div class="section-head">
+      <div>
+        <h2>{{ t('seasonSummary') }}</h2>
+      </div>
+    </div>
+    <article class="card table-card">
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>{{ t('thSeason') }}</th>
+              <th class="numeric">{{ t('thRecords') }}</th>
+              <th class="numeric">{{ t('thRecordedKg') }}</th>
+              <th class="numeric">{{ t('thAvgKgDay') }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (s of seasons(); track s.name) {
+            <tr>
+              <td>{{ s.name }}</td>
+              <td class="numeric">{{ s.recordCount }}</td>
+              <td class="numeric">{{ fmt(s.totalKg, 0) }} kg</td>
+              <td class="numeric">{{ fmt(s.averageKgPerDay, 1) }} {{ t('kgPerDay') }}</td>
+            </tr>
+            } @empty {
+            <tr>
+              <td colspan="4" class="empty">{{ t('noSeasonData') }}</td>
+            </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </article>
+  </section>
+
+  <!-- ===================== HISTORY ===================== -->
+  <section [class.hidden]="view() !== 'history'">
+    <div class="section-head">
+      <div>
+        <h2>{{ t('recordedHistory') }}</h2>
+        <p>{{ t('historyDesc') }}</p>
+      </div>
+      <span class="pill">{{ records().length }} {{ t('records') }}</span>
+    </div>
+    <article class="card table-card">
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>{{ t('thDate') }}</th>
+              <th class="numeric">{{ t('thBags') }}</th>
+              <th class="numeric">kg</th>
+              <th class="numeric">{{ t('thHours') }}</th>
+              <th class="numeric">{{ t('kgPerDay') }}</th>
+              <th class="numeric">{{ currency() || t('currency') }}/{{ t('perDay') }}</th>
+              <th class="numeric">{{ t('thWebAvg') }}</th>
+              <th class="numeric">{{ t('thEspAvg') }}</th>
+              <th class="numeric">{{ t('thWaterMax') }}</th>
+              <th>{{ t('thWeather') }}</th>
+              <th>{{ t('thBurner') }}</th>
+              <th>{{ t('thInfo') }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (r of historyRows(); track r.rowNumber) {
+            <tr>
+              <td>{{ r.dateLabel }}</td>
+              <td class="numeric">{{ fmt(r.bags, 0) }}</td>
+              <td class="numeric">{{ fmt(r.kg, 0) }}</td>
+              <td class="numeric">{{ fmt(r.hours, 0) }}</td>
+              <td class="numeric">{{ fmt(r.kgPerDay, 1) }}</td>
+              <td class="numeric">{{ fmt(r.costPerDay, 2) }}</td>
+              <td class="numeric">{{ fmt(r.webAvg, 1) }}</td>
+              <td class="numeric">{{ fmt(r.espAvg, 1) }}</td>
+              <td class="numeric">{{ fmt(r.waterMax, 1) }}</td>
+              <td>{{ r.weather || '—' }}</td>
+              <td>{{ burner(r) }}</td>
+              <td>{{ r.info || '—' }}</td>
+            </tr>
+            } @empty {
+            <tr>
+              <td colspan="12" class="empty">{{ t('noHistory') }}</td>
+            </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </article>
+  </section>
+
+  <footer class="footer">{{ t('footer') }}</footer>
+</main>

@@ -16,7 +16,7 @@ import { SummaryStatComponent } from './hidden/summary.component/summary.compone
 import { UserService } from './services/user.service';
 
 @Component({
-  selector: 'main-component',
+  selector: 'cv-component',
   standalone: true,
   imports: [
     CommonModule,
@@ -31,10 +31,10 @@ import { UserService } from './services/user.service';
     ScrollToTopComponent,
     SummaryStatComponent,
   ],
-  templateUrl: './main.component.html',
-  styleUrl: './main.component.css',
+  templateUrl: './cv.component.html',
+  styleUrl: './cv.component.css',
 })
-export class MainComponent {
+export class CVComponent {
   summaryPopupVisible = signal(false);
 
   constructor(
