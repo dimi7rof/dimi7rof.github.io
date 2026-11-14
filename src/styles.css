@@ -735,6 +735,16 @@ tbody tr:hover {
     min-width: 0;
     padding: 8px 0;
   }
+  .clim-value {
+    font-size: 20px;
+  }
+  .clim-label {
+    font-size: 8px;
+    gap: 4px;
+  }
+  .grid {
+    gap: 4px;
+  }
 }
 .refresh-btn {
   width: 34px;

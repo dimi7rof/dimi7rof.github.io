@@ -37,7 +37,6 @@
           <path d="M21 4v5h-5" />
         </svg>
       </button>
-      <label for="languageSelect">{{ t('languageLabel') }}</label>
       <select id="languageSelect" (change)="onLangChange($event)">
         <option value="bg" [selected]="i18n.lang() === 'bg'">Български</option>
         <option value="en" [selected]="i18n.lang() === 'en'">English</option>
