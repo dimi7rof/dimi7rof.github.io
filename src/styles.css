@@ -726,7 +726,7 @@ tbody tr:hover {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 } */
-@media (max-width: 600px) {
+@media (max-width: 400px) {
   .clim-range {
     width: 100%;
   }
@@ -742,8 +742,11 @@ tbody tr:hover {
     font-size: 8px;
     gap: 4px;
   }
+  .clim-title {
+    padding: 4px 6px 4px;
+  }
   .grid {
-    gap: 4px;
+    gap: 3px;
   }
 }
 .refresh-btn {

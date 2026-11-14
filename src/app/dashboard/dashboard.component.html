@@ -46,7 +46,7 @@
 
   @if (view() !== 'climate') {
   @if (message()) { <div class="error" role="alert">{{ message() }}</div> }
-  @if (loading()) { <div class="loading">{{ t('loading') }}</div> }
+  @if (loading()) { <div class="loading"><app-loading /></div> }
   }
 
   <!-- ===================== CLIMATE (main tab) ===================== -->
@@ -146,38 +146,9 @@
 
     <div class="section-head">
       <div>
-        <h2>{{ t('latestTemperatures') }}</h2>
-        <p>{{ t('mostRecentValues') }}</p>
-      </div>
-    </div>
-    <div class="grid temperature-grid">
-      @for (tile of tempTiles(); track tile.name; let i = $index) {
-      <article class="card temp-tile">
-        <div class="temp-name">{{ tile.name }}</div>
-        <div class="temp-value" [style.color]="palette[i]">{{ fmt(tile.value, 1, '°') }}</div>
-        <div class="temp-range">{{ tile.meta }}</div>
-      </article>
-      }
-    </div>
-
-    <div class="section-head">
-      <div>
         <h2>{{ t('latestSensorFeeds') }}</h2>
         <p>{{ t('sensorFeedsDesc') }}</p>
       </div>
-    </div>
-    <div class="grid temperature-grid">
-      @for (tile of liveTiles(); track $index) {
-      <article class="card temp-tile">
-        <div class="temp-name">{{ tile.name }}</div>
-        <div class="temp-value" [style.color]="palette[$index % palette.length]">{{ fmt(tile.value, 1) }}</div>
-        <div class="temp-range">{{ tile.meta }}</div>
-      </article>
-      } @empty {
-      <article class="card temp-tile" style="grid-column:1/-1">
-        <div class="empty">{{ t('noLiveSensors') }}</div>
-      </article>
-      }
     </div>
 
     <div class="section-head">

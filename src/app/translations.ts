@@ -148,8 +148,8 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     climateAtm: 'Влажност и налягане',
     outside: 'Навън',
     humidity: 'Влажност',
-    humidityLeft: 'Влажност % (ляво)',
-    pressureRight: 'Налягане hPa (дясно)',
+    humidityLeft: 'Влажност %',
+    pressureRight: 'Налягане hPa',
     lastHours: 'Последни {n} часа',
   },
   en: {
@@ -298,8 +298,8 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     climateAtm: 'Humidity and pressure',
     outside: 'Outside',
     humidity: 'Humidity',
-    humidityLeft: 'Humidity % (left)',
-    pressureRight: 'Pressure hPa (right)',
+    humidityLeft: 'Humidity %',
+    pressureRight: 'Pressure hPa',
     lastHours: 'Last {n} hours',
   },
 };

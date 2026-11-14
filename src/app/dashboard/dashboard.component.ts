@@ -14,7 +14,6 @@ import { ClimateComponent } from '../climate/climate.component';
 import { I18nService } from '../i18n.service';
 import {
   Kpis,
-  LiveSensors,
   OverviewData,
   SeasonData,
   SeasonListItem,
@@ -22,6 +21,7 @@ import {
 } from '../models';
 import { PelletApiService } from '../pellet-api.service';
 import { Lang } from '../translations';
+import { LoadingComponent } from '../loading/loading.component';
 
 Chart.register(...registerables);
 
@@ -39,7 +39,7 @@ const MONTHS_BG = ['Окт', 'Ное', 'Дек', 'Яну', 'Фев', 'Мар', '
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [ClimateComponent],
+  imports: [LoadingComponent, ClimateComponent, LoadingComponent],
   templateUrl: './dashboard.component.html',
 })
 export class DashboardComponent implements OnInit, OnDestroy {
@@ -138,79 +138,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
         icon: '◫',
       },
     ];
-  });
-
-  tempTiles = computed<Tile[]>(() => {
-    const l = this.latest();
-    const t = (x: string) => this.t(x);
-    const range = (a: Num, b: Num) =>
-      l ? `${this.fmt(a)} / ${this.fmt(b)} °C ${t('minMax')}` : '';
-    return [
-      {
-        name: t('outdoorWeb'),
-        value: l?.webAvg,
-        meta: range(l?.webMin, l?.webMax),
-      },
-      {
-        name: t('outdoorEsp'),
-        value: l?.espAvg,
-        meta: range(l?.espMin, l?.espMax),
-      },
-      { name: t('waterMax'), value: l?.waterMax, meta: t('recordedMax') },
-      { name: t('f1Max'), value: l?.f1Max, meta: t('recordedMax') },
-      { name: t('f2Max'), value: l?.f2Max, meta: t('recordedMax') },
-    ];
-  });
-
-  liveTiles = computed<Tile[]>(() => {
-    const f: Partial<LiveSensors> = this.seasonData()?.liveSensors ?? {};
-    const t = (x: string) => this.t(x);
-    const tiles: Tile[] = [];
-    if (f.weather) {
-      const w = f.weather;
-      tiles.push({
-        name: t('weatherStation'),
-        value: w.temperature,
-        meta: `°C · ${w.condition || t('weather')} · ${w.timestamp}`,
-      });
-      tiles.push({
-        name: t('weatherHumidity'),
-        value: w.humidity,
-        meta: `% RH · ${w.timestamp}`,
-      });
-      tiles.push({
-        name: t('weatherPressure'),
-        value: w.pressure,
-        meta: `hPa · ${w.timestamp}`,
-      });
-    }
-    if (f.esp32) {
-      const e = f.esp32;
-      tiles.push({
-        name: t('espTemp'),
-        value: e.temperature,
-        meta: `°C · ${e.timestamp}`,
-      });
-      tiles.push({
-        name: t('espPressure'),
-        value: e.pressure,
-        meta: `hPa · ${e.timestamp}`,
-      });
-    }
-    if (f.indoor) {
-      const i = f.indoor;
-      const add = (name: string, value: Num, unit: string) =>
-        tiles.push({ name, value, meta: `${unit} · ${i.timestamp}` });
-      add(t('floor0'), i.floor0, '°C');
-      add(t('floor1'), i.floor1, '°C');
-      add(t('floor2'), i.floor2, '°C');
-      add(t('outdoorImport'), i.outdoor, '°C');
-      add(t('hotWater'), i.hot, '°C');
-      add(t('coldWater'), i.cold, '°C');
-      add(t('roomPressure'), i.pressure, 'hPa');
-      add(t('roomHumidity'), i.humidity, '% RH');
-    }
-    return tiles;
   });
 
   settings = computed(() => {
@@ -432,7 +359,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       data,
       borderColor: color,
       backgroundColor: fill ? `${color}20` : color,
-      borderWidth: 2,
+      borderWidth: 1,
       pointRadius: 2,
       pointHoverRadius: 5,
       tension: 0.32,

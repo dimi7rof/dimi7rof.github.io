@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ChangeDetectorRef, OnDestroy, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-loading',
@@ -10,7 +10,10 @@ export class LoadingComponent implements OnInit, OnDestroy {
   progress = 1;
 
   private interval?: ReturnType<typeof setInterval>;
+  private readonly duration = 6000;
   private startTime = 0;
+
+  constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.startTime = Date.now();
@@ -18,9 +21,14 @@ export class LoadingComponent implements OnInit, OnDestroy {
     this.interval = setInterval(() => {
       const elapsed = Date.now() - this.startTime;
 
-      this.progress = Math.min(100, Math.floor(1 + (elapsed / 4000) * 99));
+      this.progress = Math.min(
+        100,
+        1 + Math.floor((elapsed / this.duration) * 99),
+      );
 
-      if (this.progress === 100) {
+      this.cdr.detectChanges();
+
+      if (this.progress >= 100) {
         this.stop();
       }
     }, 40);
@@ -29,6 +37,7 @@ export class LoadingComponent implements OnInit, OnDestroy {
   private stop(): void {
     if (this.interval) {
       clearInterval(this.interval);
+      this.interval = undefined;
     }
   }
 
