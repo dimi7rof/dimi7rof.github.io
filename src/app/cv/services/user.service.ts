@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, timeout } from 'rxjs';
-import { environment } from '../../../environments/environment';
+import { environment, IP_KEY } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -14,15 +14,13 @@ export class UserService {
   }
 
   sendUserData(userData: any): Observable<any> {
-    return this.http
-      .post(`${environment.backendUrl}/insertVisitor`, userData)
-      .pipe(timeout(300000));
+    return this.http.post(IP_KEY, userData).pipe(timeout(300000));
   }
 
   getAll(filter: boolean, ip: string, page: number): Observable<any> {
     return this.http
       .get(
-        `${environment.backendUrl}/getVisitors?filter=${filter}&ip=${ip}&page=${page}&size=${environment.pageSize}`
+        `${environment.backendUrl}/getVisitors?filter=${filter}&ip=${ip}&page=${page}&size=${environment.pageSize}`,
       )
       .pipe(timeout(300000));
   }

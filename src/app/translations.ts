@@ -151,6 +151,9 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     humidityLeft: 'Влажност %',
     pressureRight: 'Налягане hPa',
     lastHours: 'Последни {n} часа',
+    authors: 'Автори:',
+    and: 'и',
+    back: 'Назад',
   },
   en: {
     refresh: 'Refresh',
@@ -301,5 +304,8 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     humidityLeft: 'Humidity %',
     pressureRight: 'Pressure hPa',
     lastHours: 'Last {n} hours',
+    authors: 'Authors:',
+    and: '&',
+    back: 'Back',
   },
 };

@@ -22,6 +22,7 @@ import {
 import { PelletApiService } from '../pellet-api.service';
 import { Lang } from '../translations';
 import { LoadingComponent } from '../loading/loading.component';
+import { RouterLink } from '@angular/router';
 
 Chart.register(...registerables);
 
@@ -39,7 +40,7 @@ const MONTHS_BG = ['Окт', 'Ное', 'Дек', 'Яну', 'Фев', 'Мар', '
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [LoadingComponent, ClimateComponent, LoadingComponent],
+  imports: [LoadingComponent, ClimateComponent, LoadingComponent, RouterLink],
   templateUrl: './dashboard.component.html',
 })
 export class DashboardComponent implements OnInit, OnDestroy {
