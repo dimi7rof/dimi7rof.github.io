@@ -266,6 +266,18 @@ select {
   --accent: var(--blue);
 }
 
+.accent-purple {
+  --accent: var(--purple);
+}
+
+.accent-red {
+  --accent: var(--red);
+}
+
+.inventory-stats .wide {
+  grid-column: 1 / -1;
+}
+
 .content-grid {
   grid-template-columns: minmax(0, 1.55fr) minmax(300px, 1fr);
   align-items: stretch;

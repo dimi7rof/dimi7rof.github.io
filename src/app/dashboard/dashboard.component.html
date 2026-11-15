@@ -112,6 +112,13 @@
             <div class="mini-label">{{ t('recentBurn') }}</div>
             <div class="mini-value">{{ fmt(kpis().latestKgPerDay, 1, ' ' + t('kgPerDay')) }}</div>
           </div>
+          <div class="inventory-stats">
+            <!-- ...Очаквана автономност и Последен разход... -->
+            <div class="wide">
+              <div class="mini-label">{{ t('runOutDate') }}</div>
+              <div class="mini-value">{{ runOutDate() }}</div>
+            </div>
+          </div>
         </div>
         <div class="legend-note" style="margin-top:15px">{{ t('autonomyNote') }}</div>
       </article>

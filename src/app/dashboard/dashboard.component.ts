@@ -144,12 +144,87 @@ export class DashboardComponent implements OnInit, OnDestroy {
       (this.seasonData() && !this.records().length ? this.t('noDated') : ''),
   );
 
+  /** Refill = a dated row with bags > 0. Next refill = latest refill + average of the last 3 gaps. */
+  refill = computed(() => {
+    const refills = this.records().filter((r) => (r.bags ?? 0) > 0);
+    const latest = refills.at(-1);
+    if (!latest) return null;
+
+    const pts = refills.slice(-4); // up to 4 refills -> 3 gaps
+    const gaps = pts
+      .slice(1)
+      .map((r, i) => (r.timestamp - pts[i].timestamp) / 3_600_000);
+    const avgGapH = gaps.length
+      ? gaps.reduce((a, b) => a + b, 0) / gaps.length
+      : null;
+
+    let nextTs: number | null = null;
+    if (avgGapH !== null) {
+      const d = new Date(latest.timestamp + avgGapH * 3_600_000);
+      d.setMinutes(d.getMinutes() >= 30 ? 60 : 0, 0, 0); // nearest hour
+      nextTs = d.getTime();
+    }
+    return { latest, avgGapH, nextTs };
+  });
+
+  private locale() {
+    return this.i18n.lang() === 'bg' ? 'bg-BG' : 'en-GB';
+  }
+  private fmtDay(ts: number) {
+    return new Date(ts).toLocaleDateString(this.locale(), {
+      day: 'numeric',
+      month: 'short',
+    });
+  }
+  private fmtTime(ts: number) {
+    return new Date(ts).toLocaleTimeString(this.locale(), {
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+  }
+  private fmtSpan(ms: number) {
+    const h = Math.round(Math.abs(ms) / 3_600_000);
+    const d = Math.floor(h / 24);
+    return d
+      ? `${d} ${this.t('unitDay')} ${h % 24} ${this.t('unitHour')}`
+      : `${h} ${this.t('unitHour')}`;
+  }
+
   kpiItems = computed(() => {
     const k = this.kpis();
     const t = (x: string) => this.t(x);
     const cur = k.currency || '—';
     const perDay = `${cur}/${t('perDay')}`;
+    const rf = this.refill();
+    const untilFoot =
+      !rf || rf.nextTs === null
+        ? t('noRefill')
+        : [
+            (rf.nextTs >= Date.now()
+              ? t('refillIn')
+              : t('refillOverdue')
+            ).replace('{n}', this.fmtSpan(rf.nextTs - Date.now())),
+            t('refillAvgGap').replace('{n}', String(Math.round(rf.avgGapH!))),
+          ].join(' · ');
     return [
+      {
+        label: t('latestRefill'),
+        value: rf ? this.fmtDay(rf.latest.timestamp) : '—',
+        foot: rf
+          ? `${this.fmtTime(rf.latest.timestamp)} · ${this.fmt(rf.latest.bags, 0, ` ${t('bags')}`)}`
+          : t('noRefill'),
+        accent: 'accent-purple',
+        icon: '↻',
+      },
+      {
+        label: t('refillUntil'),
+        value: rf?.nextTs
+          ? `${this.fmtDay(rf.nextTs)} ${this.fmtTime(rf.nextTs)}`
+          : '—',
+        foot: untilFoot,
+        accent: 'accent-red',
+        icon: '◷',
+      },
       {
         label: t('recordedPellets'),
         value: this.fmt(k.totalBags, 0, ` ${t('bags')}`),
@@ -198,6 +273,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
       { label: t('correction'), value: show(l?.correction, '') },
       { label: t('cleaner'), value: show(l?.cleaner, '') },
     ];
+  });
+
+  /** Прогнозна дата на свършване: днес + estimatedDaysRemaining */
+  runOutDate = computed(() => {
+    const days = this.kpis().estimatedDaysRemaining;
+    if (days == null || !Number.isFinite(days)) return '—';
+    return new Date(Date.now() + days * 86_400_000).toLocaleDateString(
+      this.locale(),
+      { day: 'numeric', month: 'short', year: 'numeric' },
+    );
   });
 
   climate = viewChild(ClimateComponent);
