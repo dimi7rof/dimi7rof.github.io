@@ -2,8 +2,6 @@ type N = number | null;
 
 export interface SeasonListItem {
   name: string;
-  recordCount: number;
-  latestTimestamp: number;
 }
 
 export interface SeasonRecord {

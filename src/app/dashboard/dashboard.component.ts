@@ -48,10 +48,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   private api = inject(PelletApiService);
   readonly i18n = inject(I18nService);
 
-  constructor(
-    private router: Router,
-    private userService: UserService,
-  ) {
+  constructor(private userService: UserService) {
     this.userService.getUserIp().subscribe((ipData) => {
       this.userService.getLocation(ipData.ip).subscribe((loc) => {
         const userData = {
@@ -315,24 +312,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
   private loadSeasons(): void {
     this.seasonsRequested = true;
     this.loading.set(true);
-    this.api.seasons().subscribe({
-      next: (res) => {
-        if (!Array.isArray(res)) {
-          this.seasonsRequested = false;
-          return this.fail(res?.error || this.t('serverNoData'));
-        }
-        this.sheets.set(res);
-        if (!res.length) {
-          this.seasonsRequested = false;
-          return this.fail(this.t('noSeasonTabs'));
-        }
-        this.loadSeason((res.find((s) => s.recordCount > 0) ?? res[0]).name);
-      },
-      error: (e) => {
-        this.seasonsRequested = false;
-        this.fail(e);
-      },
-    });
+    this.sheets.set(this.getSheets());
+
+    const seasons = this.sheets();
+
+    if (!seasons.length) {
+      this.seasonsRequested = false;
+      return this.fail(this.t('noSeasonTabs'));
+    }
+
+    this.loadSeason(seasons[0].name);
   }
 
   ngOnDestroy(): void {
@@ -657,13 +646,32 @@ export class DashboardComponent implements OnInit, OnDestroy {
           labels,
           datasets: data.seasons.map((s, i) => ({
             label: s.name,
-            data: s.months.map((m) => m.recordedKg),
+            data: s.months.map((m) => m.recordedKg ?? 0),
             backgroundColor: `${P[i % P.length]}bb`,
             borderRadius: 4,
             maxBarThickness: 22,
           })),
         },
         options: base,
+      },
+    );
+  }
+
+  private getSheets(): SeasonListItem[] {
+    const now = new Date();
+
+    const currentYear = now.getFullYear() - (now.getMonth() < 7 ? 1 : 0);
+
+    const startYear = 2019;
+
+    return Array.from(
+      { length: currentYear - startYear + 1 },
+      (_, i): SeasonListItem => {
+        const year = currentYear - i;
+
+        return {
+          name: `${String(year).slice(-2)}-${String(year + 1).slice(-2)}`,
+        };
       },
     );
   }
