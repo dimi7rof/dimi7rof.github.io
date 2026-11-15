@@ -11,9 +11,9 @@ import {
 } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
 import 'chartjs-adapter-date-fns';
-import { I18nService } from '../i18n.service';
+import { I18nService } from '../services/i18n.service';
 import { ClimatePoint } from '../models';
-import { PelletApiService } from '../pellet-api.service';
+import { PelletApiService } from '../services/pellet-api.service';
 import { finalize, timeout } from 'rxjs';
 
 Chart.register(...registerables);

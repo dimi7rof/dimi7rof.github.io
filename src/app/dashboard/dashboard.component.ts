@@ -11,7 +11,6 @@ import {
 } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
 import { ClimateComponent } from '../climate/climate.component';
-import { I18nService } from '../i18n.service';
 import {
   Kpis,
   OverviewData,
@@ -19,11 +18,12 @@ import {
   SeasonListItem,
   SeasonRecord,
 } from '../models';
-import { PelletApiService } from '../pellet-api.service';
+import { PelletApiService } from '../services/pellet-api.service';
 import { Lang } from '../translations';
 import { LoadingComponent } from '../loading/loading.component';
 import { Router, RouterLink } from '@angular/router';
-import { UserService } from '../cv/services/user.service';
+import { UserService } from '../services/user.service';
+import { I18nService } from '../services/i18n.service';
 
 Chart.register(...registerables);
 
@@ -555,7 +555,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
           datasets: data.seasons.map((s, i) =>
             this.line(
               s.name,
-              s.months.map((m) => m.averageKgPerDay),
+              s.months.map((m) => m.averageKgPerDay ?? 0),
               P[i % P.length],
             ),
           ),

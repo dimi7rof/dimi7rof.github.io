@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, timeout } from 'rxjs';
-import { environment, IP_KEY } from '../../../environments/environment';
+import { environment, IP_KEY } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',

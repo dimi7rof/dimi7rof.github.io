@@ -424,7 +424,6 @@ select {
 table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 900px;
   font-size: 11px;
 }
 

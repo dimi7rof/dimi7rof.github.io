@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { cvData } from '../../cv-data';
+import { cvData } from '../../../../assets/cv-data';
 
 @Component({
   selector: 'title-component',

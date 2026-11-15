@@ -1,5 +1,5 @@
 import { Component, input, output, signal } from '@angular/core';
-import { UserService } from '../../services/user.service';
+import { UserService } from '../../../services/user.service';
 
 interface Data {
   monthly: number;

@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { Lang, TRANSLATIONS } from './translations';
+import { Lang, TRANSLATIONS } from '../translations';
 
 const STORAGE_KEY = 'pelletDashboardLanguage';
 
@@ -21,14 +21,20 @@ export class I18nService {
     this.lang.set(next);
     document.documentElement.lang = next;
     document.title = this.t('appTitle');
-    try { localStorage.setItem(STORAGE_KEY, next); } catch { /* ignore */ }
+    try {
+      localStorage.setItem(STORAGE_KEY, next);
+    } catch {
+      /* ignore */
+    }
   }
 
   private load(): Lang {
     try {
       const saved = localStorage.getItem(STORAGE_KEY) as Lang | null;
       if (saved && saved in TRANSLATIONS) return saved;
-    } catch { /* ignore */ }
+    } catch {
+      /* ignore */
+    }
     return 'bg';
   }
 }

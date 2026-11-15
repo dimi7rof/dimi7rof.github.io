@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import jsPDF from 'jspdf';
-import { cvData } from './cv-data';
+import { cvData } from '../../assets/cv-data';
 import { CertificateComponent } from './containers/certificate-component/certificate.component';
 import { ContactComponent } from './containers/contact.component/contact.component';
 import { EducationComponent } from './containers/education.component/education.component';
