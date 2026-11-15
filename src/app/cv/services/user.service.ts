@@ -14,7 +14,14 @@ export class UserService {
   }
 
   sendUserData(userData: any): Observable<any> {
-    return this.http.post(IP_KEY, userData).pipe(timeout(300000));
+    return this.http
+      .post(IP_KEY, JSON.stringify(userData), {
+        headers: {
+          'Content-Type': 'text/plain',
+        },
+        responseType: 'text',
+      })
+      .pipe(timeout(30000));
   }
 
   getAll(filter: boolean, ip: string, page: number): Observable<any> {
