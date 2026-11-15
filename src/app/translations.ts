@@ -160,6 +160,9 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     unitDay: 'д',
     unitHour: 'ч',
     runOutDate: 'Прогнозно свършване',
+    monthlyCost: 'Разходи по месеци',
+    monthlyCostDesc:
+      'EUR · стойност на отчетените пелети за месеца. Сезоните в лева са превърнати по курс 1,95583; сезони без колона с цена не са показани.',
   },
   en: {
     refresh: 'Refresh',
@@ -320,5 +323,8 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     unitDay: 'd',
     unitHour: 'h',
     runOutDate: 'Estimated run-out',
+    monthlyCost: 'Cost per month',
+    monthlyCostDesc:
+      'EUR · value of the pellets recorded in each month. BGN seasons are converted at 1.95583; seasons without a cost column are not shown.',
   },
 };

@@ -194,6 +194,16 @@
 
     <div class="section-head">
       <div>
+        <h2>{{ t('monthlyCost') }}</h2>
+        <p>{{ t('monthlyCostDesc') }}</p>
+      </div>
+    </div>
+    <article class="card chart-card">
+      <div class="chart-wrap"><canvas #monthlyCostChart></canvas></div>
+    </article>
+
+    <div class="section-head">
+      <div>
         <h2>{{ t('recordedPelletQuantities') }}</h2>
         <p>{{ t('recordedPelletDesc') }}</p>
       </div>

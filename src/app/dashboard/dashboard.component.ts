@@ -35,6 +35,7 @@ interface Tile {
   meta: string;
 }
 
+const BGN_PER_EUR = 1.95583;
 const KG_PER_BAG = 15; // same as bagWeightKg in the Apps Script
 const MONTHS_BG = ['Окт', 'Ное', 'Дек', 'Яну', 'Фев', 'Мар', 'Апр'];
 
@@ -98,6 +99,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   monthlyAvgRef!: ElementRef<HTMLCanvasElement>;
   @ViewChild('monthlyTotalChart', { static: true })
   monthlyTotalRef!: ElementRef<HTMLCanvasElement>;
+  @ViewChild('monthlyCostChart', { static: true })
+  monthlyCostRef!: ElementRef<HTMLCanvasElement>;
 
   readonly palette = [
     '#36c5d8',
@@ -613,7 +616,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   private renderComparisonCharts() {
-    this.destroyCharts(['monthlyAverage', 'monthlyTotal']);
+    this.destroyCharts(['monthlyAverage', 'monthlyTotal', 'monthlyCost']);
     const data = this.overviewData();
     if (!data) return;
     const labels = this.i18n.lang() === 'bg' ? MONTHS_BG : data.monthNames;
@@ -655,6 +658,59 @@ export class DashboardComponent implements OnInit, OnDestroy {
         options: base,
       },
     );
+    // Разход по месеци, всичко в EUR (лева се превръщат); сезони без данни за цена се пропускат
+    const toEur = (v: number | null, cur: string) =>
+      v === null
+        ? null
+        : Math.round((cur === 'BGN' ? v / BGN_PER_EUR : v) * 100) / 100;
+    const costSeasons = data.seasons
+      .map((s, i) => ({ s, i }))
+      .filter(({ s }) => s.months.some((m) => m.recordedCost != null));
+    this.charts['monthlyCost'] = new Chart(this.monthlyCostRef.nativeElement, {
+      type: 'bar',
+      data: {
+        labels,
+        datasets: costSeasons.map(({ s, i }) => ({
+          label: s.name,
+          currency: s.currency,
+          data: s.months.map((m) => toEur(m.recordedCost ?? null, s.currency)),
+          original: s.months.map((m) => m.recordedCost ?? null),
+          backgroundColor: `${P[i % P.length]}bb`,
+          borderRadius: 4,
+          maxBarThickness: 22,
+        })),
+      },
+      options: {
+        ...base,
+        plugins: {
+          ...base.plugins,
+          tooltip: {
+            ...base.plugins.tooltip,
+            callbacks: {
+              label: (c: any) =>
+                c.parsed.y == null
+                  ? ''
+                  : `${c.dataset.label}: ${c.parsed.y.toFixed(2)} EUR` +
+                    (c.dataset.currency === 'BGN'
+                      ? ` (${c.dataset.original[c.dataIndex].toFixed(2)} BGN)`
+                      : ''),
+            },
+          },
+        },
+        scales: {
+          ...base.scales,
+          y: {
+            ...base.scales.y,
+            title: {
+              display: true,
+              text: 'EUR',
+              color: this.css('--muted'),
+              font: { size: 9 },
+            },
+          },
+        },
+      },
+    });
   }
 
   private getSheets(): SeasonListItem[] {

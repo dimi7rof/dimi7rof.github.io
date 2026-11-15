@@ -69,7 +69,12 @@ export interface OverviewSeason {
   recordCount: number;
   totalKg: number;
   averageKgPerDay: N;
-  months: { month: string; averageKgPerDay: N; recordedKg: number }[];
+  months: {
+    month: string;
+    averageKgPerDay: N;
+    recordedKg: number;
+    recordedCost: N;
+  }[];
 }
 
 export interface OverviewData {
