@@ -5,6 +5,6 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './certificate.component.html',
-  styleUrl: './certificate.component.css',
+  styleUrls: ['./certificate.component.css', '../../styles.css'],
 })
 export class CertificateComponent {}

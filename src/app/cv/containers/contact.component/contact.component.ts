@@ -6,7 +6,7 @@ import { cvData } from '../../cv-data';
   standalone: true,
   imports: [],
   templateUrl: './contact.component.html',
-  styleUrl: './contact.component.css',
+  styleUrls: ['./contact.component.css', '../../styles.css'],
 })
 export class ContactComponent {
   profile = cvData.profile;

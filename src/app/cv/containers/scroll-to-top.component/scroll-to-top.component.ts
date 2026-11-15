@@ -4,10 +4,10 @@ import { Component, HostListener } from '@angular/core';
   selector: 'app-scroll-to-top',
   template: `
     @if (isVisible) {
-    <button (click)="scrollToTop()" class="scroll-to-top">⬆</button>
+      <button (click)="scrollToTop()" class="scroll-to-top">⬆</button>
     }
   `,
-  styleUrl: './scroll-to-top.component.css',
+  styleUrls: ['./scroll-to-top.component.css', '../../styles.css'],
 })
 export class ScrollToTopComponent {
   isVisible = false;

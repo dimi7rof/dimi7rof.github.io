@@ -31,13 +31,15 @@ import { SummaryStatComponent } from './hidden/summary.component/summary.compone
     SummaryStatComponent,
   ],
   templateUrl: './cv.component.html',
-  styleUrl: './cv.component.css',
+  styleUrls: ['./cv.component.css', './styles.css'],
 })
 export class CVComponent {
   summaryPopupVisible = signal(false);
 
   constructor(private router: Router) {}
-
+  back() {
+    this.router.navigate(['/']);
+  }
   downloadPDF() {
     const pdf = new jsPDF({
       orientation: 'portrait',

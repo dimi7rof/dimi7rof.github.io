@@ -6,7 +6,7 @@ import { cvData } from '../../cv-data';
   standalone: true,
   imports: [],
   templateUrl: './experience.component.html',
-  styleUrl: './experience.component.css',
+  styleUrls: ['./experience.component.css', '../../styles.css'],
 })
 export class ExperienceComponent {
   experience = cvData.experience;

@@ -7,7 +7,7 @@ import { ScrollToTopComponent } from '../../containers/scroll-to-top.component/s
   selector: 'links-component',
   standalone: true,
   templateUrl: './links.component.html',
-  styleUrl: './links.component.css',
+  styleUrls: ['./links.component.css', '../../styles.css'],
   imports: [ScrollToTopComponent],
 })
 export class LinksComponent {
@@ -16,7 +16,7 @@ export class LinksComponent {
   constructor(private router: Router) {}
 
   back() {
-    this.router.navigate(['/']);
+    this.router.navigate(['/cv']);
   }
 
   get totalLinks(): number {

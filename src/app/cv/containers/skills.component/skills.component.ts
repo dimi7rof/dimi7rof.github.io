@@ -15,33 +15,7 @@ import { cvData } from '../../cv-data';
       </div>
     </div>
   </section>`,
-  styles: `
-    .logos {
-      gap: 32px;
-    }
-
-    .logos > img {
-      height: 60px;
-      width: 60px;
-      background-color: darkgray;
-      border-radius: 55px;
-    }
-
-    .skills {
-      height: 350px;
-    }
-
-    @media (orientation: portrait) {
-      .skills {
-        height: 520px;
-      }
-
-      .logos {
-        flex-direction: column;
-        padding: 10px;
-      }
-    }
-  `,
+  styleUrls: ['./skills.component.css', '../../styles.css'],
 })
 export class SkillsComponent {
   skills = cvData.skills;

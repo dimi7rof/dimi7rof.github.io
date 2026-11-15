@@ -6,7 +6,7 @@ import { cvData } from '../../cv-data';
   standalone: true,
   imports: [],
   templateUrl: './education.component.html',
-  styleUrl: './education.component.css',
+  styleUrls: ['./education.component.css', '../../styles.css'],
 })
 export class EducationComponent {
   education = cvData.education;

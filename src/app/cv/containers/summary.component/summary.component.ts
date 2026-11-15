@@ -12,10 +12,6 @@ import { Component } from '@angular/core';
       <p>This page is for practice only</p>
     </div>
   </section>`,
-  styles: `
-.summary {
-  height: 350px;
-}
-`,
+  styleUrls: ['./summary.component.css', '../../styles.css'],
 })
 export class SummaryComponent {}
