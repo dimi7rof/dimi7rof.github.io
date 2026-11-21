@@ -150,7 +150,7 @@ export class ClimateComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.load();
-    //this.timers.push(setInterval(() => this.now.set(Date.now()), 30_000));
+    this.timers.push(setInterval(() => this.now.set(Date.now()), 30_000));
     //this.timers.push(setInterval(() => this.load(), REFRESH_MS));
   }
 
