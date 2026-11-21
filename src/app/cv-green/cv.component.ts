@@ -13,6 +13,7 @@ import { SkillsComponent } from './containers/skills.component/skills.component'
 import { SummaryComponent } from './containers/summary.component/summary.component';
 import { TitleComponent } from './containers/title.component/title.component';
 import { SummaryStatComponent } from './hidden/summary.component/summary.component';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'cv-component',
@@ -36,7 +37,30 @@ import { SummaryStatComponent } from './hidden/summary.component/summary.compone
 export class CVComponent {
   summaryPopupVisible = signal(false);
 
-  constructor(private router: Router) {}
+  constructor(
+    private userService: UserService,
+    private router: Router,
+  ) {
+    this.userService.getUserIp().subscribe((ipData) => {
+      this.userService.getLocation(ipData.ip).subscribe((loc) => {
+        const userData = {
+          ip: ipData.ip,
+          os: this.userService.getOperatingSystem(),
+          browser: this.userService.getBrowserInfo(),
+          city: loc.city,
+          country: loc.country,
+          org: loc.org,
+          page: 'cv-green',
+        };
+
+        this.userService.sendUserData(userData).subscribe({
+          next: () => console.info(userData.ip),
+          error: () => console.error('Error'),
+        });
+      });
+    });
+  }
+
   back() {
     this.router.navigate(['/']);
   }

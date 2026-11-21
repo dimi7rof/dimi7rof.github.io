@@ -2,6 +2,7 @@ import { Component, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { cvData } from '../../assets/cv-data';
+import { UserService } from '../services/user.service';
 
 type Section =
   | 'profile'
@@ -20,7 +21,29 @@ type Section =
   styleUrls: ['./cv-blue.component.css'],
 })
 export class CVBlueComponent {
-  constructor(private router: Router) {}
+  constructor(
+    private userService: UserService,
+    private router: Router,
+  ) {
+    this.userService.getUserIp().subscribe((ipData) => {
+      this.userService.getLocation(ipData.ip).subscribe((loc) => {
+        const userData = {
+          ip: ipData.ip,
+          os: this.userService.getOperatingSystem(),
+          browser: this.userService.getBrowserInfo(),
+          city: loc.city,
+          country: loc.country,
+          org: loc.org,
+          page: 'cv-blue',
+        };
+
+        this.userService.sendUserData(userData).subscribe({
+          next: () => console.info(userData.ip),
+          error: () => console.error('Error'),
+        });
+      });
+    });
+  }
 
   profile = cvData.profile;
   experience = cvData.experience;

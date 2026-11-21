@@ -29,11 +29,6 @@ Chart.register(...registerables);
 
 type View = 'climate' | 'season' | 'compare' | 'history';
 type Num = number | null | undefined;
-interface Tile {
-  name: string;
-  value: Num;
-  meta: string;
-}
 
 const BGN_PER_EUR = 1.95583;
 const KG_PER_BAG = 15; // same as bagWeightKg in the Apps Script
@@ -54,11 +49,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.userService.getLocation(ipData.ip).subscribe((loc) => {
         const userData = {
           ip: ipData.ip,
-          os: this.getOperatingSystem(),
-          browser: this.getBrowserInfo(),
+          os: this.userService.getOperatingSystem(),
+          browser: this.userService.getBrowserInfo(),
           city: loc.city,
           country: loc.country,
           org: loc.org,
+          page: 'dashboard',
         };
 
         this.userService.sendUserData(userData).subscribe({
@@ -67,26 +63,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
         });
       });
     });
-  }
-
-  getOperatingSystem(): string {
-    const userAgent = navigator.userAgent;
-    if (/Windows NT 10.0/.test(userAgent)) return 'Windows 10';
-    if (/Windows NT 6.1/.test(userAgent)) return 'Windows 7';
-    if (/Mac OS X/.test(userAgent)) return 'MacOS';
-    if (/Linux/.test(userAgent)) return 'Linux';
-    if (/Android/.test(userAgent)) return 'Android';
-    if (/iPhone|iPad|iPod/.test(userAgent)) return 'iOS';
-    return 'Unknown';
-  }
-
-  getBrowserInfo(): string {
-    const userAgent = navigator.userAgent;
-    if (/Chrome/.test(userAgent)) return 'Chrome';
-    if (/Firefox/.test(userAgent)) return 'Firefox';
-    if (/Safari/.test(userAgent)) return 'Safari';
-    if (/Edge/.test(userAgent)) return 'Edge';
-    return 'Unknown Browser';
   }
 
   @ViewChild('consumptionChart', { static: true })

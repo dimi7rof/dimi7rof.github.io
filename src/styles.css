@@ -732,11 +732,12 @@ tbody tr:hover {
 .clim-panel {
   margin-bottom: 12px;
 }
-/* @media (max-width: 720px) {
-  .clim-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-} */
+
+.no-link {
+  text-decoration: none;
+  color: inherit !important;
+}
+
 @media (max-width: 400px) {
   .clim-range {
     width: 100%;

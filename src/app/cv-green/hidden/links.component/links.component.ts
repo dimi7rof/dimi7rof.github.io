@@ -16,7 +16,7 @@ export class LinksComponent {
   constructor(private router: Router) {}
 
   back() {
-    this.router.navigate(['/cv']);
+    this.router.navigate(['/cv-green']);
   }
 
   get totalLinks(): number {

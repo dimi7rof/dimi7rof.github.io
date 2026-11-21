@@ -10,7 +10,7 @@ export const PELLETS_URL =
 export const TEMPERATURE_URL =
   'https://script.google.com/macros/s/AKfycbzDMQon895LRHNiWUZAGKT5nmLH507ovAu4o0UyXnDNGwxza9-pL50HxYm-xvMIdHYeBg/exec';
 
-export const IP_KEY =
+export const IP_URL =
   'https://script.google.com/macros/s/AKfycbzH7fjznHwKstF_dJqZzgHnkFS_vCGfDG1sukmd177x_Q-eHwimpqEd_AGz-o2N-74H/exec';
 
 /** Optional: only if you set an API_KEY Script Property in Apps Script. */

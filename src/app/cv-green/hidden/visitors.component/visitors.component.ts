@@ -69,6 +69,6 @@ export class VisitorsComponent {
   }
 
   back() {
-    this.router.navigate(['/cv']);
+    this.router.navigate(['/cv-green']);
   }
 }
