@@ -150,8 +150,8 @@ export class ClimateComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.load();
-    this.timers.push(setInterval(() => this.now.set(Date.now()), 30_000));
-    this.timers.push(setInterval(() => this.load(), REFRESH_MS));
+    //this.timers.push(setInterval(() => this.now.set(Date.now()), 30_000));
+    //this.timers.push(setInterval(() => this.load(), REFRESH_MS));
   }
 
   ngOnDestroy(): void {
@@ -225,7 +225,7 @@ export class ClimateComponent implements OnInit, OnDestroy {
           this.error.set(
             e?.name === 'TimeoutError'
               ? 'Timeout: the server did not answer in time.'
-              : e?.message || String(e),
+              : 'Ops, something went wrong.',
           ),
       });
   }
