@@ -185,7 +185,7 @@ select {
 
 .grid {
   display: grid;
-  gap: 12px;
+  gap: 6px;
 }
 
 .kpi-grid {
@@ -652,13 +652,13 @@ tbody tr:hover {
   margin-bottom: 12px;
 }
 .clim-tile {
-  padding: 14px 14px 12px;
+  padding: 14px 6px 12px;
 }
 .clim-label {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 650;
   color: var(--muted);
 }
