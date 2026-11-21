@@ -59,7 +59,7 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     loading: 'Зареждане на данните за отоплението…',
     readings: 'измервания',
     records: 'записа',
-    bags: 'чували',
+    bags: 'чувалa',
     noStock: 'Няма отчетена наличност за този сезон',
     noStockValue: 'Няма отчетена наличност за този сезон.',
     remaining: 'остават',

@@ -21,7 +21,7 @@ import {
 import { PelletApiService } from '../services/pellet-api.service';
 import { Lang } from '../translations';
 import { LoadingComponent } from '../loading/loading.component';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { I18nService } from '../services/i18n.service';
 
@@ -153,7 +153,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
     const pts = refills.slice(-4); // up to 4 refills -> 3 gaps
     const gaps = pts
       .slice(1)
-      .map((r, i) => (r.timestamp - pts[i].timestamp) / 3_600_000);
+      .map(
+        (r, i) => ((r.timestamp - pts[i].timestamp) / 3_600_000 / r.bags!) * 5,
+      );
     const avgGapH = gaps.length
       ? gaps.reduce((a, b) => a + b, 0) / gaps.length
       : null;
@@ -189,6 +191,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
       ? `${d} ${this.t('unitDay')} ${h % 24} ${this.t('unitHour')}`
       : `${h} ${this.t('unitHour')}`;
   }
+  private fmtHours(ms: number) {
+    const h = Math.round(Math.abs(ms) / 3_600_000);
+    return `${h} ${this.t('unitHour')}`;
+  }
 
   kpiItems = computed(() => {
     const k = this.kpis();
@@ -196,22 +202,35 @@ export class DashboardComponent implements OnInit, OnDestroy {
     const cur = k.currency || '—';
     const perDay = `${cur}/${t('perDay')}`;
     const rf = this.refill();
-    const untilFoot =
-      !rf || rf.nextTs === null
-        ? t('noRefill')
-        : [
-            (rf.nextTs >= Date.now()
-              ? t('refillIn')
-              : t('refillOverdue')
-            ).replace('{n}', this.fmtSpan(rf.nextTs - Date.now())),
-            t('refillAvgGap').replace('{n}', String(Math.round(rf.avgGapH!))),
-          ].join(' · ');
+    const untilFoot = (() => {
+      if (!rf || rf.nextTs === null) {
+        return t('noRefill');
+      }
+
+      const remainingMs = rf.nextTs - Date.now();
+
+      const refillMessage =
+        remainingMs >= 0 ? t('refillIn') : t('refillOverdue');
+
+      const timeUntilRefill = refillMessage.replace(
+        '{n}',
+        this.fmtSpan(remainingMs),
+      );
+
+      const averageGap = t('refillAvgGap').replace(
+        '{n}',
+        String(Math.round(rf.avgGapH!)),
+      );
+
+      return `${timeUntilRefill} · ${averageGap}`;
+    })();
+    const lastRefill = Date.now() - (rf?.latest.timestamp ?? 0);
     return [
       {
         label: t('latestRefill'),
         value: rf ? this.fmtDay(rf.latest.timestamp) : '—',
         foot: rf
-          ? `${this.fmtTime(rf.latest.timestamp)} · ${this.fmt(rf.latest.bags, 0, ` ${t('bags')}`)}`
+          ? `${this.fmtTime(rf.latest.timestamp)} · ${this.fmt(rf.latest.bags, 0, ` ${t('bags')}`)} · ${this.fmtHours(lastRefill)}`
           : t('noRefill'),
         accent: 'accent-purple',
         icon: '↻',
