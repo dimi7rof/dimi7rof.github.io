@@ -143,6 +143,15 @@
       <article class="card chart-card">
         <div class="card-head">
           <div>
+            <div class="card-title">{{ t('temperatureVsConsumption') }}</div>
+            <div class="card-subtitle">{{ t('temperatureVsConsumptionDesc') }}</div>
+          </div>
+        </div>
+        <div class="chart-wrap"><canvas #tempVsConsumptionChart></canvas></div>
+      </article>
+      <article class="card chart-card">
+        <div class="card-head">
+          <div>
             <div class="card-title">{{ t('dailyHeatingCost') }}</div>
             <div class="card-subtitle">{{ t('recordedCost') }} {{ currency() }} {{ t('perDay') }}</div>
           </div>

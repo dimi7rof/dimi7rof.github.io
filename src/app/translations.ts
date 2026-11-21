@@ -24,6 +24,9 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     temperatureHistory: 'История на температурите',
     temperatureHistoryDesc:
       '°C · средни стойности и максимуми на водата / зоните',
+    temperatureVsConsumption: 'Температура срещу разход на пелети',
+    temperatureVsConsumptionDesc:
+      'Средни температури и отчетени количества пелети по дни за избрания сезон',
     dailyHeatingCost: 'Дневна цена на отоплението',
     latestTemperatures: 'Последни температури',
     mostRecentValues: 'Последни отчетени стойности',
@@ -105,6 +108,8 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     f2Max: 'F2 · макс.',
     webAvg: 'Web средна',
     espAvg: 'ESP32 средна',
+    min: 'Минимална',
+    max: 'Максимална',
     recordedCost: 'Отчетена цена',
     weatherStation: 'Метеостанция',
     weatherHumidity: 'Влажност на въздуха',
@@ -187,6 +192,10 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
       'Weather station and ESP32 measurements from the selected season',
     temperatureHistory: 'Temperature history',
     temperatureHistoryDesc: '°C · average readings and water / zone maxima',
+
+    temperatureVsConsumption: 'Temperature vs. pellet consumption',
+    temperatureVsConsumptionDesc:
+      'Average temperatures and recorded pellet quantities by day for the selected season',
     dailyHeatingCost: 'Daily heating cost',
     latestTemperatures: 'Latest temperatures',
     mostRecentValues: 'Most recent recorded values',
@@ -268,6 +277,8 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     f2Max: 'F2 · max.',
     webAvg: 'Web avg',
     espAvg: 'ESP32 avg',
+    min: 'Min.',
+    max: 'Max.',
     recordedCost: 'Recorded',
     weatherStation: 'Weather · Bratsigovo',
     weatherHumidity: 'Weather humidity',

@@ -69,6 +69,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   consumptionRef!: ElementRef<HTMLCanvasElement>;
   @ViewChild('temperatureChart', { static: true })
   temperatureRef!: ElementRef<HTMLCanvasElement>;
+  @ViewChild('tempVsConsumptionChart', { static: true })
+  tempVsConsumptionRef!: ElementRef<HTMLCanvasElement>;
   @ViewChild('costChart', { static: true })
   costRef!: ElementRef<HTMLCanvasElement>;
   @ViewChild('monthlyAverageChart', { static: true })
@@ -470,7 +472,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
     };
   }
 
-  private line(label: string, data: Num[], color: string, fill = false): any {
+  private line(
+    label: string,
+    data: Num[],
+    color: string,
+    fill = false,
+    yAxisID = 'y',
+  ): any {
     return {
       label,
       data,
@@ -481,6 +489,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       pointHoverRadius: 5,
       tension: 0.32,
       fill,
+      yAxisID,
       spanGaps: true,
     };
   }
@@ -584,6 +593,57 @@ export class DashboardComponent implements OnInit, OnDestroy {
       },
       options: base,
     });
+
+    this.charts['tempVsConsumption'] = new Chart(
+      this.tempVsConsumptionRef.nativeElement,
+      {
+        type: 'line',
+        data: {
+          labels,
+          datasets: [
+            this.line(
+              t('min'),
+              records.map((r) => r.espMin),
+              css('--blue'),
+            ),
+            this.line(
+              t('max'),
+              records.map((r) => r.espMax),
+              css('--orange'),
+            ),
+            this.line(
+              t('bagsPerDay'),
+              records.map((r) => r.bagsPerDay),
+              css('--purple'),
+              true,
+              'y1',
+            ),
+          ],
+        },
+        options: {
+          ...base,
+          scales: {
+            ...base.scales,
+            y: {
+              ...base.scales.y,
+              min: -30,
+              max: 30,
+              ticks: { ...base.scales.y.ticks, stepSize: step },
+              title: axisTitle(t('temperature')),
+            },
+            y1: {
+              ...base.scales.y,
+              position: 'right',
+              min: 0,
+              max: 4,
+              ticks: { ...base.scales.y.ticks, stepSize: step * KG_PER_BAG },
+              grid: { drawOnChartArea: false },
+              title: axisTitle(t('bagsPerDay')),
+            },
+          },
+        },
+      },
+    );
 
     const cur = this.currency();
     this.charts['cost'] = new Chart(this.costRef.nativeElement, {
