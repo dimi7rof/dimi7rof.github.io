@@ -516,12 +516,12 @@ export class ClimateComponent implements OnInit, OnDestroy {
 
     return (
       [
-        days ? `${days}d` : '',
-        hours ? `${hours}h` : '',
-        minutes ? `${minutes}m` : '',
+        days ? `${days}${this.t('dayShort')}` : '',
+        hours ? `${hours}${this.t('hourShort')}` : '',
+        minutes ? `${minutes}${this.t('minuteShort')}` : '',
       ]
         .filter(Boolean)
-        .join(' ') || '0m'
+        .join(' ') || `0${this.t('minuteShort')}`
     );
   }
 }

@@ -733,6 +733,42 @@ tbody tr:hover {
 .clim-panel {
   margin-bottom: 12px;
 }
+.clim-peak-count {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.clim-peak-table-wrap {
+  overflow-x: auto;
+}
+
+.clim-peak-table {
+  width: 100%;
+  border-collapse: collapse;
+  white-space: nowrap;
+
+  th,
+  td {
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.85rem;
+  }
+
+  th {
+    color: var(--muted);
+    font-weight: 600;
+  }
+
+  td:nth-child(3) {
+    color: #fb7185;
+    font-weight: 600;
+  }
+
+  tbody tr:last-child td {
+    border-bottom: none;
+  }
+}
 
 .no-link {
   text-decoration: none;

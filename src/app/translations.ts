@@ -168,6 +168,14 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     monthlyCost: 'Разходи по месеци',
     monthlyCostDesc:
       'EUR · стойност на отчетените пелети за месеца. Сезоните в лева са превърнати по курс 1,95583; сезони без колона с цена не са показани.',
+    dayShort: 'д',
+    hourShort: 'ч',
+    minuteShort: 'мин',
+    hotWaterPeaks: 'Интервали на загряване на топлата вода',
+    hotWaterPeaksDesc: 'Температурни пикове над 45°C',
+    peaks: 'пика',
+    averageInterval: 'Среден интервал',
+    noPeaksFound: 'Няма открити пикове над 45°C.',
   },
   en: {
     refresh: 'Refresh',
@@ -337,5 +345,13 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     monthlyCost: 'Cost per month',
     monthlyCostDesc:
       'EUR · value of the pellets recorded in each month. BGN seasons are converted at 1.95583; seasons without a cost column are not shown.',
+    hotWaterPeaks: 'Hot Water Heating Intervals',
+    hotWaterPeaksDesc: 'Temperature peaks above 45°C',
+    peaks: 'peaks',
+    averageInterval: 'Avg. interval',
+    noPeaksFound: 'No peaks above 45°C found.',
+    dayShort: 'd',
+    hourShort: 'h',
+    minuteShort: 'm',
   },
 };

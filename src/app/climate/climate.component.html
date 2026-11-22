@@ -51,14 +51,16 @@
   <article class="card chart-card clim-panel">
     <div class="card-head">
       <div>
-        <div class="card-title">Hot Water Heating Intervals</div>
-        <div class="card-subtitle">
-          Local temperature peaks above 45°C
-        </div>
+        <div class="card-title">{{ t('hotWaterPeaks') }}</div>
+        <div class="card-subtitle">{{ t('hotWaterPeaksDesc') }}</div>
       </div>
+
       <div class="clim-peak-count">
-        {{ hotWaterPeaks().length }} peaks
-        <span>· Avg. interval: {{ formatInterval(averagePeakInterval()) }}</span>
+        {{ hotWaterPeaks().length }} {{ t('peaks') }}
+        <span>
+          · {{ t('averageInterval') }}:
+          {{ formatInterval(averagePeakInterval()) }}
+        </span>
       </div>
     </div>
 
@@ -86,7 +88,7 @@
       </table>
     </div>
     } @else {
-    <div class="empty">No peaks above 45°C found.</div>
+    <div class="empty">{{ t('noPeaksFound') }}</div>
     }
   </article>
 
