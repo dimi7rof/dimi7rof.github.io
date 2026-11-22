@@ -46,7 +46,7 @@
 
   @if (view() !== 'climate') {
   @if (message()) { <div class="error" role="alert">{{ message() }}</div> }
-  @if (loading()) { <div class="loading"><app-loading /></div> }
+  @if (loading()) { <div class="loading"><app-loading [duration]="2500" /></div> }
   }
 
   <!-- ===================== CLIMATE (main tab) ===================== -->

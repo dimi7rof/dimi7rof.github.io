@@ -185,11 +185,12 @@ select {
 
 .grid {
   display: grid;
-  gap: 6px;
+  grid-template-columns: 1fr;
+  gap: 3px;
 }
 
 .kpi-grid {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .card {
@@ -756,9 +757,6 @@ tbody tr:hover {
   }
   .clim-title {
     padding: 4px 6px 4px;
-  }
-  .grid {
-    gap: 3px;
   }
 }
 .refresh-btn {

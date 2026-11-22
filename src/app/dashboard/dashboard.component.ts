@@ -461,6 +461,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
             font: { size: 9 },
           },
           border: { color: this.css('--border') },
+          offset: true,
         },
         y: {
           beginAtZero: true,
@@ -495,7 +496,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   private renderSeasonCharts() {
-    this.destroyCharts(['consumption', 'temperature', 'cost']);
+    this.destroyCharts([
+      'consumption',
+      'temperature',
+      'cost',
+      'tempVsConsumption',
+    ]);
     const records = this.records();
     const t = (x: string) => this.t(x);
     const labels = records.map((r) => r.dateLabel);
