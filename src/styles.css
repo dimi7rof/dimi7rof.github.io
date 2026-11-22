@@ -735,7 +735,7 @@ tbody tr:hover {
 }
 .clim-peak-count {
   color: var(--muted);
-  font-size: 0.85rem;
+  font-size: 11px;
 }
 
 .clim-peak-table-wrap {
@@ -762,7 +762,12 @@ tbody tr:hover {
 
   td:nth-child(3) {
     color: #fb7185;
-    font-weight: 600;
+    font-weight: 500;
+  }
+
+  td:nth-child(4) {
+    color: #129e00;
+    font-weight: 700;
   }
 
   tbody tr:last-child td {

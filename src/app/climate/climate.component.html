@@ -67,14 +67,6 @@
     @if (hotWaterPeaks().length) {
     <div class="clim-peak-table-wrap">
       <table class="clim-peak-table">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Date / Time</th>
-            <th>Temperature</th>
-            <th>Time since previous peak</th>
-          </tr>
-        </thead>
         <tbody>
           @for (peak of hotWaterPeaks(); track peak.t; let i = $index) {
           <tr>
