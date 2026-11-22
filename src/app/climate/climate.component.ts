@@ -15,6 +15,7 @@ import { I18nService } from '../services/i18n.service';
 import { ClimatePoint } from '../models';
 import { PelletApiService } from '../services/pellet-api.service';
 import { finalize, timeout } from 'rxjs';
+import { DatePipe } from '@angular/common';
 
 Chart.register(...registerables);
 
@@ -53,6 +54,7 @@ const REFRESH_MS = 5 * 60_000;
 
 @Component({
   selector: 'app-climate',
+  imports: [DatePipe],
   standalone: true,
   templateUrl: './climate.component.html',
 })
@@ -423,6 +425,103 @@ export class ClimateComponent implements OnInit, OnDestroy {
         this.series(pts, 'pressure', false, 'y1'),
       ],
       o,
+    );
+  }
+
+  readonly hotWaterPeaks = computed(() => {
+    const points = this.windowPoints();
+    const peaks: {
+      t: number;
+      temperature: number;
+      intervalMs: number | null;
+    }[] = [];
+
+    let i = 1;
+
+    while (i < points.length - 1) {
+      const current = points[i].hot;
+
+      if (current === null || current <= 45) {
+        i++;
+        continue;
+      }
+
+      // Find the end of a plateau (e.g. 48, 48, 48).
+      let end = i;
+      while (end + 1 < points.length && points[end + 1].hot === current) {
+        end++;
+      }
+
+      const prev = points[i - 1].hot;
+      const next = points[end + 1]?.hot;
+
+      // A peak must be higher than both neighboring records.
+      if (prev !== null && next !== null && prev < current && next < current) {
+        const t = points[i].t;
+        const previousPeak = peaks.at(-1);
+
+        peaks.push({
+          t,
+          temperature: current,
+          intervalMs: previousPeak ? t - previousPeak.t : null,
+        });
+      }
+
+      i = end + 1;
+    }
+
+    return peaks;
+  });
+
+  readonly averagePeakInterval = computed(() => {
+    const peaks = this.hotWaterPeaks();
+    const points = this.windowPoints();
+
+    if (peaks.length < 2) return null;
+
+    const intervals: number[] = [];
+
+    for (let i = 1; i < peaks.length; i++) {
+      const previous = peaks[i - 1];
+      const current = peaks[i];
+
+      // Check whether hot water dropped below 30°C
+      // between these two peaks.
+      const droppedBelow30 = points.some(
+        (p) =>
+          p.t > previous.t && p.t < current.t && p.hot !== null && p.hot < 30,
+      );
+
+      if (!droppedBelow30) {
+        intervals.push(current.t - previous.t);
+      }
+    }
+
+    if (!intervals.length) return null;
+
+    return intervals.reduce((sum, ms) => sum + ms, 0) / intervals.length;
+  });
+
+  formatPeakDate(t: number): string {
+    return new Date(t).toLocaleString(this.locale());
+  }
+
+  formatInterval(ms: number | null): string {
+    if (ms === null) return '–';
+
+    const totalMinutes = Math.floor(ms / 60000);
+    const days = Math.floor(totalMinutes / 1440);
+    const hours = Math.floor((totalMinutes % 1440) / 60);
+    const minutes = totalMinutes % 60;
+
+    return (
+      [
+        days ? `${days}d` : '',
+        hours ? `${hours}h` : '',
+        minutes ? `${minutes}m` : '',
+      ]
+        .filter(Boolean)
+        .join(' ') || '0m'
     );
   }
 }

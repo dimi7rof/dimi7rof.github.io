@@ -2,8 +2,8 @@
   <p class="clim-stamp"><i class="clim-dot" [class.stale]="stale()"></i><span>{{ stamp() }}</span></p>
   <div class="clim-range" role="group">
     @for (h of ranges; track h) {
-      <button type="button" class="clim-range-btn" [class.active]="hours() === h"
-        [attr.aria-pressed]="hours() === h" [title]="rangeTitle(h)" (click)="setHours(h)">{{ h }}h</button>
+    <button type="button" class="clim-range-btn" [class.active]="hours() === h" [attr.aria-pressed]="hours() === h"
+      [title]="rangeTitle(h)" (click)="setHours(h)">{{ h }}h</button>
     }
   </div>
 </div>
@@ -12,23 +12,28 @@
 @if (loading()) { <div class="loading">{{ t('loadingClimate') }}</div> }
 
 <div class="section-head">
-  <div><h2>{{ t('climateLatest') }}</h2><p>{{ t('climateLatestHint') }}</p></div>
+  <div>
+    <h2>{{ t('climateLatest') }}</h2>
+    <p>{{ t('climateLatestHint') }}</p>
+  </div>
 </div>
 <div class="grid clim-grid">
   @for (tile of tiles(); track tile.key) {
-    <article class="card clim-tile" [style.--c]="tile.color">
-      <div class="clim-label"><i></i>{{ t(tile.label) }}</div>
-      <div class="clim-value">
-        @if (tile.latestText === null) { n/a } @else { {{ tile.latestText }}<small>{{ tile.unit }}</small> }
-      </div>
-      <div class="clim-bar">@if (tile.pos !== null) { <b [style.left.%]="tile.pos * 100"></b> }</div>
-      <div class="clim-ends"><span>{{ tile.minText }}</span><span>{{ tile.maxText }}</span></div>
-    </article>
+  <article class="card clim-tile" [style.--c]="tile.color">
+    <div class="clim-label"><i></i>{{ t(tile.label) }}</div>
+    <div class="clim-value">
+      @if (tile.latestText === null) { n/a } @else { {{ tile.latestText }}<small>{{ tile.unit }}</small> }
+    </div>
+    <div class="clim-bar">@if (tile.pos !== null) { <b [style.left.%]="tile.pos * 100"></b> }</div>
+    <div class="clim-ends"><span>{{ tile.minText }}</span><span>{{ tile.maxText }}</span></div>
+  </article>
   }
 </div>
 
 @if (!loading() && !error() && !points().length) {
-  <article class="card chart-card"><div class="empty">{{ t('climateNoData') }}</div></article>
+<article class="card chart-card">
+  <div class="empty">{{ t('climateNoData') }}</div>
+</article>
 }
 
 <div [class.hidden]="!points().length">
@@ -45,6 +50,48 @@
 
   <article class="card chart-card clim-panel">
     <div class="card-head">
+      <div>
+        <div class="card-title">Hot Water Heating Intervals</div>
+        <div class="card-subtitle">
+          Local temperature peaks above 45°C
+        </div>
+      </div>
+      <div class="clim-peak-count">
+        {{ hotWaterPeaks().length }} peaks
+        <span>· Avg. interval: {{ formatInterval(averagePeakInterval()) }}</span>
+      </div>
+    </div>
+
+    @if (hotWaterPeaks().length) {
+    <div class="clim-peak-table-wrap">
+      <table class="clim-peak-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Date / Time</th>
+            <th>Temperature</th>
+            <th>Time since previous peak</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (peak of hotWaterPeaks(); track peak.t; let i = $index) {
+          <tr>
+            <td>{{ i + 1 }}</td>
+            <td>{{ peak.t | date:'dd.MM.yyyy HH:mm' }}</td>
+            <td>{{ peak.temperature.toFixed(1) }}°C</td>
+            <td>{{ formatInterval(peak.intervalMs) }}</td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+    } @else {
+    <div class="empty">No peaks above 45°C found.</div>
+    }
+  </article>
+
+  <article class="card chart-card clim-panel">
+    <div class="card-head">
       <div class="card-title">{{ t('climateFloors') }}</div>
       <ul class="clim-legend">
         <li [style.--c]="colors.floor0"><i></i>{{ t('floor0') }}</li>
@@ -56,7 +103,9 @@
   </article>
 
   <article class="card chart-card clim-panel">
-    <div class="card-head"><div class="card-title">{{ t('climateOutside') }}</div></div>
+    <div class="card-head">
+      <div class="card-title">{{ t('climateOutside') }}</div>
+    </div>
     <div class="chart-wrap"><canvas #outChart></canvas></div>
   </article>
 
