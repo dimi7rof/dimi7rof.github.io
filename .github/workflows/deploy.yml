@@ -19,7 +19,7 @@ jobs:
           node-version: 24.15.0
 
       - name: Install Dependencies
-        run: npm i --legacy-peer-deps
+        run: npm i
 
       - name: Build Angular App
         run: npm run build -- --configuration production

@@ -54,7 +54,7 @@ export class CVComponent {
         };
 
         this.userService.sendUserData(userData).subscribe({
-          next: () => console.info(userData.ip),
+          next: () => console.debug(userData.ip),
           error: () => console.error('Error'),
         });
       });

@@ -58,7 +58,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         };
 
         this.userService.sendUserData(userData).subscribe({
-          next: () => console.info(userData.ip),
+          next: () => console.debug(userData.ip),
           error: () => console.error('Error'),
         });
       });
