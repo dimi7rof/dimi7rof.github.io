@@ -430,44 +430,57 @@ export class ClimateComponent implements OnInit, OnDestroy {
 
   readonly hotWaterPeaks = computed(() => {
     const points = this.windowPoints();
+
+    const minPeakTemperature = 45;
+    const requiredDrop = 7;
+
     const peaks: {
       t: number;
       temperature: number;
       intervalMs: number | null;
     }[] = [];
 
-    let i = 1;
+    let candidate: { t: number; temperature: number } | null = null;
+    let previousTemperature: number | null = null;
 
-    while (i < points.length - 1) {
-      const current = points[i].hot;
+    for (const point of points) {
+      const temperature = point.hot;
 
-      if (current === null || current <= 45) {
-        i++;
+      if (temperature === null) continue;
+
+      if (candidate === null) {
+        if (temperature > minPeakTemperature) {
+          candidate = { t: point.t, temperature };
+        }
+
+        previousTemperature = temperature;
         continue;
       }
 
-      // Find the end of a plateau (e.g. 48, 48, 48).
-      let end = i;
-      while (end + 1 < points.length && points[end + 1].hot === current) {
-        end++;
+      // A new higher temperature becomes the peak candidate.
+      if (temperature > candidate.temperature) {
+        candidate = { t: point.t, temperature };
       }
 
-      const prev = points[i - 1].hot;
-      const next = points[end + 1]?.hot;
+      // A rise or plateau breaks the consecutive-decrease sequence.
+      if (previousTemperature !== null && temperature >= previousTemperature) {
+        candidate =
+          temperature > minPeakTemperature ? { t: point.t, temperature } : null;
+      }
 
-      // A peak must be higher than both neighboring records.
-      if (prev !== null && next !== null && prev < current && next < current) {
-        const t = points[i].t;
+      // Confirm only after a consecutive decline of at least 7°C.
+      else if (temperature <= candidate.temperature - requiredDrop) {
         const previousPeak = peaks.at(-1);
 
         peaks.push({
-          t,
-          temperature: current,
-          intervalMs: previousPeak ? t - previousPeak.t : null,
+          ...candidate,
+          intervalMs: previousPeak ? candidate.t - previousPeak.t : null,
         });
+
+        candidate = null;
       }
 
-      i = end + 1;
+      previousTemperature = temperature;
     }
 
     return peaks;
